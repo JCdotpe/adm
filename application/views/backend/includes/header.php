@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-
-<html class="no-js"> 
-    
-    <head>
-    
+<html lang="es">
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>
         <?php
@@ -13,65 +11,29 @@
             echo 'CIE - ' . $title;
          ?>
     </title>
-    
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-
-    
 
     <link rel="stylesheet" href="<?php echo base_url('css/bootstrap.min.css'); ?>">
-    <link rel="stylesheet" href="<?php echo base_url('css/bootstrap.spacelab.css'); ?>">
-    <link rel="stylesheet" href="<?php echo base_url('css/bootstrap-responsive.min.css'); ?>">
-    <!--<link rel="stylesheet" href="--><?php //echo base_url('css/jquery.dataTables.css'); ?><!--">-->
-    
-    <link rel="stylesheet" href="<?php echo base_url('css/smoothness/jquery-ui-1.10.3.custom.min.css') ?>">
-    
-    <link rel="stylesheet" href="<?php echo base_url('css/TableTools.css'); ?>">
-    <link rel="stylesheet" href="<?php echo base_url('css/ui.jqgrid.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('css/main.css'); ?>">
-     <link rel="stylesheet" href="<?php echo base_url('css/basic.css'); ?>">
-    <link rel="shortcut icon" href="<?php echo base_url('img/ico/favicon.ico'); ?>">
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="<?php echo base_url('img/ico/apple-touch-icon-57x57-precomposed.png'); ?>">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo base_url('img/ico/apple-touch-icon-114x114-precomposed.png'); ?>">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo base_url('img/ico/apple-touch-icon-72x72-precomposed.png'); ?>">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo base_url('img/ico/apple-touch-icon-144x144-precomposed.png'); ?>">
-    <link rel="apple-touch-icon-precomposed" href="<?php echo base_url('img/ico/apple-touch-icon-57-precomposed.png'); ?>">
-    
-    
-    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>-->    
-    <!--<script src="<?php echo base_url('js/general/jquery-1.8.3.min.js'); ?>"></script>-->
-    
-    <script src="<?php echo base_url('js/general/jquery-1.10.2.min.js'); ?>"></script>
-    <script src="<?php echo base_url('js/general/jquery-ui-1.10.2.custom.min.js'); ?>"></script>
-    <script src="<?php echo base_url('js/general/basic.js'); ?>"></script>
+    <link rel="stylesheet" href="<?php echo base_url('css/font-awesome.min.css'); ?>">    
 
-    <script src="<?php echo base_url('js/general/jquery.validate.min.js'); ?>"></script>
-    <script src="<?php echo base_url('js/general/jquery.cookie.js'); ?>"></script>
-    <script src="<?php echo base_url('js/jqgrid/i18n/grid.locale-es.js'); ?>"></script>
-    <script src="<?php echo base_url('js/jqgrid/jquery.jqGrid.min.js'); ?>"></script>
-
-    <script src="<?php echo base_url('js/general/jquery-migrate-1.0.0.js'); ?>"></script>
-        
-    <script src="<?php echo base_url('js/general/bootstrap.min.js'); ?>"></script>
-        
-    <script src="<?php echo base_url('js/general/modernizr-2.6.2-respond-1.1.0.min.js'); ?>"></script>
-        
-     <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBRWqVZ3W4STXTofBB1i7BvCKmhPfA4GM8&sensor=false"></script> -->
+    <link rel="stylesheet/less" type="text/css" href="<?php echo base_url('js/style.less'); ?>" />
     
-    <!-- Le fav and touch icons -->
-   
-    <script type="text/javascript">
-        <!--
-            var CI = {
-              'base_url': '<?php echo base_url(); ?>',
-              'site_url': '<?php echo site_url(); ?>',
-              'year' : <?php echo date("Y"); ?>,
-              'cct' : $.cookie('csrf_cookie_name')
-            };            
-        -->
-    </script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
     </head>
     
     <body>
 
+
+    <script src="<?php echo base_url('js/less-1.6.2.min.js'); ?>"></script>
+    <script src="<?php echo base_url('js/jquery.js'); ?>"></script>
+    <script src="<?php echo base_url('js/bootstrap.min.js'); ?>"></script>
+
+    <div style="display: block;" id="header">
+        <a href="#" id="logo"><img alt="CIE2013" src="http://webinei.inei.gob.pe/cie/2013/web/img/brand_gps.png"></a>
+        <div id="oted">Oficina Técnica de Estadísticas Departamentales - OTED</div>
+    </div>    
