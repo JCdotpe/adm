@@ -1311,12 +1311,14 @@ class Ion_auth_model extends CI_Model
 		return $this->db->select($this->tables['groups_roles'].'.'.$this->join['roles'].' as id,'.$this->tables['roles'].'.role_name, '.$this->tables['roles'].'.url')
 		                ->where($this->tables['roles'].'.active',1)
 		                ->where($this->tables['groups_roles'].'.active',1)
-		                ->where($this->tables['groups_roles'].'.id',$id)
+		                ->where($this->tables['users_groups'].'.'.$this->join['users'],$id)
 		                ->join($this->tables['groups_roles'], $this->tables['roles'].'.id = '.$this->tables['groups_roles'].'.'.$this->join['roles'])
+		                ->join($this->tables['users_groups'], $this->tables['groups_roles'].'.'.$this->join['groups'].' = '.$this->tables['users_groups'].'.'.$this->join['groups'])
 		                ->get($this->tables['roles']);
-// select role_name, url from roles 
-// inner join groups_roles on roles.id = groups_roles.role_id
-// where groups_roles.id = 1 and roles.active = 1 and groups_roles.active = 1
+// SELECT groups_roles.role_id as id, roles.role_name, roles.url 
+// FROM roles JOIN groups_roles ON roles.id = groups_roles.role_id 
+// join users_groups on groups_roles.group_id = users_groups.group_id
+// WHERE roles.active = 1 AND groups_roles.active = 1 AND users_groups.user_id = 1
 	}
 
 	/**
