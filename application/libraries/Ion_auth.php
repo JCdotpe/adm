@@ -513,4 +513,9 @@ class Ion_auth
 		return $check_all;
 	}
 
+	public function get_roles()
+	{
+		return $this->ion_auth->get_groups_roles()->result();
+	}
+
 }

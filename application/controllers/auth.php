@@ -25,8 +25,12 @@ class Auth extends CI_Controller {
 	function index()
 	{
 		if ($this->ion_auth->logged_in()) {
+			$data['home'] = TRUE;
+			$data['nav'] = TRUE;
+			$data['title'] = 'Inicio';
+			$data['user'] = $this->ion_auth->user()->row();
+			// $data['group'] = $this->ion_auth->group($this->ion_auth->user()->row()->id);
 			$data['main_content'] = 'backend/index_view';
-			$data['message'] = 'message';
     		$this->load->view('backend/includes/template', $data); 
 		}else if (!$this->ion_auth->logged_in())
 		{

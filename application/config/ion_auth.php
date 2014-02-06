@@ -35,6 +35,8 @@ $config['tables']['users']           = 'users';
 $config['tables']['groups']          = 'groups';
 $config['tables']['users_groups']    = 'users_groups';
 $config['tables']['login_attempts']  = 'login_attempts';
+$config['tables']['groups_roles']  = 'groups_roles';
+$config['tables']['roles']  = 'roles';
 
 /*
  | Users table column and Group table column you want to join WITH.
@@ -44,6 +46,7 @@ $config['tables']['login_attempts']  = 'login_attempts';
  */
 $config['join']['users']  = 'user_id';
 $config['join']['groups'] = 'group_id';
+$config['join']['roles'] = 'role_id';
 
 /*
  | -------------------------------------------------------------------------

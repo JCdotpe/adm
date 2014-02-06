@@ -1296,6 +1296,30 @@ class Ion_auth_model extends CI_Model
 	}
 
 	/**
+	 * get_groups_roles
+	 *
+	 * @return array
+	 * @author Ben Edmunds
+	 **/
+	public function get_groups_roles($id=FALSE)
+	{
+		$this->trigger_events('get_groups_roles');
+
+		//if no id was passed use the current users id
+		$id || $id = $this->session->userdata('user_id');
+
+		return $this->db->select($this->tables['groups_roles'].'.'.$this->join['roles'].' as id,'.$this->tables['roles'].'.role_name, '.$this->tables['roles'].'.url')
+		                ->where($this->tables['roles'].'.active',1)
+		                ->where($this->tables['groups_roles'].'.active',1)
+		                ->where($this->tables['groups_roles'].'.id',$id)
+		                ->join($this->tables['groups_roles'], $this->tables['roles'].'.id = '.$this->tables['groups_roles'].'.'.$this->join['roles'])
+		                ->get($this->tables['roles']);
+// select role_name, url from roles 
+// inner join groups_roles on roles.id = groups_roles.role_id
+// where groups_roles.id = 1 and roles.active = 1 and groups_roles.active = 1
+	}
+
+	/**
 	 * get_users_groups
 	 *
 	 * @return array
