@@ -3,89 +3,6 @@
   <p style="margin-top:20px">En la parte superior de la página encontraras los módulos a los que tienes acceso.</p>
 </div>
 
-<div class="jumbotron">
-  <h1>CIE 2013</h1>
-  <p style="margin-top:20px">En la parte superior de la página encontraras los módulos a los que tienes acceso.</p>
-</div>
-
-<div class="jumbotron">
-  <h1>CIE 2013</h1>
-  <p style="margin-top:20px">En la parte superior de la página encontraras los módulos a los que tienes acceso.</p>
-</div>
-
-<div class="jumbotron">
-  <h1>CIE 2013</h1>
-  <p style="margin-top:20px">En la parte superior de la página encontraras los módulos a los que tienes acceso.</p>
-</div>
-
-<div class="jumbotron">
-  <h1>CIE 2013</h1>
-  <p style="margin-top:20px">En la parte superior de la página encontraras los módulos a los que tienes acceso.</p>
-</div>
-
-<div class="jumbotron">
-  <h1>CIE 2013</h1>
-  <p style="margin-top:20px">En la parte superior de la página encontraras los módulos a los que tienes acceso.</p>
-</div>
-
-<div class="jumbotron">
-  <h1>CIE 2013</h1>
-  <p style="margin-top:20px">En la parte superior de la página encontraras los módulos a los que tienes acceso.</p>
-</div>
-
-<div class="jumbotron">
-  <h1>CIE 2013</h1>
-  <p style="margin-top:20px">En la parte superior de la página encontraras los módulos a los que tienes acceso.</p>
-</div>
-
-<div class="jumbotron">
-  <h1>CIE 2013</h1>
-  <p style="margin-top:20px">En la parte superior de la página encontraras los módulos a los que tienes acceso.</p>
-</div>
-
-<div class="jumbotron">
-  <h1>CIE 2013</h1>
-  <p style="margin-top:20px">En la parte superior de la página encontraras los módulos a los que tienes acceso.</p>
-</div>
-
-<div class="jumbotron">
-  <h1>CIE 2013</h1>
-  <p style="margin-top:20px">En la parte superior de la página encontraras los módulos a los que tienes acceso.</p>
-</div>
-
-<div class="jumbotron">
-	<h1>CIE 2013</h1>
-	<p style="margin-top:20px">En la parte superior de la página encontraras los módulos a los que tienes acceso.</p>
-</div>
-
-<form class="form-horizontal" role="form">
-
-<div class="row">
-	<div class="col-md-6">
-		a
-	</div>
-	<div class="col-md-6">
-		b
-	</div>	
-</div>
-
-<div class="row">
-	<div class="col-md-12">
-		c
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-6">
-		d
-	</div>
-	<div class="col-md-6">
-		e
-	</div>	
-</div>
-
-</form>
-
 <div class="table-responsive">
 <table class="table table-striped table-hover">
       <thead>
@@ -126,8 +43,6 @@
       </tbody>
 </table>
 </div>
-
-
 
 
 <div class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">

@@ -8,7 +8,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">INEI</a>
+			<a class="navbar-brand" href="<?php echo base_url('index.php'); ?>">CIE2013</a>
 		</div>
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
@@ -41,7 +41,27 @@
 			<?php 
 				}
 			?>
+
 			</ul>
+
+			<?php 
+				if($this->ion_auth->logged_in()){
+			?>
+ 	<ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido, <?php echo $user->username; ?> <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Configurar</a></li>
+            <li><a href="#">Cambiar contraseña</a></li>
+            <li class="divider"></li>
+            <li><a href="#"> <?php echo anchor('auth/logout', 'Salir'); ?></a></li>
+          </ul>
+        </li>
+      </ul>
+			<?php 
+				}
+			?>      
+
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>
@@ -50,12 +70,12 @@
 <?php 
 	if(isset($fluid)){ 
 ?>
-	<div class="container-fluid front">
+	<div class="container-fluid main-content">
 <?php 
 	}else{ 
 ?>
-	<div class="container front">
+	<div class="container-fluid main-content">
 <?php 
 	} 
-	$this->load->view('backend/includes/breadcrumb');
+	
 ?>
