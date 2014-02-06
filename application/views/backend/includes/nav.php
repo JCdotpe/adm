@@ -1,25 +1,28 @@
-<div class="navtopper navbar navbar-inverse navbar-fixed-top ">
-	<div class=" navbar-inner navtopper-inner" id="navbarflex">
-		<div class="container">
-			<div class="row">
-				<div class="span12 text-center">
-					<a href="<?php echo base_url(); ?>"><img style="margin-top: 2.5px;" src="<?php echo base_url('img/brand.jpg'); ?>"/></a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<nav id="nav-primary" class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">INEI</a>
+    </div>
 
-<div id="menu_nav2" class="navbar navbar-inverse navbar-fixed-top navbottom">
-	<div class="navbar-inner">
-		<div class="container">
-			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</a>
-			<div class="nav-collapse collapse">
-				<ul class="nav">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+            <!-- BORRAR LINKS Y JALAR DE BASE DE DATOS SEGUN EL ROL -->
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+            <!-- BORRAR LINKS Y JALAR DE BASE DE DATOS SEGUN EL ROL -->
 			<?php
 				if($this->ion_auth->logged_in()){
 					$roles = $this->ion_auth->get_roles();
@@ -58,12 +61,18 @@
 					</li>
 			<?php 
 				}
-			?>
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
+			?>            
+          </ul>
+        </li>
+      </ul>
+
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
 
 <?php 
 	if(isset($fluid)){ 
