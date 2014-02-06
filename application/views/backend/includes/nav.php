@@ -1,6 +1,6 @@
 <nav id="nav-primary" class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
+	<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 				<span class="sr-only">Toggle navigation</span>
@@ -11,7 +11,7 @@
 			<a class="navbar-brand" href="#">INEI</a>
 		</div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
+	<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 			<?php
@@ -28,7 +28,7 @@
 							}
 					?>
 							<li <?php echo $c; ?>>
-								<?php echo anchor(base_url().strtolower($role->url),$i++ .'. '.utf8_encode($role->role_name)); ?>
+								<?php echo anchor(base_url().strtolower($role->url),utf8_encode($role->role_name)); ?>
 							</li>
 					<?php
 						}
@@ -40,7 +40,7 @@
 					</li>
 			<?php 
 				}
-			?>            
+			?>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
