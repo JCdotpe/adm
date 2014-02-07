@@ -23,7 +23,8 @@
 						$i = 1;
 						foreach ($roles as $role){
 							$c = "";
-							if($this->uri->segment(1) == $role->url){
+							$uri = "index.php/".$this->uri->segment(1);
+							if($uri == $role->url){
 								$c = ' class="active"';
 							}
 					?>
@@ -47,20 +48,20 @@
 			<?php 
 				if($this->ion_auth->logged_in()){
 			?>
- 	<ul class="nav navbar-nav navbar-right">
-        <li class="glass dropdown">
-          <a id="nav-user" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo $user->username; ?> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#"><i class="fa fa-gear"></i> Configurar</a></li>
-            <li><a href="#"><i class="fa fa-key"></i> Cambiar contraseña</a></li>
-            <li class="divider"></li>
-            <li> <?php echo anchor('auth/logout', 'Salir'); ?></li>
-          </ul>
-        </li>
-      </ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="glass dropdown">
+					<a id="nav-user" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo $user->username; ?> <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#"><i class="fa fa-gear"></i> Configurar</a></li>
+						<li><a href="#"><i class="fa fa-key"></i> Cambiar contraseña</a></li>
+						<li class="divider"></li>
+						<li> <?php echo anchor('auth/logout', 'Salir'); ?></li>
+					</ul>
+				</li>
+			</ul>
 			<?php 
 				}
-			?>      
+			?>
 
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
