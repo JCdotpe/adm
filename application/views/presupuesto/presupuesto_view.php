@@ -38,6 +38,11 @@ $(function(){
 });
 </script>
 
+<select id="proyect">
+	<option value = "0">SELECCIONE</option>
+	<option value = "1">CENSO DEPARTAMENTAL PARA PROGRAMA PILOTO TUMBES ACCESIBLE 2012</option>
+</select>
+
 <div class="row-fluid" id="pptt-tabs" style="margin-top:10px">
 	<div class="span12" id="insidetabs" style="text-align:center">
 		<div class="tabbable">
@@ -60,7 +65,11 @@ $(function(){
 <script type="text/javascript">
 
 $(function(){
-	$('#ctab1 a').trigger('click');
+
+	$('#proyect').change(function(event){
+		$('#ctab1 a').trigger('click');
+	});
+
 });
 
 </script>
