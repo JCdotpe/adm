@@ -26,5 +26,5 @@
 
 	<div style="display: block;" id="header">
 		<a href="#" id="logo"><img alt="CIE2013" src="http://webinei.inei.gob.pe/cie/2013/web/img/brand_gps.png"></a>
-		<div id="oted">Oficina Técnica de Estadísticas Departamentales - OTED</div>
+		<div id="oted">OFICINA TECNICA DE ESTADISTICAS DEPARTAMENTALES - OTED</div>
 	</div>

@@ -4,10 +4,10 @@
 	<div class="container-fluid">
 		<div class="row">
 				<div id="inei-notas" class="col-md-9">
-					<p><a href="#" data-toggle="modal" data-target=".modal-notas"><i class="fa fa-bars"></i> NOTAS</a></p>
+					<p>SISTEMA ADM v1.0</p>
 				</div>
 				<div id="adm-version" class="col-md-3">
-					<p class="pull-right">ADM v0.1</p>
+					<p class="pull-right"><a href="#" data-toggle="modal" data-target=".modal-notas"><i class="fa fa-bars"></i> NOTAS</a></p>
 				</div>
 			</div>
 		</div>
