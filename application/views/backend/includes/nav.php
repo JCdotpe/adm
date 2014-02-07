@@ -48,13 +48,13 @@
 				if($this->ion_auth->logged_in()){
 			?>
  	<ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido, <?php echo $user->username; ?> <b class="caret"></b></a>
+        <li class="glass dropdown">
+          <a id="nav-user" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo $user->username; ?> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Configurar</a></li>
-            <li><a href="#">Cambiar contraseña</a></li>
+            <li><a href="#"><i class="fa fa-gear"></i> Configurar</a></li>
+            <li><a href="#"><i class="fa fa-key"></i> Cambiar contraseña</a></li>
             <li class="divider"></li>
-            <li><a href="#"> <?php echo anchor('auth/logout', 'Salir'); ?></a></li>
+            <li> <?php echo anchor('auth/logout', 'Salir'); ?></li>
           </ul>
         </li>
       </ul>
