@@ -3,7 +3,7 @@ $(window).scroll(function () {
         $('#nav-primary').css('top', '0px');
     }
     else{
-    	$('#nav-primary').css('top', '62px');	
+    	$('#nav-primary').css('top', '60px');	
     }
 }
 );

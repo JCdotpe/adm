@@ -71,16 +71,20 @@ $(function(){
 });
 </script>	
 
-<select id="proyect">
+<!-- <select id="proyect">
 	<option value = "0">SELECCIONE</option>
 	<option value = "1">CENSO DEPARTAMENTAL PARA PROGRAMA PILOTO TUMBES ACCESIBLE 2012</option>
-</select>
+</select> -->
 
-<div class="row-fluid" id="pptt-tabs" style="margin-top:10px">
-	<div class="span12" id="insidetabs" style="text-align:center">
+<div class="row-fluid" id="pptt-tabs">
+	<div class="span12" id="insidetabs">
+
+<!-- 		<h1 class="entry-title">Presupuesto General</h1>
+ -->
+
 		<div class="tabbable">
 			<ul id="nav_pptt" class="nav nav-tabs fix_navcap">
-				<li id="ctab1"><a href="#tab1" data-toggle="tab">Datos Generales</a></li>
+				<li id="ctab1" class="active"><a href="#tab1" data-toggle="tab">Datos Generales</a></li>
 				<li id="ctab2"><a href="#tab2" data-toggle="tab">Detalle PPTT</a></li>
 			</ul>
 			<div class="tab-content fix_tabcontent">

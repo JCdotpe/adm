@@ -7,35 +7,41 @@
 $Sub_Total = array(
 	'name'	=> 'Sub_Total',
 	'id'	=> 'Sub_Total',
+	'class'	=> 'form-control input8',
 );
 
 $IGV = array(
 	'name'	=> 'IGV',
 	'id'	=> 'IGV',
+	'class'	=> 'form-control input8',
 );
 
 $Total_General = array(
 	'name'	=> 'Total_General',
 	'id'	=> 'Total_General',
 	'readonly' => 'true',
+	'class'	=> 'form-control input8',
 );
 
 $Nro_Meses = array(
 	'name'	=> 'Nro_Meses',
 	'id'	=> 'Nro_Meses',
 	'maxlength'	=> 2,
+	'class'	=> 'form-control input2',
 );
 
 $Nro_Actividades = array(
 	'name'	=> 'Nro_Actividades',
 	'id'	=> 'Nro_Actividades',
 	'maxlength'	=> 2,
+	'class'	=> 'form-control input2',
 );
 
 $Nro_Partidas = array(
 	'name'	=> 'Nro_Partidas',
 	'id'	=> 'Nro_Partidas',
 	'maxlength'	=> 2,
+	'class'	=> 'form-control input2',
 );
 
 
@@ -47,45 +53,120 @@ echo form_open($this->uri->uri_string(),$attr);
 
 <div>
 	
-	Subtotal <?php echo form_input($Sub_Total); ?>
-	IGV <?php echo form_input($IGV); ?>
-	Total General <?php echo form_input($Total_General); ?>
-	Cantidad de Meses <?php echo form_input($Nro_Meses); ?>
-	<table id="pptt_meses" border="1">
+	<h2>Presupuesto General</h2>
+
+	<div class="row"><form class="form-inline" role="form">
+
+		<div class="col-xs-3">
+
+			<div class="form-group">
+				<label>Total General</label>
+				<?php echo form_input($Total_General); ?>
+			</div>
+
+		</div>
+
+		<div class="col-xs-3">
+
+			<div class="form-group">
+				<label>Subtotal</label>
+				<?php echo form_input($Sub_Total); ?>
+			</div>
+
+		</div>
+
+		<div class="col-xs-3">
+
+			<div class="form-group">
+				<label>IGV</label>
+				<?php echo form_input($IGV); ?>
+			</div>
+
+		</div>
+
+		<div class="col-xs-3">
+
+			<div class="form-group">
+				<label>Cantidad de Meses</label>
+				<?php echo form_input($Nro_Meses); ?>
+			</div>	
+
+		</div>						
+
+	</form></div><!-- end row -->
+
+	
+
+		
+
+
+
+
+
+	
+	 
+
+	
+
+	<hr />
+
+	<form class="form-inline" role="form">
+
+	<h2>Presupuesto Mensual</h2> <input id="total_mcs" class="form-control input8" name="total_mcs" type="text" readonly />
+
+	
+
+	<table id="pptt_meses" class="table table-striped table-hover">
 		<thead>
-			<th>Código</th>
-			<th>Nombre Meses</th>
-			<th>SubTotal</th>
+			<th width="60px">COD</th>
+			<th>MES</th>
+			<th>SUBTOTAL</th>
 			<th>IGV</th>
-			<th>Total  <input type="text" id="total_mcs" name="total_mcs" readonly /><div class="help-block has-error"></div> </th>
+			<th>TOTAL</th>
 		</thead>
 		<tbody>
 		</tbody>
 	</table>
 
-	Cantidad de Actividades <?php echo form_input($Nro_Actividades); ?>
-	<table id="pptt_actividades" border="1">
+	</form></form><!-- end form presupuesto -->
+
+	<hr />
+
+	<form class="form-inline" role="form">
+
+	<h2>Cantidad de Actividades</h2> <?php echo form_input($Nro_Actividades); ?>
+
+	<table id="pptt_actividades" class="table table-striped table-hover">
 		<thead>
-			<th>Código</th>
-			<th>Nombre Actividad</th>
-			<th>SubTotal <input type="text" id="total_actvd" name="total_actvd" readonly /><div class="help-block has-error"></div> </th>
+			<th width="60px">COD.</th>
+			<th>ACTIVIDAD</th>
+			<th>SUBTOTAL <input type="text" id="total_actvd" class="form-control input8" name="total_actvd" readonly /><div class="help-block has-error"></div> </th>
 			<th class='prct_act'>%</th>
 		</thead>
 		<tbody>
 		</tbody>
 	</table>
 
-	Cantidad de Partidas <?php echo form_input($Nro_Partidas); ?>
-	<table id="pptt_partidas" border="1">
+	</form><!-- end form actividades -->
+
+	<hr />
+
+	<form class="form-inline" role="form">
+
+	<h2>Cantidad de Partidas</h2> <?php echo form_input($Nro_Partidas); ?>
+
+	<table id="pptt_partidas" class="table table-striped table-hover">
 		<thead>
-			<th>Código</th>
-			<th>Nombre Partida</th>
-			<th>SubTotal <input type="text" id="total_part" name="total_part" readonly /><div class="help-block has-error"></div> </th>
+			<th>COD.</th>
+			<th>PARTIDA</th>
+			<th>SUBTOTAL <input type="text" id="total_part" class="form-control input2" name="total_part" readonly /><div class="help-block has-error"></div> </th>
 			<th class='prct_part'>%</th>
 		</thead>
 		<tbody>
 		</tbody>
 	</table>
+
+	</form><!-- end form partidas -->
 
 </div>
 
@@ -119,13 +200,13 @@ $('#Nro_Meses').change(function(event) {
 
 	if (nro > 0){
 		html = '';
-		for (var i = 0; i < nro; i++){
+		for (var i = 0; i < nro; i++){ 
 			html += '<tr>';
-			html += '<td><input type="text" id="cod_mcs_'+i+'" name="cod_mcs_'+i+'" maxlength="2" class="meses" /></td>';
-			html += '<td><input type="text" id="name_mcs_'+i+'" name="name_mcs_'+i+'" readonly /></td>';
-			html += '<td><input type="text" id="subtotal_mcs_'+i+'" name="subtotal_mcs_'+i+'" class="calculo_mcs" /></td>';
-			html += '<td><input type="text" id="igv_mcs_'+i+'" name="igv_mcs_'+i+'" class="calculo_mcs" /></td>';
-			html += '<td><input type="text" id="totgnrl_mcs_'+i+'" name="totgnrl_mcs_[]" readonly /></td>';
+			html += '<td><input type="text" id="cod_mcs_'+i+'" name="cod_mcs_'+i+'" maxlength="2" class="form-control input2 meses" /></td>';
+			html += '<td><input type="text" id="name_mcs_'+i+'" name="name_mcs_'+i+'" class="form-control input13" readonly /></td>';
+			html += '<td><input type="text" id="subtotal_mcs_'+i+'" name="subtotal_mcs_'+i+'" class="form-control input8 calculo_mcs" /></td>';
+			html += '<td><input type="text" id="igv_mcs_'+i+'" name="igv_mcs_'+i+'" class="form-control input8 calculo_mcs" /></td>';
+			html += '<td><input type="text" id="totgnrl_mcs_'+i+'" name="totgnrl_mcs_[]" class="form-control input8" readonly /></td>';
 			html += '</tr>';
 		}
 		$('#pptt_meses > tbody').append(html);
@@ -188,8 +269,8 @@ $('#Nro_Actividades').change(function(event){
 	if (mcs > 0){
 		html = '';
 		for (var i = 0; i < mcs; i++) {
-			html += '<th class = "act_meses"><input type="text" id="act_nombre_mes_'+i+'" name="act_nombre_mes_'+i+'" value="'+$('#name_mcs_'+i).val()+'" readonly />';
-			html += '<input type="text" id="act_total_mes_'+i+'" name="act_total_mes_[]" readonly /><div class="help-block has-error"></div></th>';
+			html += '<th class = "act_meses"><input type="text" id="act_nombre_mes_'+i+'" class="form-control input13" name="act_nombre_mes_'+i+'" value="'+$('#name_mcs_'+i).val()+'" readonly />';
+			html += '<input type="text" id="act_total_mes_'+i+'" class="form-control input8" name="act_total_mes_[]" readonly /><div class="help-block has-error"></div></th>';
 		}
 		$('.prct_act').after(html);
 
@@ -199,12 +280,12 @@ $('#Nro_Actividades').change(function(event){
 			html2 = '';
 			for (var j = 0; j < act; j++) {
 				html2 += '<tr>';
-				html2 += '<td><input type="text" id="act_cod_'+j+'" name="act_cod_'+j+'" maxlength="2" class="actvd" /></td>';
-				html2 += '<td><input type="text" id="act_name_'+j+'" name="act_name_'+j+'" readonly /></td>';
-				html2 += '<td><input type="text" id="act_subtotal_'+j+'" name="act_subtotal_[]" class="calculo_prct_details act_calculo_pptt" /><div class="help-block has-error"></div></td>';
-				html2 += '<td><input type="text" id="act_prct_'+j+'" name="act_prct_'+j+'" readonly /></td>';
+				html2 += '<td><input type="text" id="act_cod_'+j+'" name="act_cod_'+j+'" maxlength="2" class="actvd form-control input2" /></td>';
+				html2 += '<td><input type="text" id="act_name_'+j+'" name="act_name_'+j+'" readonly class="form-control input200" /></td>';
+				html2 += '<td><input type="text" id="act_subtotal_'+j+'" name="act_subtotal_[]" class="form-control input8 calculo_prct_details act_calculo_pptt" /><div class="help-block has-error"></div></td>';
+				html2 += '<td><input type="text" id="act_prct_'+j+'" name="act_prct_'+j+'" class="form-control input8" readonly /></td>';
 				for (var m = 0; m < mcs; m++) {
-					html2 += '<td><input type="text" id="act_pptt_mes_'+m+'_'+j+'" name="act_pptt_mes_[]" class="act_calculo_pptt" /><div class="help-block has-error"></div></td>';
+					html2 += '<td><input type="text" id="act_pptt_mes_'+m+'_'+j+'" name="act_pptt_mes_[]" class="form-control input8 act_calculo_pptt" /><div class="help-block has-error"></div></td>';
 				}
 				html2 += '</tr>';
 			}
@@ -282,8 +363,8 @@ $('#Nro_Partidas').change(function(event){
 	if (mcs > 0){
 		html = '';
 		for (var i = 0; i < mcs; i++) {
-			html += '<th class = "part_meses"><input type="text" id="part_nombre_mes_'+i+'" name="part_nombre_mes_'+i+'" value="'+$('#name_mcs_'+i).val()+'" readonly />';
-			html += '<input type="text" id="part_total_mes_'+i+'" name="part_total_mes_[]" readonly /><div class="help-block has-error"></div></th>';
+			html += '<th class = "part_meses"><input type="text" id="part_nombre_mes_'+i+'" name="part_nombre_mes_'+i+'" class="form-control input13" value="'+$('#name_mcs_'+i).val()+'" readonly />';
+			html += '<input type="text" id="part_total_mes_'+i+'" class="form-control input8" name="part_total_mes_[]" readonly /><div class="help-block has-error"></div></th>';
 		}
 		$('.prct_part').after(html);
 
@@ -293,12 +374,12 @@ $('#Nro_Partidas').change(function(event){
 			html2 = '';
 			for (var j = 0; j < part; j++) {
 				html2 += '<tr>';
-				html2 += '<td><input type="text" id="part_cod_'+j+'" name="part_cod_'+j+'"  class="prtda" /></td>';
-				html2 += '<td><input type="text" id="part_name_'+j+'" name="part_name_'+j+'" readonly /></td>';
-				html2 += '<td><input type="text" id="part_subtotal_'+j+'" name="part_subtotal_[]" class="calculo_prct_details part_calculo_pptt" /><div class="help-block has-error"></div></td>';
-				html2 += '<td><input type="text" id="part_prct_'+j+'" name="part_prct_'+j+'" readonly /></td>';
+				html2 += '<td><input type="text" id="part_cod_'+j+'" name="part_cod_'+j+'"  class="prtda form-control input2" /></td>';
+				html2 += '<td><input type="text" id="part_name_'+j+'" name="part_name_'+j+'" class="form-control input13" readonly /></td>';
+				html2 += '<td><input type="text" id="part_subtotal_'+j+'" name="part_subtotal_[]" class="form-control input8 calculo_prct_details part_calculo_pptt" /><div class="help-block has-error"></div></td>';
+				html2 += '<td><input type="text" id="part_prct_'+j+'" name="part_prct_'+j+'" class="form-control input8" readonly /></td>';
 				for (var m = 0; m < mcs; m++) {
-					html2 += '<td><input type="text" id="part_pptt_mes_'+m+'_'+j+'" name="part_pptt_mes_[]" class="part_calculo_pptt" /><div class="help-block has-error"></div></td>';
+					html2 += '<td><input type="text" id="part_pptt_mes_'+m+'_'+j+'" name="part_pptt_mes_[]" class="form-control input8 part_calculo_pptt" /><div class="help-block has-error"></div></td>';
 				}
 				html2 += '</tr>';
 			}
