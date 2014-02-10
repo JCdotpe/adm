@@ -35,8 +35,41 @@ $(function(){
 		range: jQuery.validator.format('Por favor ingrese un valor entre {0} y {1}.'),
 	});
 
+	$.validator.addMethod("EqualsUno", function(value, element, arg){
+		flag = false;
+		if ( $('#' + arg[0]).val() == value ) { flag = true; }
+		return  flag;
+	}, "El Total de Meses diferente al Total General");
+
+	$.validator.addMethod("EqualsDos", function(value, element, arg){
+		flag = false;
+		var cod = element.id;
+		array=cod.split("_");
+		if ( value == $('#'+arg[0]+array[3]).val() ) { flag = true; }
+		return  flag;
+	}, "Total de Mes Incorrecto");
+
+	$.validator.addMethod("EqualsTres", function(value, element, arg){
+		flag = true;
+		var cod = element.id;
+		array=cod.split("_");
+		var posi = parseInt(array[3]) + 1;
+
+		if ( posi == $('#'+arg[1]).val())
+		{
+			var sum = 0;
+			for (var i = 0; i < posi; i++) {
+				valor = $('#'+array[0]+'_'+array[1]+'_'+array[2]+'_'+i+'_'+array[4]).val();
+				valor = (valor == '') ? 0 : valor;
+				sum = parseFloat(sum) + parseFloat(valor);
+			}
+			if ( sum != $('#'+arg[0]+array[4]).val() ) { flag = false; }
+		}
+		return  flag;
+	}, "Suma de Meses no coincide con Subtotal");
+
 });
-</script>
+</script>	
 
 <select id="proyect">
 	<option value = "0">SELECCIONE</option>

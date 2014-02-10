@@ -42,6 +42,18 @@ class General extends CI_Controller {
 			show_404();
 		}
 	}
+
+	public function partidas()
+	{
+		$code = $this->input->get('codigo');
+		$is_ajax = $this->input->get('ajax');
+		if($is_ajax){
+			$data['datos'] = $this->general_model->get_partidas($code)->result();
+			$this->load->view('backend/json/json_view', $data);		
+		}else{
+			show_404();
+		}
+	}
 }
 
 ?>
