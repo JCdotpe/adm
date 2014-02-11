@@ -55,7 +55,7 @@ echo form_open($this->uri->uri_string(),$attr);
 	
 	<h2>Presupuesto General</h2>
 
-	<div class="row"><form class="form-inline" role="form">
+	<div class="row"><div class="form-inline" role="form">
 
 		<div class="col-xs-3">
 
@@ -93,7 +93,7 @@ echo form_open($this->uri->uri_string(),$attr);
 
 		</div>						
 
-	</form></div><!-- end row -->
+	</div></div><!-- end row -->
 
 	
 
@@ -110,7 +110,7 @@ echo form_open($this->uri->uri_string(),$attr);
 
 	<hr />
 
-	<form class="form-inline" role="form">
+	<div class="form-inline" role="form">
 
 	<h2>Presupuesto Mensual</h2> <input id="total_mcs" class="form-control input8" name="total_mcs" type="text" readonly />
 
@@ -128,11 +128,11 @@ echo form_open($this->uri->uri_string(),$attr);
 		</tbody>
 	</table>
 
-	</form></form><!-- end form presupuesto -->
+	</div><!-- end form presupuesto -->
 
 	<hr />
 
-	<form class="form-inline" role="form">
+	<div class="form-inline" role="form">
 
 	<h2>Cantidad de Actividades</h2> <?php echo form_input($Nro_Actividades); ?>
 
@@ -147,11 +147,11 @@ echo form_open($this->uri->uri_string(),$attr);
 		</tbody>
 	</table>
 
-	</form><!-- end form actividades -->
+	</div><!-- end form actividades -->
 
 	<hr />
 
-	<form class="form-inline" role="form">
+	<div class="form-inline" role="form">
 
 	<h2>Cantidad de Partidas</h2> <?php echo form_input($Nro_Partidas); ?>
 
@@ -166,7 +166,7 @@ echo form_open($this->uri->uri_string(),$attr);
 		</tbody>
 	</table>
 
-	</form><!-- end form partidas -->
+	</div><!-- end form partidas -->
 
 </div>
 
