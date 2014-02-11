@@ -45,7 +45,7 @@ $Nro_Partidas = array(
 );
 
 
-$attr = array('id' => 'pptt_gnrl_frm');
+$attr = array('id' => 'pptt_gnrl_frm','accept-charset' => 'UTF-8');
 
 echo form_open($this->uri->uri_string(),$attr);
 
@@ -71,6 +71,7 @@ echo form_open($this->uri->uri_string(),$attr);
 			<div class="form-group">
 				<label>Subtotal</label>
 				<?php echo form_input($Sub_Total); ?>
+				<div class="help-block has-error"></div>
 			</div>
 
 		</div>
@@ -80,6 +81,7 @@ echo form_open($this->uri->uri_string(),$attr);
 			<div class="form-group">
 				<label>IGV</label>
 				<?php echo form_input($IGV); ?>
+				<div class="help-block has-error"></div>
 			</div>
 
 		</div>
@@ -89,6 +91,7 @@ echo form_open($this->uri->uri_string(),$attr);
 			<div class="form-group">
 				<label>Cantidad de Meses</label>
 				<?php echo form_input($Nro_Meses); ?>
+				<div class="help-block has-error"></div>
 			</div>	
 
 		</div>						
@@ -112,7 +115,7 @@ echo form_open($this->uri->uri_string(),$attr);
 
 	<div class="form-inline" role="form">
 
-	<h2>Presupuesto Mensual</h2> <input id="total_mcs" class="form-control input8" name="total_mcs" type="text" readonly />
+	<h2>Presupuesto Mensual</h2> <input id="total_mcs" class="form-control input8" name="total_mcs" type="text" readonly /><div class="help-block has-error"></div>
 
 	
 
@@ -134,7 +137,7 @@ echo form_open($this->uri->uri_string(),$attr);
 
 	<div class="form-inline" role="form">
 
-	<h2>Cantidad de Actividades</h2> <?php echo form_input($Nro_Actividades); ?>
+	<h2>Cantidad de Actividades</h2> <?php echo form_input($Nro_Actividades); ?><div class="help-block has-error"></div>
 
 	<table id="pptt_actividades" class="table table-striped table-hover">
 		<thead>
@@ -153,13 +156,13 @@ echo form_open($this->uri->uri_string(),$attr);
 
 	<div class="form-inline" role="form">
 
-	<h2>Cantidad de Partidas</h2> <?php echo form_input($Nro_Partidas); ?>
+	<h2>Cantidad de Partidas</h2> <?php echo form_input($Nro_Partidas); ?> <div class="help-block has-error"></div>
 
 	<table id="pptt_partidas" class="table table-striped table-hover">
 		<thead>
 			<th>COD.</th>
 			<th>PARTIDA</th>
-			<th>SUBTOTAL <input type="text" id="total_part" class="form-control input2" name="total_part" readonly /><div class="help-block has-error"></div> </th>
+			<th>SUBTOTAL <input type="text" id="total_part" class="form-control input8" name="total_part" readonly /><div class="help-block has-error"></div> </th>
 			<th class='prct_part'>%</th>
 		</thead>
 		<tbody>
@@ -202,10 +205,10 @@ $('#Nro_Meses').change(function(event) {
 		html = '';
 		for (var i = 0; i < nro; i++){ 
 			html += '<tr>';
-			html += '<td><input type="text" id="cod_mcs_'+i+'" name="cod_mcs_'+i+'" maxlength="2" class="form-control input2 meses" /></td>';
+			html += '<td><input type="text" id="cod_mcs_'+i+'" name="cod_mcs_[]" maxlength="2" class="form-control input2 meses" /><div class="help-block has-error"></div> </td>';
 			html += '<td><input type="text" id="name_mcs_'+i+'" name="name_mcs_'+i+'" class="form-control input13" readonly /></td>';
-			html += '<td><input type="text" id="subtotal_mcs_'+i+'" name="subtotal_mcs_'+i+'" class="form-control input8 calculo_mcs" /></td>';
-			html += '<td><input type="text" id="igv_mcs_'+i+'" name="igv_mcs_'+i+'" class="form-control input8 calculo_mcs" /></td>';
+			html += '<td><input type="text" id="subtotal_mcs_'+i+'" name="subtotal_mcs_[]" class="form-control input8 calculo_mcs" /><div class="help-block has-error"></div> </td>';
+			html += '<td><input type="text" id="igv_mcs_'+i+'" name="igv_mcs_[]" class="form-control input8 calculo_mcs" /><div class="help-block has-error"></div> </td>';
 			html += '<td><input type="text" id="totgnrl_mcs_'+i+'" name="totgnrl_mcs_[]" class="form-control input8" readonly /></td>';
 			html += '</tr>';
 		}
@@ -249,9 +252,9 @@ function buscar_meses(codigo,posi){
 		$('#act_nombre_mes_'+posi).val('');
 		$('#part_nombre_mes_'+posi).val('');
 		$.each(json_data, function(i,datos){
-			$('#name_mcs_'+posi).val(datos.nombre_mes);
-			$('#act_nombre_mes_'+posi).val(datos.nombre_mes);
-			$('#part_nombre_mes_'+posi).val(datos.nombre_mes);
+			$('#name_mcs_'+posi).val(datos.NOMBRE);
+			$('#act_nombre_mes_'+posi).val(datos.NOMBRE);
+			$('#part_nombre_mes_'+posi).val(datos.NOMBRE);
 		});
 	});
 }
@@ -270,7 +273,7 @@ $('#Nro_Actividades').change(function(event){
 		html = '';
 		for (var i = 0; i < mcs; i++) {
 			html += '<th class = "act_meses"><input type="text" id="act_nombre_mes_'+i+'" class="form-control input13" name="act_nombre_mes_'+i+'" value="'+$('#name_mcs_'+i).val()+'" readonly />';
-			html += '<input type="text" id="act_total_mes_'+i+'" class="form-control input8" name="act_total_mes_[]" readonly /><div class="help-block has-error"></div></th>';
+			html += '<input type="text" id="act_total_mes_'+i+'" class="form-control input8" name="act_total_mes_[]" readonly /><div class="help-block has-error"></div> </th>';
 		}
 		$('.prct_act').after(html);
 
@@ -280,9 +283,9 @@ $('#Nro_Actividades').change(function(event){
 			html2 = '';
 			for (var j = 0; j < act; j++) {
 				html2 += '<tr>';
-				html2 += '<td><input type="text" id="act_cod_'+j+'" name="act_cod_'+j+'" maxlength="2" class="actvd form-control input2" /></td>';
+				html2 += '<td><input type="text" id="act_cod_'+j+'" name="act_cod_[]" maxlength="2" class="actvd form-control input2" /><div class="help-block has-error"></div> </td>';
 				html2 += '<td><input type="text" id="act_name_'+j+'" name="act_name_'+j+'" readonly class="form-control input200" /></td>';
-				html2 += '<td><input type="text" id="act_subtotal_'+j+'" name="act_subtotal_[]" class="form-control input8 calculo_prct_details act_calculo_pptt" /><div class="help-block has-error"></div></td>';
+				html2 += '<td><input type="text" id="act_subtotal_'+j+'" name="act_subtotal_[]" class="form-control input8 calculo_prct_details act_calculo_pptt" /><div class="help-block has-error"></div> </td>';
 				html2 += '<td><input type="text" id="act_prct_'+j+'" name="act_prct_'+j+'" class="form-control input8" readonly /></td>';
 				for (var m = 0; m < mcs; m++) {
 					html2 += '<td><input type="text" id="act_pptt_mes_'+m+'_'+j+'" name="act_pptt_mes_[]" class="form-control input8 act_calculo_pptt" /><div class="help-block has-error"></div></td>';
@@ -308,7 +311,7 @@ function buscar_actividades(codigo,posi){
 
 		$('#act_name_'+posi).val('');
 		$.each(json_data, function(i,datos){
-			$('#act_name_'+posi).val(datos.nombre_actividad);
+			$('#act_name_'+posi).val( datos.DESCRIPCION );
 		});
 	});
 }
@@ -364,7 +367,7 @@ $('#Nro_Partidas').change(function(event){
 		html = '';
 		for (var i = 0; i < mcs; i++) {
 			html += '<th class = "part_meses"><input type="text" id="part_nombre_mes_'+i+'" name="part_nombre_mes_'+i+'" class="form-control input13" value="'+$('#name_mcs_'+i).val()+'" readonly />';
-			html += '<input type="text" id="part_total_mes_'+i+'" class="form-control input8" name="part_total_mes_[]" readonly /><div class="help-block has-error"></div></th>';
+			html += '<input type="text" id="part_total_mes_'+i+'" class="form-control input8" name="part_total_mes_[]" readonly /><div class="help-block has-error"></div> </th>';
 		}
 		$('.prct_part').after(html);
 
@@ -374,8 +377,8 @@ $('#Nro_Partidas').change(function(event){
 			html2 = '';
 			for (var j = 0; j < part; j++) {
 				html2 += '<tr>';
-				html2 += '<td><input type="text" id="part_cod_'+j+'" name="part_cod_'+j+'"  class="prtda form-control input2" /></td>';
-				html2 += '<td><input type="text" id="part_name_'+j+'" name="part_name_'+j+'" class="form-control input13" readonly /></td>';
+				html2 += '<td><input type="text" id="part_cod_'+j+'" name="part_cod_[]"  class="prtda form-control input12" /><div class="help-block has-error"></div> </td>';	
+				html2 += '<td><input type="text" id="part_name_'+j+'" name="part_name_'+j+'" class="form-control" readonly /></td>';
 				html2 += '<td><input type="text" id="part_subtotal_'+j+'" name="part_subtotal_[]" class="form-control input8 calculo_prct_details part_calculo_pptt" /><div class="help-block has-error"></div></td>';
 				html2 += '<td><input type="text" id="part_prct_'+j+'" name="part_prct_'+j+'" class="form-control input8" readonly /></td>';
 				for (var m = 0; m < mcs; m++) {
@@ -402,7 +405,7 @@ function buscar_partidas(codigo,posi){
 
 		$('#part_name_'+posi).val('');
 		$.each(json_data, function(i,datos){
-			$('#part_name_'+posi).val(datos.nombre_partida);
+			$('#part_name_'+posi).val(datos.GASTO);
 		});
 	});
 }
@@ -426,38 +429,82 @@ $(document).on("change",'.part_calculo_pptt',function() {
 ////////////////////////////////////////////////
 $("#pptt_gnrl_frm").validate({
 	rules: {
-		total_mcs: {
+		Sub_Total: {
 			required:true,
+			number:true,
+		},
+		IGV: {
+			required:true,
+			number:true,
+		},
+		Nro_Meses: {
+			required:true,
+			number:true,
+		},
+		total_mcs: {
 			EqualsUno:['Total_General'],
+		},
+		'cod_mcs_[]':{
+			required:true,
+			number:true,
+			range:[1,12],
+		},
+		'subtotal_mcs_[]':{
+			required:true,
+			number:true,
+		},
+		'igv_mcs_[]':{
+			required:true,
+			number:true,
+		},
+		Nro_Actividades: {
+			required:true,
+			number:true,
 		},
 		total_actvd: {
-			required:true,
 			EqualsUno:['Total_General'],
 		},
-		total_part: {
+		'act_cod_[]':{
 			required:true,
-			EqualsUno:['Total_General'],
-		},
-		'act_total_mes_[]': {
-			required:true,
-			EqualsDos:['totgnrl_mcs_'],
+			number:true,
 		},
 		'act_subtotal_[]': {
 			required:true,
+			number:true,
 		},
 		'act_pptt_mes_[]': {
 			required:true,
+			number:true,
 			EqualsTres:['act_subtotal_','Nro_Meses'],
 		},
-		'part_total_mes_[]': {
+		'act_total_mes_[]': {
 			required:true,
+			number:true,
 			EqualsDos:['totgnrl_mcs_'],
+		},
+		Nro_Partidas: {
+			required:true,
+			number:true,
+		},
+		total_part: {
+			EqualsUno:['Total_General'],
+		},
+		'part_cod_[]': {
+			required:true,
+			rangelength:[8,11],
 		},
 		'part_subtotal_[]': {
 			required:true,
+			number:true,
+		},
+		'part_total_mes_[]': {
+			required:true,
+			number:true,
+			EqualsDos:['totgnrl_mcs_'],
 		},
 		'part_pptt_mes_[]': {
 			required:true,
+			number:true,
 			EqualsTres:['part_subtotal_','Nro_Meses'],
 		},
 	},

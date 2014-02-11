@@ -36,8 +36,8 @@ class General extends CI_Controller {
 		$code = $this->input->get('codigo');
 		$is_ajax = $this->input->get('ajax');
 		if($is_ajax){
-			$data['datos'] = $this->general_model->get_actividades($code)->result();
-			$this->load->view('backend/json/json_view', $data);		
+			$datos = $this->general_model->get_actividades($code);
+			$this->convert_uft8_array($datos);
 		}else{
 			show_404();
 		}
@@ -48,11 +48,20 @@ class General extends CI_Controller {
 		$code = $this->input->get('codigo');
 		$is_ajax = $this->input->get('ajax');
 		if($is_ajax){
-			$data['datos'] = $this->general_model->get_partidas($code)->result();
-			$this->load->view('backend/json/json_view', $data);		
+			$datos = $this->general_model->get_partidas($code);
+			$this->convert_uft8_array($datos);
 		}else{
 			show_404();
 		}
+	}
+
+	function convert_uft8_array($datos)
+	{
+		$data['datos'] = array();
+		foreach ($datos->result_array() as $row) {
+			array_push($data['datos'], array_map('utf8_encode', $row));
+		}
+		$this->load->view('backend/json/json_view', $data);
 	}
 }
 

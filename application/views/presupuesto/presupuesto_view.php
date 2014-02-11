@@ -30,9 +30,10 @@ $(function(){
 		required:'Campo obligatorio',
 		email:'Ingrese un email válido',
 		date:'Ingrese una fecha válida',
-		numer:'Sólo se permiten números',
+		number:'Sólo se permiten números',
 		digits:'Sólo se permiten números',
 		range: jQuery.validator.format('Por favor ingrese un valor entre {0} y {1}.'),
+		rangelength: jQuery.validator.format("Por favor ingrese entre {0} y {1} caracteres."),
 	});
 
 	$.validator.addMethod("EqualsUno", function(value, element, arg){
@@ -84,7 +85,7 @@ $(function(){
 
 		<div class="tabbable">
 			<ul id="nav_pptt" class="nav nav-tabs fix_navcap">
-				<li id="ctab1" class="active"><a href="#tab1" data-toggle="tab">Datos Generales</a></li>
+				<li id="ctab1"><a href="#tab1" data-toggle="tab">Datos Generales</a></li>
 				<li id="ctab2"><a href="#tab2" data-toggle="tab">Detalle PPTT</a></li>
 			</ul>
 			<div class="tab-content fix_tabcontent">
@@ -103,9 +104,9 @@ $(function(){
 
 $(function(){
 
-	$('#proyect').change(function(event){
+	// $('#proyect').change(function(event){
 		$('#ctab1 a').trigger('click');
-	});
+	// });
 
 });
 
