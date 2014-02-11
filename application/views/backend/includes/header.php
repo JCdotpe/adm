@@ -22,7 +22,12 @@
 	<script src="<?php echo base_url('js/jquery.js'); ?>"></script>
 	<script src="<?php echo base_url('js/bootstrap.min.js'); ?>"></script>
 
-	<script src="<?php echo base_url('js/main.js'); ?>"></script>	
+	<script src="<?php echo base_url('js/main.js'); ?>"></script>
+	<script type="text/javascript">
+		var CI = {
+			'site_url': '<?php echo site_url(); ?>'
+		};
+	</script>
 
 	<div style="display: block;" id="header">
 		<a href="#" id="logo"><img alt="CIE2013" src="http://webinei.inei.gob.pe/cie/2013/web/img/brand_gps.png"></a>

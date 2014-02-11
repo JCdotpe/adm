@@ -4,9 +4,9 @@
 ////// DATOS GENERALES /////////////
 ////////////////////////////////////
 
-$Sub_Total = array(
-	'name'	=> 'Sub_Total',
-	'id'	=> 'Sub_Total',
+$SubTotal = array(
+	'name'	=> 'Subtotal',
+	'id'	=> 'Subtotal',
 	'class'	=> 'form-control input8',
 );
 
@@ -16,16 +16,16 @@ $IGV = array(
 	'class'	=> 'form-control input8',
 );
 
-$Total_General = array(
-	'name'	=> 'Total_General',
-	'id'	=> 'Total_General',
+$Total_Gral = array(
+	'name'	=> 'Total_Gral',
+	'id'	=> 'Total_Gral',
 	'readonly' => 'true',
 	'class'	=> 'form-control input8',
 );
 
-$Nro_Meses = array(
-	'name'	=> 'Nro_Meses',
-	'id'	=> 'Nro_Meses',
+$Cantidad_Mes = array(
+	'name'	=> 'Cantidad_Mes',
+	'id'	=> 'Cantidad_Mes',
 	'maxlength'	=> 2,
 	'class'	=> 'form-control input2',
 );
@@ -61,7 +61,7 @@ echo form_open($this->uri->uri_string(),$attr);
 
 			<div class="form-group">
 				<label>Total General</label>
-				<?php echo form_input($Total_General); ?>
+				<?php echo form_input($Total_Gral); ?>
 			</div>
 
 		</div>
@@ -70,7 +70,7 @@ echo form_open($this->uri->uri_string(),$attr);
 
 			<div class="form-group">
 				<label>Subtotal</label>
-				<?php echo form_input($Sub_Total); ?>
+				<?php echo form_input($SubTotal); ?>
 				<div class="help-block has-error"></div>
 			</div>
 
@@ -90,7 +90,7 @@ echo form_open($this->uri->uri_string(),$attr);
 
 			<div class="form-group">
 				<label>Cantidad de Meses</label>
-				<?php echo form_input($Nro_Meses); ?>
+				<?php echo form_input($Cantidad_Mes); ?>
 				<div class="help-block has-error"></div>
 			</div>	
 
@@ -180,13 +180,13 @@ echo form_close();
 
 <script type="text/javascript">
 
-$('#Sub_Total').change(function(event) {
-	calc_totgnrl($(this).val(),$('#IGV').val(),'Total_General');// sumatoria del subtotal e igv
+$('#Subtotal').change(function(event) {
+	calc_totgnrl($(this).val(),$('#IGV').val(),'Total_Gral');// sumatoria del subtotal e igv
 	$('.calculo_prct_details').trigger('change');// recalcula el porcentaje de las filas en las tablas detalles
 });
 
 $('#IGV').change(function(event) {
-	calc_totgnrl($('#Sub_Total').val(),$(this).val(),'Total_General');// sumatoria del subtotal e igv
+	calc_totgnrl($('#Subtotal').val(),$(this).val(),'Total_Gral');// sumatoria del subtotal e igv
 	$('.calculo_prct_details').trigger('change');// recalcula el porcentaje de las filas en las tablas detalles
 });
 
@@ -197,7 +197,7 @@ function calc_totgnrl(par1, par2, view){
 	$('#'+view).val(monto);
 }
 
-$('#Nro_Meses').change(function(event) {
+$('#Cantidad_Mes').change(function(event) {
 	nro = $(this).val();
 	$('#pptt_meses > tbody > tr').remove();
 
@@ -206,7 +206,7 @@ $('#Nro_Meses').change(function(event) {
 		for (var i = 0; i < nro; i++){ 
 			html += '<tr>';
 			html += '<td><input type="text" id="cod_mcs_'+i+'" name="cod_mcs_[]" maxlength="2" class="form-control input2 meses" /><div class="help-block has-error"></div> </td>';
-			html += '<td><input type="text" id="name_mcs_'+i+'" name="name_mcs_'+i+'" class="form-control input13" readonly /></td>';
+			html += '<td><input type="text" id="name_mcs_'+i+'" name="name_mcs_[]" class="form-control input13" readonly /><div class="help-block has-error"></div> </td>';
 			html += '<td><input type="text" id="subtotal_mcs_'+i+'" name="subtotal_mcs_[]" class="form-control input8 calculo_mcs" /><div class="help-block has-error"></div> </td>';
 			html += '<td><input type="text" id="igv_mcs_'+i+'" name="igv_mcs_[]" class="form-control input8 calculo_mcs" /><div class="help-block has-error"></div> </td>';
 			html += '<td><input type="text" id="totgnrl_mcs_'+i+'" name="totgnrl_mcs_[]" class="form-control input8" readonly /></td>';
@@ -229,7 +229,7 @@ $(document).on("change",'.calculo_mcs',function() {
 
 function suma_total_meses() {
 	monto = 0;
-	mcs = $('#Nro_Meses').val();
+	mcs = $('#Cantidad_Mes').val();
 	for (var i = 0; i < mcs; i++) {
 		valor = $('#totgnrl_mcs_'+i).val();
 		valor = ( valor.trim() != '' ) ? valor : 0;
@@ -246,15 +246,15 @@ $(document).on("change",'.meses',function() {
 });
 
 function buscar_meses(codigo,posi){
-	$.getJSON('<?php echo site_url(); ?>/general/general/meses', {codigo:codigo,ajax:1}, function(json_data, textStatus) {
+	$.getJSON(CI.site_url+'/general/general/meses', {codigo:codigo,ajax:1}, function(json_data, textStatus) {
 
 		$('#name_mcs_'+posi).val('');
 		$('#act_nombre_mes_'+posi).val('');
 		$('#part_nombre_mes_'+posi).val('');
 		$.each(json_data, function(i,datos){
-			$('#name_mcs_'+posi).val(datos.NOMBRE);
-			$('#act_nombre_mes_'+posi).val(datos.NOMBRE);
-			$('#part_nombre_mes_'+posi).val(datos.NOMBRE);
+			$('#name_mcs_'+posi).val(datos.Nombre);
+			$('#act_nombre_mes_'+posi).val(datos.Nombre);
+			$('#part_nombre_mes_'+posi).val(datos.Nombre);
 		});
 	});
 }
@@ -265,7 +265,7 @@ function buscar_meses(codigo,posi){
 ////////////////////////////////////////////////
 $('#Nro_Actividades').change(function(event){
 
-	mcs = $('#Nro_Meses').val();
+	mcs = $('#Cantidad_Mes').val();
 	
 	$('.act_meses').remove();
 	
@@ -284,7 +284,7 @@ $('#Nro_Actividades').change(function(event){
 			for (var j = 0; j < act; j++) {
 				html2 += '<tr>';
 				html2 += '<td><input type="text" id="act_cod_'+j+'" name="act_cod_[]" maxlength="2" class="actvd form-control input2" /><div class="help-block has-error"></div> </td>';
-				html2 += '<td><input type="text" id="act_name_'+j+'" name="act_name_'+j+'" readonly class="form-control input200" /></td>';
+				html2 += '<td><input type="text" id="act_name_'+j+'" name="act_name_[]" readonly class="form-control input200" /><div class="help-block has-error"></div> </td>';
 				html2 += '<td><input type="text" id="act_subtotal_'+j+'" name="act_subtotal_[]" class="form-control input8 calculo_prct_details act_calculo_pptt" /><div class="help-block has-error"></div> </td>';
 				html2 += '<td><input type="text" id="act_prct_'+j+'" name="act_prct_'+j+'" class="form-control input8" readonly /></td>';
 				for (var m = 0; m < mcs; m++) {
@@ -311,7 +311,7 @@ function buscar_actividades(codigo,posi){
 
 		$('#act_name_'+posi).val('');
 		$.each(json_data, function(i,datos){
-			$('#act_name_'+posi).val( datos.DESCRIPCION );
+			$('#act_name_'+posi).val( datos.Descripcion );
 		});
 	});
 }
@@ -324,7 +324,7 @@ $(document).on("change",'.calculo_prct_details',function() {
 });
 
 function calc_prct(posi,prefijo,view) {
-	par1 = $('#Total_General').val();
+	par1 = $('#Total_Gral').val();
 	par2 = $('#'+prefijo+'_subtotal_'+posi).val();
 	monto = ( parseFloat(par2) / parseFloat(par1) ) * 100;
 	$('#'+prefijo+view+posi).val(monto.toFixed(2));
@@ -360,7 +360,7 @@ function suma_total_details(param,view,nrofilas) {
 ////////////////////////////////////////////////
 $('#Nro_Partidas').change(function(event){
 
-	mcs = $('#Nro_Meses').val();
+	mcs = $('#Cantidad_Mes').val();
 	
 	$('.part_meses').remove();
 	if (mcs > 0){
@@ -377,8 +377,8 @@ $('#Nro_Partidas').change(function(event){
 			html2 = '';
 			for (var j = 0; j < part; j++) {
 				html2 += '<tr>';
-				html2 += '<td><input type="text" id="part_cod_'+j+'" name="part_cod_[]"  class="prtda form-control input12" /><div class="help-block has-error"></div> </td>';	
-				html2 += '<td><input type="text" id="part_name_'+j+'" name="part_name_'+j+'" class="form-control" readonly /></td>';
+				html2 += '<td><input type="text" id="part_cod_'+j+'" name="part_cod_[]" maxlength="11" class="prtda form-control input12" /><div class="help-block has-error"></div> </td>';	
+				html2 += '<td><input type="text" id="part_name_'+j+'" name="part_name_[]" class="form-control" readonly /><div class="help-block has-error"></div> </td>';
 				html2 += '<td><input type="text" id="part_subtotal_'+j+'" name="part_subtotal_[]" class="form-control input8 calculo_prct_details part_calculo_pptt" /><div class="help-block has-error"></div></td>';
 				html2 += '<td><input type="text" id="part_prct_'+j+'" name="part_prct_'+j+'" class="form-control input8" readonly /></td>';
 				for (var m = 0; m < mcs; m++) {
@@ -405,7 +405,7 @@ function buscar_partidas(codigo,posi){
 
 		$('#part_name_'+posi).val('');
 		$.each(json_data, function(i,datos){
-			$('#part_name_'+posi).val(datos.GASTO);
+			$('#part_name_'+posi).val(datos.Gasto);
 		});
 	});
 }
@@ -429,7 +429,7 @@ $(document).on("change",'.part_calculo_pptt',function() {
 ////////////////////////////////////////////////
 $("#pptt_gnrl_frm").validate({
 	rules: {
-		Sub_Total: {
+		Subtotal: {
 			required:true,
 			number:true,
 		},
@@ -437,17 +437,20 @@ $("#pptt_gnrl_frm").validate({
 			required:true,
 			number:true,
 		},
-		Nro_Meses: {
+		Cantidad_Mes: {
 			required:true,
 			number:true,
 		},
 		total_mcs: {
-			EqualsUno:['Total_General'],
+			EqualsUno:['Total_Gral'],
 		},
 		'cod_mcs_[]':{
 			required:true,
 			number:true,
 			range:[1,12],
+		},
+		'name_mcs_[]':{
+			required:true,
 		},
 		'subtotal_mcs_[]':{
 			required:true,
@@ -462,11 +465,14 @@ $("#pptt_gnrl_frm").validate({
 			number:true,
 		},
 		total_actvd: {
-			EqualsUno:['Total_General'],
+			EqualsUno:['Total_Gral'],
 		},
 		'act_cod_[]':{
 			required:true,
 			number:true,
+		},
+		'act_name_[]':{
+			required:true,
 		},
 		'act_subtotal_[]': {
 			required:true,
@@ -475,7 +481,7 @@ $("#pptt_gnrl_frm").validate({
 		'act_pptt_mes_[]': {
 			required:true,
 			number:true,
-			EqualsTres:['act_subtotal_','Nro_Meses'],
+			EqualsTres:['act_subtotal_','Cantidad_Mes'],
 		},
 		'act_total_mes_[]': {
 			required:true,
@@ -487,11 +493,14 @@ $("#pptt_gnrl_frm").validate({
 			number:true,
 		},
 		total_part: {
-			EqualsUno:['Total_General'],
+			EqualsUno:['Total_Gral'],
 		},
 		'part_cod_[]': {
 			required:true,
 			rangelength:[8,11],
+		},
+		'part_name_[]': {
+			required:true,
 		},
 		'part_subtotal_[]': {
 			required:true,
@@ -505,7 +514,7 @@ $("#pptt_gnrl_frm").validate({
 		'part_pptt_mes_[]': {
 			required:true,
 			number:true,
-			EqualsTres:['part_subtotal_','Nro_Meses'],
+			EqualsTres:['part_subtotal_','Cantidad_Mes'],
 		},
 	},
 
@@ -533,37 +542,28 @@ $("#pptt_gnrl_frm").validate({
 	},
 	submitHandler: function(form) {
 
-		// var cap1_cm_data = $("#cap1_cm").serializeArray();
-		// cap1_cm_data.push(
-		// 	{name: 'ajax',value:1},
-		// 	{name: 'id_local',value:$("input[name='id_local']").val()},
-		// 	{name: 'Nro_Pred',value:$("input[name='Nro_Pred']").val()},
-		// 	{name: 'user_id',value:$("input[name='user_id']").val()},
-		// 	{name: 'P1_A_2_NroIE',value:$("#P1_A_2_NroIE").val()}
-		// );
+		var pptt_gnrl_data = $("#pptt_gnrl_frm").serializeArray();
+		pptt_gnrl_data.push(
+			{name: 'ajax',value:1},
+			// {name: 'codigo_proyecto',value:$("input[name='id_local']").val()},
+			{name: 'codigo_proyecto',value:'00000001'},
+			{name: 'id_area',value:1}
+			// {name: 'user_id',value:$("input[name='user_id']").val()},
+		);
 
-		// var bcar = $( "#cap1_cm :submit" );
-		// bcar.attr("disabled", "disabled");
-		// $.ajax({
-		// 	url: CI.site_url + "/consistencia/cap1/cm",
-		// 	type:'POST',
-		// 	cache:false,
-		// 	data:cap1_cm_data,
-		// 	dataType:'json',
-		// 	success:function(json){
-		// 		alert(json.msg);
-		// 		bcar.removeAttr('disabled');
-		// 		btncmod(json.nrocms);
-		// 		var rec = parseInt($('#P1_A_2_NroIE').val())+1;
-		// 		if( rec > parseInt($('#P1_A_1_Cant_IE').val()) ){
-		// 			$('#P1_B_1_TPred').focus();
-		// 		}else{
-		// 			$( "#gies .ienro:nth-child(" + rec + ")" ).trigger('click');
-		// 			$('#P1_A_2_1_NomIE').focus();
-		// 		}
-		// 		// gen_cms(json.nro_cms,json.cms);
-		// 	}
-		// });
+		var bgnrl = $( "#pptt_gnrl_frm :submit" );
+		bgnrl.attr("disabled", "disabled");
+		$.ajax({
+			url: CI.site_url + "/presupuesto/presupuesto/datos_generales",
+			type:'POST',
+			cache:false,
+			data:pptt_gnrl_data,
+			dataType:'json',
+			success:function(json){
+				alert(json.msg);
+				bgnrl.removeAttr('disabled');
+			}
+		});
 	}
 });
 
