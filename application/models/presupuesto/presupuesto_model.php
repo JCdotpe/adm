@@ -17,5 +17,35 @@ class Presupuesto_model extends CI_MODEL{
 		return $this->db->affected_rows() > 0;
 	}
 
+	function insert_pptt_proyect_mes( $data )
+	{
+		$this->db->insert('presup_proyecto_mes', $data);
+		return $this->db->affected_rows() > 0;
+	}
+
+	function delete_pptt_proyect_mes( $area, $codigo, $anio )
+	{
+		$this->db->where('ID_AREA', $area);
+		$this->db->where('CODIGO_PROYECTO', $codigo);
+		$this->db->where('ANIO', $anio);
+		$this->db->delete('presup_proyecto_mes');
+		return $this->db->affected_rows() > 0;	
+	}
+
+	function insert_pryct_actvdd( $data )
+	{
+		$this->db->insert('proyecto_actividad', $data);
+		return $this->db->affected_rows() > 0;
+	}
+
+	function delete_pryct_actvdd( $area, $codigo, $anio )
+	{
+		$this->db->where('ID_AREA', $area);
+		$this->db->where('CODIGO_PROYECTO', $codigo);
+		$this->db->where('ANIO', $anio);
+		$this->db->delete('proyecto_actividad');
+		return $this->db->affected_rows() > 0;	
+	}
+
 }
 ?>
