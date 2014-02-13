@@ -68,7 +68,7 @@ class Presupuesto extends CI_Controller {
 			$pptt_exist = $this->presupuesto_model->get_pptt_proyect($cod_area, $cod_pryct)->num_rows();
 
 			if ($pptt_exist > 0) {
-				if ( $this->presupuesto_model->update_pptt_proyect( $cod_area,$cod_pryct,$arr_presup_proyecto ) > 0 ) {
+				if ( $this->presupuesto_model->update_pptt_proyect( $cod_area, $cod_pryct, $arr_presup_proyecto ) > 0 ) {
 					$flag = 1;
 					$msg = 'Se ha actualizado satisfactoriamente el Presupuesto del Proyecto';
 				}
@@ -98,14 +98,15 @@ class Presupuesto extends CI_Controller {
 			$anio = ($max_mes < $mes_actual) ? date( 'Y', mktime(0,0,0, date('m'), date('d'), date('Y')+1) ) : date('Y');
 			$arr_presup_proyecto_mes['Anio'] = $anio;
 
-			$this->presupuesto_model->delete_pptt_proyect_mes( $cod_area, $cod_pryct, $anio );
+			$this->presupuesto_model->delete_data_pptt( $cod_area, $cod_pryct, $anio, 'presup_proyecto_mes' );
+
 			for ($i=0; $i < $nro_meses; $i++) {
 				foreach ($tbl_presup_proyecto_mes as $key => $camp) {
 					if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio'))) {
 						$arr_presup_proyecto_mes[$camp] = ( !isset($presup_proyecto_mes[$camp][$i]) ) ? 0 : $presup_proyecto_mes[$camp][$i]; 
 					}
 				}
-				$this->presupuesto_model->insert_pptt_proyect_mes($arr_presup_proyecto_mes);
+				$this->presupuesto_model->insert_data_pptt( $arr_presup_proyecto_mes, 'presup_proyecto_mes' );
 			}
 
 
@@ -113,49 +114,66 @@ class Presupuesto extends CI_Controller {
 			//Proyecto Actividad
 			//////////////////////////////
 
-			$arr_proyecto_actividad['Id_Area'] = $cod_area;
-			$arr_proyecto_actividad['Codigo_Proyecto'] = $cod_pryct;
-			$arr_proyecto_actividad['Anio'] = $anio;
-
 			$nro_act = $this->input->post('Nro_Actividades');
 
-			foreach ($tbl_proyecto_actividad as $a=>$b) { 
-				if (!in_array($b, array('Id_Area','Codigo_Proyecto'))) {
-					$proyecto_actividad[$b] = ( $this->input->post($b) == '' ) ? 0 : $this->input->post($b); //asigno post a un array global
-				}
-			}
+			$this->proyecto_data( $cod_area, $cod_pryct, $anio, $nro_act, $nro_meses, $tbl_proyecto_actividad, 'proyecto_actividad' );
 
-			$this->presupuesto_model->delete_pryct_actvdd( $cod_area, $cod_pryct, $anio );
 
-			$x = 0; //indice para el monto_act
-			for ($i=0; $i < $nro_act ; $i++) { 
-				
-				foreach ($tbl_proyecto_actividad as $key => $camp) {
-					if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','Mes','Monto_Act'))) {
-						$arr_proyecto_actividad[$camp] = ( !isset($proyecto_actividad[$camp][$i]) ) ? 0 : $proyecto_actividad[$camp][$i]; //asigno nro_act y cod_act
-					}
-				}
-				
-				for ($j=0; $j < $nro_meses ; $j++) { //recorro cantidad de meses
-					foreach ($tbl_proyecto_actividad as $key => $camp) {
-						
-						if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','Nro_Act','Cod_Act','Monto_Act'))) {
-							$arr_proyecto_actividad[$camp] = ( !isset($proyecto_actividad[$camp][$j]) ) ? 0 : $proyecto_actividad[$camp][$j]; //asigno mes
-						}
+			//////////////////////////////
+			//Proyecto Gasto
+			//////////////////////////////
 
-						if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','Nro_Act','Cod_Act','Mes'))) {
-							$arr_proyecto_actividad[$camp] = ( !isset($proyecto_actividad[$camp][$x]) ) ? 0 : $proyecto_actividad[$camp][$x]; //asigno monto_act
-						}
-					}
-					$this->presupuesto_model->insert_pryct_actvdd($arr_proyecto_actividad);
-					$x++;
-				}
-			}
+			$nro_gasto = $this->input->post('Nro_Partidas');
+			
+			$this->proyecto_data( $cod_area, $cod_pryct, $anio, $nro_gasto, $nro_meses, $tbl_proyecto_gasto, 'proyecto_gasto' );
 
+
+			//////////////////////////////
+			//////////////////////////////
 			$datos['flag'] = $flag;
 			$datos['msg'] = $msg;
 			$data['datos'] = $datos;
 			$this->load->view('backend/json/json_view', $data);
+		}
+	}
+
+	public function proyecto_data( $area, $pryct, $anio, $cantidad, $meses, $tbl_camp, $tbl_name )
+	{
+		$arr_proyecto['Id_Area'] = $area;
+		$arr_proyecto['Codigo_Proyecto'] = $pryct;
+		$arr_proyecto['Anio'] = $anio;
+
+		foreach ($tbl_camp as $a=>$b) { 
+			if (!in_array($b, array('Id_Area','Codigo_Proyecto'))) {
+				$arr_global[$b] = ( $this->input->post($b) == '' ) ? 0 : $this->input->post($b); //asigno post a un array global
+			}
+		}
+
+		$this->presupuesto_model->delete_data_pptt( $area, $pryct, $anio, $tbl_name );
+
+		$x = 0; //indice para el monto
+		for ($i=0; $i < $cantidad ; $i++) { 
+			
+			foreach ($tbl_camp as $key => $camp) {
+				if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','Mes','Monto_Act','Monto_Gasto'))) {
+					$arr_proyecto[$camp] = ( !isset($arr_global[$camp][$i]) ) ? 0 : $arr_global[$camp][$i]; //asigno nro y cod
+				}
+			}
+			
+			for ($j=0; $j < $meses ; $j++) { //recorro cantidad de meses
+				foreach ($tbl_camp as $key => $camp) {
+					
+					if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','Nro_Act','Cod_Act','Monto_Act','Nro_Gasto','Cod_Gasto','Monto_Gasto'))) {
+						$arr_proyecto[$camp] = ( !isset($arr_global[$camp][$j]) ) ? 0 : $arr_global[$camp][$j]; //asigno mes
+					}
+
+					if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','Mes','Nro_Act','Cod_Act','Nro_Gasto','Cod_Gasto'))) {
+						$arr_proyecto[$camp] = ( !isset($arr_global[$camp][$x]) ) ? 0 : $arr_global[$camp][$x]; //asigno monto
+					}
+				}
+				$this->presupuesto_model->insert_data_pptt( $arr_proyecto, $tbl_name );
+				$x++;
+			}
 		}
 	}
 }

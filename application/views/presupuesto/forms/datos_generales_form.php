@@ -381,17 +381,17 @@ $('#Nro_Partidas').change(function(event){
 			for (var j = 0; j < part; j++) {
 				html2 += '<tr>';
 				html2 += '<td><input type="text" id="Nro_Gasto_'+j+'" name="Nro_Gasto[]" class="form-control input2" value="'+( parseInt(j) + 1 )+'" readonly /></td>';
-				html2 += '<td><input type="text" id="part_cod_'+j+'" name="part_cod_[]" maxlength="11" class="prtda form-control input12" /><div class="help-block has-error"></div> </td>';	
+				html2 += '<td><input type="text" id="Cod_Gasto_'+j+'" name="Cod_Gasto[]" maxlength="11" class="prtda form-control input12" /><div class="help-block has-error"></div> </td>';	
 				html2 += '<td><input type="text" id="part_name_'+j+'" name="part_name_[]" class="form-control" readonly /><div class="help-block has-error"></div> </td>';
 				html2 += '<td><input type="text" id="part_subtotal_'+j+'" name="part_subtotal_[]" class="form-control input8 calculo_prct_details part_calculo_pptt" /><div class="help-block has-error"></div></td>';
 				html2 += '<td><input type="text" id="part_prct_'+j+'" name="part_prct_'+j+'" class="form-control input8" readonly /></td>';
 				for (var m = 0; m < mcs; m++) {
-					html2 += '<td><input type="text" id="part_pptt_mes_'+m+'_'+j+'" name="part_pptt_mes_[]" class="form-control input8 part_calculo_pptt" /><div class="help-block has-error"></div></td>';
+					html2 += '<td><input type="text" id="Monto_Gasto_'+m+'_'+j+'" name="Monto_Gasto[]" class="form-control input8 part_calculo_pptt" /><div class="help-block has-error"></div></td>';
 				}
 				html2 += '</tr>';
 			}
 			$('#pptt_partidas > tbody').append(html2);
-			$('#part_cod_0').focus();
+			$('#Cod_Gasto_0').focus();
 		}
 	}
 
@@ -418,11 +418,11 @@ $(document).on("change",'.part_calculo_pptt',function() {
 	var campo = $(this);
 	var cod = campo.attr('id');
 	array=cod.split("_");
-	if ( array[2] != 'mes' )
+	if ( array[0] != 'Monto' )
 	{
 		suma_total_details( "part_subtotal_", "total_part", $('#Nro_Partidas').val() ); // suma el total de todas las partidas
 	}else{
-		suma_total_details( "part_pptt_mes_"+array[3]+"_", "part_total_mes_"+array[3]+"", $('#Nro_Partidas').val() ); // suma el total de todas las partidas
+		suma_total_details( "Monto_Gasto_"+array[2]+"_", "part_total_mes_"+array[2]+"", $('#Nro_Partidas').val() ); // suma el total de todas las partidas
 	}
 	
 });
@@ -499,7 +499,7 @@ $("#pptt_gnrl_frm").validate({
 		total_part: {
 			EqualsUno:['Total_Gral'],
 		},
-		'part_cod_[]': {
+		'Cod_Gasto[]': {
 			required:true,
 			rangelength:[8,11],
 		},
@@ -515,10 +515,10 @@ $("#pptt_gnrl_frm").validate({
 			number:true,
 			EqualsDos:['Total_Gral_M_'],
 		},
-		'part_pptt_mes_[]': {
+		'Monto_Gasto[]': {
 			required:true,
 			number:true,
-			EqualsTres:['part_subtotal_','Cantidad_Mes'],
+			// EqualsTres:['part_subtotal_','Cantidad_Mes'],
 		},
 	},
 
