@@ -54,17 +54,17 @@ $(function(){
 		flag = true;
 		var cod = element.id;
 		array=cod.split("_");
-		var posi = parseInt(array[3]) + 1;
+		var posi = parseInt(array[2]) + 1;
 
 		if ( posi == $('#'+arg[1]).val())
 		{
 			var sum = 0;
 			for (var i = 0; i < posi; i++) {
-				valor = $('#'+array[0]+'_'+array[1]+'_'+array[2]+'_'+i+'_'+array[4]).val();
+				valor = $('#'+array[0]+'_'+array[1]+'_'+i+'_'+array[3]).val();
 				valor = (valor == '') ? 0 : valor;
 				sum = parseFloat(sum) + parseFloat(valor);
 			}
-			if ( sum != $('#'+arg[0]+array[4]).val() ) { flag = false; }
+			if ( sum != $('#'+arg[0]+array[3]).val() ) { flag = false; }
 		}
 		return  flag;
 	}, "Suma de Meses no coincide con Subtotal");
@@ -87,6 +87,7 @@ $(function(){
 			<ul id="nav_pptt" class="nav nav-tabs fix_navcap">
 				<li id="ctab1"><a href="#tab1" data-toggle="tab">Datos Generales</a></li>
 				<li id="ctab2"><a href="#tab2" data-toggle="tab">Detalle PPTT</a></li>
+				<!-- <li id="ctab3"><a href="#tab3" data-toggle="tab">Exportar</a></li> -->
 			</ul>
 			<div class="tab-content fix_tabcontent">
 				<div class="tab-pane" id="tab1">
@@ -95,6 +96,9 @@ $(function(){
 				<div class="tab-pane" id="tab2">
 					<p><?php $this->load->view('presupuesto/forms/detalle_pptt_form'); ?></p>
 				</div>
+				<!-- <div class="tab-pane" id="tab3">
+					<p><?php //$this->load->view('presupuesto/forms/exportar'); ?></p>
+				</div> -->
 			</div>
 		</div>
 	</div>

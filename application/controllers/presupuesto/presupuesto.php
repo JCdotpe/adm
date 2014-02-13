@@ -73,8 +73,10 @@ class Presupuesto extends CI_Controller {
 					$msg = 'Se ha actualizado satisfactoriamente el Presupuesto del Proyecto';
 				}
 			}else{
-				$flag = 1;
-				$msg = 'Se ha registrado satisfactoriamente el Presupuesto del Proyecto';
+				if ( $this->presupuesto_model->insert_data_pptt( $arr_presup_proyecto, 'presup_proyecto' ) > 0 ) {
+					$flag = 1;
+					$msg = 'Se ha registrado satisfactoriamente el Presupuesto del Proyecto';
+				 }
 			}
 
 

@@ -310,7 +310,7 @@ $(document).on("change",'.actvd',function() {
 });
 
 function buscar_actividades(codigo,posi){
-	$.getJSON('<?php echo site_url(); ?>/general/general/actividades', {codigo:codigo,ajax:1}, function(json_data, textStatus) {
+	$.getJSON(CI.site_url+'/general/general/actividades', {codigo:codigo,ajax:1}, function(json_data, textStatus) {
 
 		$('#act_name_'+posi).val('');
 		$.each(json_data, function(i,datos){
@@ -381,7 +381,7 @@ $('#Nro_Partidas').change(function(event){
 			for (var j = 0; j < part; j++) {
 				html2 += '<tr>';
 				html2 += '<td><input type="text" id="Nro_Gasto_'+j+'" name="Nro_Gasto[]" class="form-control input2" value="'+( parseInt(j) + 1 )+'" readonly /></td>';
-				html2 += '<td><input type="text" id="Cod_Gasto_'+j+'" name="Cod_Gasto[]" maxlength="11" class="prtda form-control input12" /><div class="help-block has-error"></div> </td>';	
+				html2 += '<td><input type="text" id="Cod_Gasto_'+j+'" name="Cod_Gasto[]" maxlength="11" class="prtda form-control input13" /><div class="help-block has-error"></div> </td>';	
 				html2 += '<td><input type="text" id="part_name_'+j+'" name="part_name_[]" class="form-control" readonly /><div class="help-block has-error"></div> </td>';
 				html2 += '<td><input type="text" id="part_subtotal_'+j+'" name="part_subtotal_[]" class="form-control input8 calculo_prct_details part_calculo_pptt" /><div class="help-block has-error"></div></td>';
 				html2 += '<td><input type="text" id="part_prct_'+j+'" name="part_prct_'+j+'" class="form-control input8" readonly /></td>';
@@ -405,7 +405,7 @@ $(document).on("change",'.prtda',function() {
 });
 
 function buscar_partidas(codigo,posi){
-	$.getJSON('<?php echo site_url(); ?>/general/general/partidas', {codigo:codigo,ajax:1}, function(json_data, textStatus) {
+	$.getJSON(CI.site_url+'/general/general/partidas', {codigo:codigo,ajax:1}, function(json_data, textStatus) {
 
 		$('#part_name_'+posi).val('');
 		$.each(json_data, function(i,datos){
@@ -485,7 +485,7 @@ $("#pptt_gnrl_frm").validate({
 		'Monto_Act[]': {
 			required:true,
 			number:true,
-			// EqualsTres:['act_subtotal_','Cantidad_Mes'],
+			EqualsTres:['act_subtotal_','Cantidad_Mes'],
 		},
 		'act_total_mes_[]': {
 			required:true,
@@ -518,7 +518,7 @@ $("#pptt_gnrl_frm").validate({
 		'Monto_Gasto[]': {
 			required:true,
 			number:true,
-			// EqualsTres:['part_subtotal_','Cantidad_Mes'],
+			EqualsTres:['part_subtotal_','Cantidad_Mes'],
 		},
 	},
 

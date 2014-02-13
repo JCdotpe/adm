@@ -32,5 +32,14 @@ class Presupuesto_model extends CI_MODEL{
 		return $this->db->affected_rows() > 0;	
 	}
 
+	function select_data_pptt( $area, $codigo, $anio, $tbl )
+	{
+		$this->db->where('ID_AREA', $area);
+		$this->db->where('CODIGO_PROYECTO', $codigo);
+		$this->db->where('ANIO', $anio);
+		$q = $this->db->get($tbl);
+		return $q;	
+	}
+
 }
 ?>
