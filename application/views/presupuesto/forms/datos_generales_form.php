@@ -7,13 +7,13 @@
 $SubTotal = array(
 	'name'	=> 'Subtotal',
 	'id'	=> 'Subtotal',
-	'class'	=> 'form-control input8',
+	'class'	=> 'form-control input8 calculo',
 );
 
 $IGV = array(
 	'name'	=> 'IGV',
 	'id'	=> 'IGV',
-	'class'	=> 'form-control input8',
+	'class'	=> 'form-control input8 calculo',
 );
 
 $Total_Gral = array(
@@ -182,14 +182,18 @@ echo form_close();
 
 <script type="text/javascript">
 
-$('#Subtotal').change(function(event) {
-	calc_totgnrl($(this).val(),$('#IGV').val(),'Total_Gral');// sumatoria del subtotal e igv
-	$('.calculo_prct_details').trigger('change');// recalcula el porcentaje de las filas en las tablas detalles
-});
+$(document).on("change",'.calculo',function() {
+	var campo = $(this);
+	var cod = campo.attr('id');
 
-$('#IGV').change(function(event) {
-	calc_totgnrl($('#Subtotal').val(),$(this).val(),'Total_Gral');// sumatoria del subtotal e igv
-	$('.calculo_prct_details').trigger('change');// recalcula el porcentaje de las filas en las tablas detalles
+	if ( $('#IGV').val() > 0 )
+	{
+		calc_igv('Subtotal','IGV');// calcula el igv
+	}
+
+	calc_totgnrl($('#Subtotal').val(),$('#IGV').val(),'Total_Gral');// sumatoria del subtotal e igv
+	$('.act_calculo_pptt').trigger('change');// recalcula el porcentaje de las filas en la tabla actividad
+	$('.part_calculo_pptt').trigger('change');// recalcula el porcentaje de las filas en la tabla partida
 });
 
 function calc_totgnrl(par1, par2, view){
@@ -197,6 +201,13 @@ function calc_totgnrl(par1, par2, view){
 	par2 = (par2.trim() != '') ? par2 : 0;
 	monto = parseFloat(par1) + parseFloat(par2);
 	$('#'+view).val(monto);
+}
+
+function calc_igv(sbt,view) {
+	monto = $('#'+sbt).val();
+	monto = (monto.trim() != '') ? monto : 0;
+	igv = (parseFloat(monto) * 0.18);
+	$('#'+view).val(igv.toFixed(2));
 }
 
 $('#Cantidad_Mes').change(function(event) {
@@ -225,6 +236,12 @@ $(document).on("change",'.calculo_mcs',function() {
 	var campo = $(this);
 	var cod = campo.attr('id');
 	array=cod.split("_");
+
+	if ( $('#IGV_M_'+array[2]).val() > 0 )
+	{
+		calc_igv('Subtotal_M_'+array[2],'IGV_M_'+array[2]); //calcula igv
+	}
+
 	calc_totgnrl( $('#Subtotal_M_'+array[2]).val(), $('#IGV_M_'+array[2]).val(), "Total_Gral_M_"+array[2]+"" ); // sumatoria del subtotal e igv
 	suma_total_meses(); // suma el total de todos los meses
 });
@@ -287,9 +304,11 @@ $('#Nro_Actividades').change(function(event){
 				html2 += '<tr>';
 				html2 += '<td><input type="text" id="Nro_Act_'+j+'" name="Nro_Act[]" class="form-control input2" value="'+( parseInt(j) + 1 )+'" readonly /></td>';
 				html2 += '<td><input type="text" id="Cod_Act_'+j+'" name="Cod_Act[]" maxlength="2" class="actvd form-control input2" /><div class="help-block has-error"></div> </td>';
-				html2 += '<td><input type="text" id="act_name_'+j+'" name="act_name_[]" readonly class="form-control input200" /><div class="help-block has-error"></div> </td>';
-				html2 += '<td><input type="text" id="act_subtotal_'+j+'" name="act_subtotal_[]" class="form-control input8 calculo_prct_details act_calculo_pptt" /><div class="help-block has-error"></div> </td>';
-				html2 += '<td><input type="text" id="act_prct_'+j+'" name="act_prct_'+j+'" class="form-control input8" readonly /></td>';
+				html2 += '<td><input type="text" id="Name_Act_'+j+'" name="Name_Act[]" readonly class="form-control input200" /><div class="help-block has-error"></div> </td>';
+				// html2 += '<td><input type="text" id="act_subtotal_'+j+'" name="act_subtotal_[]" class="form-control input8 calculo_prct_details act_calculo_pptt" /><div class="help-block has-error"></div> </td>';
+				html2 += '<td><input type="text" id="Subtotal_Act_'+j+'" name="Subtotal_Act[]" class="form-control input8" readonly /><div class="help-block has-error"></div> </td>';
+				// html2 += '<td><input type="text" id="act_prct_'+j+'" name="act_prct_'+j+'" class="form-control input8" readonly /></td>';
+				html2 += '<td><input type="text" id="Prct_Act_'+j+'" name="Prct_Act[]" class="form-control input8" readonly /></td>';
 				for (var m = 0; m < mcs; m++) {
 					html2 += '<td><input type="text" id="Monto_Act_'+m+'_'+j+'" name="Monto_Act[]" class="form-control input8 act_calculo_pptt" /><div class="help-block has-error"></div></td>';
 				}
@@ -312,39 +331,48 @@ $(document).on("change",'.actvd',function() {
 function buscar_actividades(codigo,posi){
 	$.getJSON(CI.site_url+'/general/general/actividades', {codigo:codigo,ajax:1}, function(json_data, textStatus) {
 
-		$('#act_name_'+posi).val('');
+		$('#Name_Act_'+posi).val('');
 		$.each(json_data, function(i,datos){
-			$('#act_name_'+posi).val( datos.Descripcion );
+			$('#Name_Act_'+posi).val( datos.Descripcion );
 		});
 	});
 }
 
-$(document).on("change",'.calculo_prct_details',function() {
-	var campo = $(this);
-	var cod = campo.attr('id');
-	array=cod.split("_");
-	calc_prct( array[2], ""+array[0]+"" ,"_prct_" ); // calcula porcentaje
-});
+// $(document).on("change",'.calculo_prct_details',function() {
+// 	var campo = $(this);
+// 	var cod = campo.attr('id');
+// 	array=cod.split("_");
+// 	calc_prct( array[2], ""+array[0]+"" ,"_prct_" ); // calcula porcentaje
+// });
 
-function calc_prct(posi,prefijo,view) {
+function calc_prct(posi,sufijo) {
 	par1 = $('#Total_Gral').val();
-	par2 = $('#'+prefijo+'_subtotal_'+posi).val();
+	par2 = $('#Subtotal_'+sufijo+'_'+posi).val();
 	monto = ( parseFloat(par2) / parseFloat(par1) ) * 100;
-	$('#'+prefijo+view+posi).val(monto.toFixed(2));
+	$('#Prct_'+sufijo+'_'+posi).val(monto.toFixed(2));
 }
 
 $(document).on("change",'.act_calculo_pptt',function() {
 	var campo = $(this);
 	var cod = campo.attr('id');
 	array=cod.split("_");
-	if ( array[0] != 'Monto' )
-	{
-		suma_total_details( "act_subtotal_", "total_actvd", $('#Nro_Actividades').val() ); // suma el total de todas las actividades
-	}else{
-		suma_total_details( "Monto_Act_"+array[2]+"_", "act_total_mes_"+array[2]+"", $('#Nro_Actividades').val() ); // suma el total de todas las actividades
-	}
-	
+
+	suma_total_fila( 'Monto_Act_', '_'+array[3]+'','Subtotal_Act_'+array[3]+'' ); // calcula subtotal de la fila
+	calc_prct( array[3], 'Act' ); // calcula porcentaje
+	suma_total_details( 'Subtotal_Act_', 'total_actvd', $('#Nro_Actividades').val() ); // suma el total de todas las actividades
+	suma_total_details( 'Monto_Act_'+array[2]+'_', 'act_total_mes_'+array[2]+'', $('#Nro_Actividades').val() ); // suma el total de todas las actividades
 });
+
+function suma_total_fila(part1,part2,view) {
+	monto = 0;
+	nrofilas = $('#Cantidad_Mes').val();
+	for (var i = 0; i < nrofilas; i++) {
+		valor = $('#'+part1+i+part2).val();
+		valor = ( valor.trim() != '' ) ? valor : 0;
+		monto = parseFloat(monto) + parseFloat(valor);
+	}
+	$('#'+view).val(monto);
+}
 
 function suma_total_details(param,view,nrofilas) {
 	monto = 0;
@@ -382,9 +410,9 @@ $('#Nro_Partidas').change(function(event){
 				html2 += '<tr>';
 				html2 += '<td><input type="text" id="Nro_Gasto_'+j+'" name="Nro_Gasto[]" class="form-control input2" value="'+( parseInt(j) + 1 )+'" readonly /></td>';
 				html2 += '<td><input type="text" id="Cod_Gasto_'+j+'" name="Cod_Gasto[]" maxlength="11" class="prtda form-control input13" /><div class="help-block has-error"></div> </td>';	
-				html2 += '<td><input type="text" id="part_name_'+j+'" name="part_name_[]" class="form-control" readonly /><div class="help-block has-error"></div> </td>';
-				html2 += '<td><input type="text" id="part_subtotal_'+j+'" name="part_subtotal_[]" class="form-control input8 calculo_prct_details part_calculo_pptt" /><div class="help-block has-error"></div></td>';
-				html2 += '<td><input type="text" id="part_prct_'+j+'" name="part_prct_'+j+'" class="form-control input8" readonly /></td>';
+				html2 += '<td><input type="text" id="Name_Part_'+j+'" name="Name_Part[]" class="form-control" readonly /><div class="help-block has-error"></div> </td>';
+				html2 += '<td><input type="text" id="Subtotal_Gasto_'+j+'" name="Subtotal_Gasto[]" class="form-control input8" readonly /><div class="help-block has-error"></div></td>';
+				html2 += '<td><input type="text" id="Prct_Gasto_'+j+'" name="Prct_Gasto[]" class="form-control input8" readonly /></td>';
 				for (var m = 0; m < mcs; m++) {
 					html2 += '<td><input type="text" id="Monto_Gasto_'+m+'_'+j+'" name="Monto_Gasto[]" class="form-control input8 part_calculo_pptt" /><div class="help-block has-error"></div></td>';
 				}
@@ -407,9 +435,9 @@ $(document).on("change",'.prtda',function() {
 function buscar_partidas(codigo,posi){
 	$.getJSON(CI.site_url+'/general/general/partidas', {codigo:codigo,ajax:1}, function(json_data, textStatus) {
 
-		$('#part_name_'+posi).val('');
+		$('#Name_Part_'+posi).val('');
 		$.each(json_data, function(i,datos){
-			$('#part_name_'+posi).val(datos.Gasto);
+			$('#Name_Part_'+posi).val(datos.Gasto);
 		});
 	});
 }
@@ -418,13 +446,11 @@ $(document).on("change",'.part_calculo_pptt',function() {
 	var campo = $(this);
 	var cod = campo.attr('id');
 	array=cod.split("_");
-	if ( array[0] != 'Monto' )
-	{
-		suma_total_details( "part_subtotal_", "total_part", $('#Nro_Partidas').val() ); // suma el total de todas las partidas
-	}else{
-		suma_total_details( "Monto_Gasto_"+array[2]+"_", "part_total_mes_"+array[2]+"", $('#Nro_Partidas').val() ); // suma el total de todas las partidas
-	}
-	
+
+	suma_total_fila( 'Monto_Gasto_', '_'+array[3]+'','Subtotal_Gasto_'+array[3]+'' ); // calcula subtotal de la fila
+	calc_prct( array[3], 'Gasto' ); // calcula porcentaje
+	suma_total_details( 'Subtotal_Gasto_', 'total_part', $('#Nro_Partidas').val() ); // suma el total de todas las partidas
+	suma_total_details( 'Monto_Gasto_'+array[2]+'_', 'part_total_mes_'+array[2]+'', $('#Nro_Partidas').val() ); // suma el total de todas las partidas
 });
 
 
@@ -475,17 +501,17 @@ $("#pptt_gnrl_frm").validate({
 			required:true,
 			number:true,
 		},
-		'act_name_[]':{
+		'Name_Act[]':{
 			required:true,
 		},
-		'act_subtotal_[]': {
+		'Subtotal_Act[]': {
 			required:true,
 			number:true,
 		},
 		'Monto_Act[]': {
 			required:true,
 			number:true,
-			EqualsTres:['act_subtotal_','Cantidad_Mes'],
+			// EqualsTres:['act_subtotal_','Cantidad_Mes'],
 		},
 		'act_total_mes_[]': {
 			required:true,
@@ -503,10 +529,10 @@ $("#pptt_gnrl_frm").validate({
 			required:true,
 			rangelength:[8,11],
 		},
-		'part_name_[]': {
+		'Name_Part[]': {
 			required:true,
 		},
-		'part_subtotal_[]': {
+		'Subtotal_Gasto[]': {
 			required:true,
 			number:true,
 		},
@@ -518,7 +544,7 @@ $("#pptt_gnrl_frm").validate({
 		'Monto_Gasto[]': {
 			required:true,
 			number:true,
-			EqualsTres:['part_subtotal_','Cantidad_Mes'],
+			// EqualsTres:['part_subtotal_','Cantidad_Mes'],
 		},
 	},
 
