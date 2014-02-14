@@ -29,12 +29,41 @@ class Presupuesto extends CI_Controller {
 		}
 	}
 
-	public function index()
+	public function index($codigo = null)
 	{
 		$data['user'] = $this->ion_auth->user()->row();
 		$data['nav'] = TRUE;
 		$data['title'] = 'Presupuesto General';
 		$data['main_content'] = 'presupuesto/presupuesto_view';
+
+		$cod_area = 1;
+		$anio = 2014;
+		$cod_pryct = ( is_null($codigo) ) ? 0 : $codigo;
+
+		//////////////////////////////
+		//Presupuesto Proyecto
+		//////////////////////////////
+		$data['presup'] = $this->presupuesto_model->get_pptt_proyect(1,$cod_pryct);
+		
+		//////////////////////////////
+		//Presupuesto Proyecto Mes
+		//////////////////////////////
+		$data['presup_mes'] = $this->presupuesto_model->select_data_pptt( $cod_area, $cod_pryct, $anio, 'presup_proyecto_mes' );
+
+		//////////////////////////////
+		//Proyecto Actividad
+		//////////////////////////////
+		$data['proyect_actividad'] = $this->presupuesto_model->select_data_pptt( $cod_area, $cod_pryct, $anio, 'proyecto_actividad' );
+		$data['cantidad1'] = $this->presupuesto_model->max_data_pptt( $cod_area, $cod_pryct, $anio, 'Nro_Act', 'proyecto_actividad' );
+		
+		//////////////////////////////
+		//Proyecto Gasto
+		//////////////////////////////
+		$data['proyect_gasto'] = $this->presupuesto_model->select_data_pptt( $cod_area, $cod_pryct, $anio, 'proyecto_gasto' );
+		$data['cantidad2'] = $this->presupuesto_model->max_data_pptt( $cod_area, $cod_pryct, $anio, 'Nro_Gasto', 'proyecto_gasto' );
+
+		///////////////////////////////
+		///////////////////////////////
 		$this->load->view('backend/includes/template', $data);
 	}
 

@@ -9,6 +9,17 @@ class Presupuesto_model extends CI_MODEL{
 		return $q;
 	}
 
+	function max_data_pptt( $area, $codigo, $anio, $camp, $tbl )
+	{
+		$this->db->select_max( $camp, 'Nro_Max');
+		$this->db->where('ID_AREA', $area);
+		$this->db->where('CODIGO_PROYECTO', $codigo);
+		$this->db->where('ANIO', $anio);
+		$q = $this->db->get($tbl);
+		if ($q->num_rows() > 0) $row = $q->row();
+		return $row->Nro_Max;
+	}
+
 	function update_pptt_proyect( $area, $codigo, $data )
 	{
 		$this->db->where('ID_AREA', $area);

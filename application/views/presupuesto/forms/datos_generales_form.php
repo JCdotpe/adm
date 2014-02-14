@@ -7,20 +7,20 @@
 $SubTotal = array(
 	'name'	=> 'Subtotal',
 	'id'	=> 'Subtotal',
-	'class'	=> 'form-control input8 calculo',
+	'class'	=> 'form-control input30 calculo',
 );
 
 $IGV = array(
 	'name'	=> 'IGV',
 	'id'	=> 'IGV',
-	'class'	=> 'form-control input8 calculo',
+	'class'	=> 'form-control input15 calculo',
 );
 
 $Total_Gral = array(
 	'name'	=> 'Total_Gral',
 	'id'	=> 'Total_Gral',
 	'readonly' => 'true',
-	'class'	=> 'form-control input8',
+	'class'	=> 'form-control input30',
 );
 
 $Cantidad_Mes = array(
@@ -178,9 +178,25 @@ echo form_open($this->uri->uri_string(),$attr);
 <?php 
 echo form_submit('send', 'Guardar','class="btn btn-primary"');
 echo form_close();
+// echo 'soy el nro d act '.$cantidad1;
 ?>
 
 <script type="text/javascript">
+
+$(function(){
+
+	$.each( <?php echo json_encode($presup->row()); ?>, function(fila, valor) {
+		$('#' + fila).val(valor);
+		if (fila == 'Cantidad_Mes') { $('#Cantidad_Mes').trigger('change'); }
+	});
+
+	$('#Nro_Actividades').val( <?php echo $cantidad1; ?> );
+	$('#Nro_Actividades').trigger('change');
+
+	$('#Nro_Partidas').val(<?php echo $cantidad2; ?>);
+	$('#Nro_Partidas').trigger('change');	
+
+});
 
 $(document).on("change",'.calculo',function() {
 	var campo = $(this);
@@ -227,6 +243,17 @@ $('#Cantidad_Mes').change(function(event) {
 		}
 		$('#pptt_meses > tbody').append(html);
 	}
+
+
+	$.each( <?php echo json_encode($presup_mes->result()) ?>, function(i, datos){
+		$('#Mes_'+i).val(datos.Mes);
+		buscar_meses(datos.Mes, i);
+		$('#Subtotal_M_'+i).val(datos.Subtotal_M);
+		$('#IGV_M_'+i).val(datos.IGV_M);
+		$('#Total_Gral_M_'+i).val(datos.Total_Gral_M);
+	});
+	suma_total_meses();
+
 	$('#Nro_Actividades').trigger('change');
 	$('#Nro_Partidas').trigger('change');
 	$('#Mes_0').focus();
@@ -254,7 +281,7 @@ function suma_total_meses() {
 		valor = ( valor.trim() != '' ) ? valor : 0;
 		monto = parseFloat(monto) + parseFloat(valor);
 	}
-	$('#total_mcs').val(monto);
+	$('#total_mcs').val(monto.toFixed(2));
 }
 
 $(document).on("change",'.meses',function() {
@@ -305,9 +332,7 @@ $('#Nro_Actividades').change(function(event){
 				html2 += '<td><input type="text" id="Nro_Act_'+j+'" name="Nro_Act[]" class="form-control input2" value="'+( parseInt(j) + 1 )+'" readonly /></td>';
 				html2 += '<td><input type="text" id="Cod_Act_'+j+'" name="Cod_Act[]" maxlength="2" class="actvd form-control input2" /><div class="help-block has-error"></div> </td>';
 				html2 += '<td><input type="text" id="Name_Act_'+j+'" name="Name_Act[]" readonly class="form-control input200" /><div class="help-block has-error"></div> </td>';
-				// html2 += '<td><input type="text" id="act_subtotal_'+j+'" name="act_subtotal_[]" class="form-control input8 calculo_prct_details act_calculo_pptt" /><div class="help-block has-error"></div> </td>';
 				html2 += '<td><input type="text" id="Subtotal_Act_'+j+'" name="Subtotal_Act[]" class="form-control input8" readonly /><div class="help-block has-error"></div> </td>';
-				// html2 += '<td><input type="text" id="act_prct_'+j+'" name="act_prct_'+j+'" class="form-control input8" readonly /></td>';
 				html2 += '<td><input type="text" id="Prct_Act_'+j+'" name="Prct_Act[]" class="form-control input8" readonly /></td>';
 				for (var m = 0; m < mcs; m++) {
 					html2 += '<td><input type="text" id="Monto_Act_'+m+'_'+j+'" name="Monto_Act[]" class="form-control input8 act_calculo_pptt" /><div class="help-block has-error"></div></td>';
@@ -315,6 +340,23 @@ $('#Nro_Actividades').change(function(event){
 				html2 += '</tr>';
 			}
 			$('#pptt_actividades > tbody').append(html2);
+
+			var cod_mes = '';
+			var x = 0;
+			$.each( <?php echo json_encode($proyect_actividad->result()) ?>, function(i, datos){
+
+				if ( i < datos.Nro_Act )
+				{
+					$('#Nro_Act_'+i).val(datos.Nro_Act);
+					$('#Cod_Act_'+i).val(datos.Cod_Act);
+					buscar_actividades(datos.Cod_Act,i);
+					cod_mes = datos.Mes;
+				}
+				x = ( cod_mes != datos.Mes ) ? ( x + 1 ) : x;
+				$('#Monto_Act_'+x+'_'+(parseInt(datos.Nro_Act)-1)).val(datos.Monto_Act);
+				cod_mes = datos.Mes;
+			});
+			$('.act_calculo_pptt').trigger('change');
 			$('#Cod_Act_0').focus();
 		}
 	}
@@ -337,13 +379,6 @@ function buscar_actividades(codigo,posi){
 		});
 	});
 }
-
-// $(document).on("change",'.calculo_prct_details',function() {
-// 	var campo = $(this);
-// 	var cod = campo.attr('id');
-// 	array=cod.split("_");
-// 	calc_prct( array[2], ""+array[0]+"" ,"_prct_" ); // calcula porcentaje
-// });
 
 function calc_prct(posi,sufijo) {
 	par1 = $('#Total_Gral').val();
@@ -419,6 +454,23 @@ $('#Nro_Partidas').change(function(event){
 				html2 += '</tr>';
 			}
 			$('#pptt_partidas > tbody').append(html2);
+
+			var cod_mes = '';
+			var x = 0;
+			$.each( <?php echo json_encode($proyect_gasto->result()) ?>, function(i, datos){
+
+				if ( i < datos.Nro_Gasto )
+				{
+					$('#Nro_Gasto_'+i).val(datos.Nro_Gasto);
+					$('#Cod_Gasto_'+i).val(datos.Cod_Gasto);
+					buscar_partidas(datos.Cod_Gasto,i);
+					cod_mes = datos.Mes;
+				}
+				x = ( cod_mes != datos.Mes ) ? ( x + 1 ) : x;
+				$('#Monto_Gasto_'+x+'_'+(parseInt(datos.Nro_Gasto)-1)).val(datos.Monto_Gasto);
+				cod_mes = datos.Mes;
+			});
+			$('.part_calculo_pptt').trigger('change');
 			$('#Cod_Gasto_0').focus();
 		}
 	}

@@ -76,7 +76,6 @@ $(function(){
 	<option value = "0">SELECCIONE</option>
 	<option value = "1">CENSO DEPARTAMENTAL PARA PROGRAMA PILOTO TUMBES ACCESIBLE 2012</option>
 </select> -->
-
 <div class="row-fluid" id="pptt-tabs">
 	<div class="span12" id="insidetabs">
 
@@ -108,9 +107,7 @@ $(function(){
 
 $(function(){
 
-	// $('#proyect').change(function(event){
-		$('#ctab1 a').trigger('click');
-	// });
+	$('#ctab1 a').trigger('click');
 
 });
 

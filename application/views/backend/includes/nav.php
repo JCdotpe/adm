@@ -45,6 +45,17 @@
 
 			</ul>
 
+			<ul class="nav navbar-nav navbar-right">
+				<li class="glass dropdown">
+					<a id="nav-user" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Proyectos  <b class="caret"></b></a>
+					<ul id="ltproyectos" class="dropdown-menu">
+						<?php $ref = ( $this->uri->segment(1) != '' ) ? site_url().'/'.$this->uri->segment(1).'/index/00000001' : ''; ?>
+						<li><a href="<?php echo $ref; ?>"><i class="fa fa-gear"></i> Proyecto 1</a></li>
+						<li><a href="<?php echo $ref; ?>"><i class="fa fa-key"></i> Proyecto 2</a></li>
+					</ul>
+				</li>
+			</ul>
+			
 			<?php 
 				if($this->ion_auth->logged_in()){
 			?>

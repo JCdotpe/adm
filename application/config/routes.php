@@ -41,6 +41,7 @@
 $route['default_controller'] = 'auth';
 $route['create_user'] = 'auth/create_user';
 $route['presupuesto'] = 'presupuesto/presupuesto';
+$route['presupuesto/index/(:any)'] = 'presupuesto/presupuesto/index/$1';
 $route['404_override'] = '';
 
 
