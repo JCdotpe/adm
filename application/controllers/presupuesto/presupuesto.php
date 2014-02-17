@@ -39,6 +39,7 @@ class Presupuesto extends CI_Controller {
 		$cod_area = 1;
 		$anio = 2014;
 		$cod_pryct = ( is_null($codigo) ) ? 0 : $codigo;
+		$data['cod_pryct'] = $cod_pryct;
 
 		//////////////////////////////
 		//Presupuesto Proyecto
@@ -82,14 +83,22 @@ class Presupuesto extends CI_Controller {
 			$cod_pryct = $this->input->post('codigo_proyecto');
 			$cod_area = $this->input->post('id_area');
 
+			$ui = $this->ion_auth->user()->row()->id;
+			$ip = $this->input->ip_address();
+			$agent = $this->agent->agent_string();
+
+
 			//////////////////////////////
 			//Presupuesto Proyecto
 			//////////////////////////////
 			$arr_presup_proyecto['Id_Area'] = $cod_area;
 			$arr_presup_proyecto['Codigo_Proyecto'] = $cod_pryct;
+			$arr_presup_proyecto['user_id'] = $ui;
+			$arr_presup_proyecto['last_ip'] = $ip;
+			$arr_presup_proyecto['user_agent'] = $agent;
 
 			foreach ($tbl_presup_proyecto as $key => $camp) {
-				if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Proyecto','Descripcion'))) {
+				if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Proyecto','Descripcion','user_id','last_ip','user_agent','created','modified'))) {
 					$arr_presup_proyecto[$camp] = ( $this->input->post($camp) == '' ) ? NULL : $this->input->post($camp);
 				}
 			}
@@ -97,11 +106,13 @@ class Presupuesto extends CI_Controller {
 			$pptt_exist = $this->presupuesto_model->get_pptt_proyect($cod_area, $cod_pryct)->num_rows();
 
 			if ($pptt_exist > 0) {
+				$arr_presup_proyecto['modified'] = date('Y-m-d H:i:s');
 				if ( $this->presupuesto_model->update_pptt_proyect( $cod_area, $cod_pryct, $arr_presup_proyecto ) > 0 ) {
 					$flag = 1;
 					$msg = 'Se ha actualizado satisfactoriamente el Presupuesto del Proyecto';
 				}
 			}else{
+				$arr_presup_proyecto['created'] = date('Y-m-d H:i:s');;
 				if ( $this->presupuesto_model->insert_data_pptt( $arr_presup_proyecto, 'presup_proyecto' ) > 0 ) {
 					$flag = 1;
 					$msg = 'Se ha registrado satisfactoriamente el Presupuesto del Proyecto';
@@ -115,10 +126,13 @@ class Presupuesto extends CI_Controller {
 
 			$arr_presup_proyecto_mes['Id_Area'] = $cod_area;
 			$arr_presup_proyecto_mes['Codigo_Proyecto'] = $cod_pryct;
+			$arr_presup_proyecto_mes['user_id'] = $ui;
+			$arr_presup_proyecto_mes['last_ip'] = $ip;
+			$arr_presup_proyecto_mes['user_agent'] = $agent;
 
 			$nro_meses = $this->input->post('Cantidad_Mes');
 			foreach ($tbl_presup_proyecto_mes as $a => $b) {
-				if (!in_array($b, array('Id_Area','Codigo_Proyecto'))) {
+				if (!in_array($b, array('Id_Area','Codigo_Proyecto','user_id','last_ip','user_agent','created'))) {
 					$presup_proyecto_mes[$b] = ( $this->input->post($b) == '' ) ? 0 : $this->input->post($b); //asigno post a un array global
 				}
 			}
@@ -133,7 +147,7 @@ class Presupuesto extends CI_Controller {
 
 			for ($i=0; $i < $nro_meses; $i++) {
 				foreach ($tbl_presup_proyecto_mes as $key => $camp) {
-					if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio'))) {
+					if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','user_id','last_ip','user_agent','created'))) {
 						$arr_presup_proyecto_mes[$camp] = ( !isset($presup_proyecto_mes[$camp][$i]) ) ? 0 : $presup_proyecto_mes[$camp][$i]; 
 					}
 				}
@@ -174,8 +188,13 @@ class Presupuesto extends CI_Controller {
 		$arr_proyecto['Codigo_Proyecto'] = $pryct;
 		$arr_proyecto['Anio'] = $anio;
 
+		$arr_proyecto['user_id'] = $this->ion_auth->user()->row()->id;
+		$arr_proyecto['last_ip'] = $this->input->ip_address();
+		$arr_proyecto['user_agent'] = $this->agent->agent_string();
+		$arr_proyecto['created'] = date('Y-m-d H:i:s');
+
 		foreach ($tbl_camp as $a=>$b) { 
-			if (!in_array($b, array('Id_Area','Codigo_Proyecto'))) {
+			if (!in_array($b, array('Id_Area','Codigo_Proyecto','user_id','last_ip','user_agent','created'))) {
 				$arr_global[$b] = ( $this->input->post($b) == '' ) ? 0 : $this->input->post($b); //asigno post a un array global
 			}
 		}
@@ -186,7 +205,7 @@ class Presupuesto extends CI_Controller {
 		for ($i=0; $i < $cantidad ; $i++) { 
 			
 			foreach ($tbl_camp as $key => $camp) {
-				if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','Mes','Monto_Act','Monto_Gasto'))) {
+				if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','Mes','Monto_Act','Monto_Gasto','user_id','last_ip','user_agent','created'))) {
 					$arr_proyecto[$camp] = ( !isset($arr_global[$camp][$i]) ) ? 0 : $arr_global[$camp][$i]; //asigno nro y cod
 				}
 			}
@@ -194,11 +213,11 @@ class Presupuesto extends CI_Controller {
 			for ($j=0; $j < $meses ; $j++) { //recorro cantidad de meses
 				foreach ($tbl_camp as $key => $camp) {
 					
-					if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','Nro_Act','Cod_Act','Monto_Act','Nro_Gasto','Cod_Gasto','Monto_Gasto'))) {
+					if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','Nro_Act','Cod_Act','Monto_Act','Nro_Gasto','Cod_Gasto','Monto_Gasto','user_id','last_ip','user_agent','created'))) {
 						$arr_proyecto[$camp] = ( !isset($arr_global[$camp][$j]) ) ? 0 : $arr_global[$camp][$j]; //asigno mes
 					}
 
-					if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','Mes','Nro_Act','Cod_Act','Nro_Gasto','Cod_Gasto'))) {
+					if (!in_array($camp, array('Id_Area','Codigo_Proyecto','Anio','Mes','Nro_Act','Cod_Act','Nro_Gasto','Cod_Gasto','user_id','last_ip','user_agent','created'))) {
 						$arr_proyecto[$camp] = ( !isset($arr_global[$camp][$x]) ) ? 0 : $arr_global[$camp][$x]; //asigno monto
 					}
 				}

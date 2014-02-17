@@ -38,7 +38,7 @@ $(function(){
 
 	$.validator.addMethod("EqualsUno", function(value, element, arg){
 		flag = false;
-		if ( $('#' + arg[0]).val() == value ) { flag = true; }
+		if ( parseFloat($('#' + arg[0]).val()) == parseFloat(value) ) { flag = true; }
 		return  flag;
 	}, "El Total de Meses diferente al Total General");
 
@@ -46,7 +46,7 @@ $(function(){
 		flag = false;
 		var cod = element.id;
 		array=cod.split("_");
-		if ( value == $('#'+arg[0]+array[3]).val() ) { flag = true; }
+		if ( parseFloat(value) == parseFloat( $('#'+arg[0]+array[3]).val() ) ) { flag = true; }
 		return  flag;
 	}, "Total de Mes Incorrecto");
 
@@ -76,6 +76,7 @@ $(function(){
 	<option value = "0">SELECCIONE</option>
 	<option value = "1">CENSO DEPARTAMENTAL PARA PROGRAMA PILOTO TUMBES ACCESIBLE 2012</option>
 </select> -->
+<?php echo form_hidden('cod_pryct', $cod_pryct); ?>
 <div class="row-fluid" id="pptt-tabs">
 	<div class="span12" id="insidetabs">
 

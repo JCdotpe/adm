@@ -194,7 +194,13 @@ $(function(){
 	$('#Nro_Actividades').trigger('change');
 
 	$('#Nro_Partidas').val(<?php echo $cantidad2; ?>);
-	$('#Nro_Partidas').trigger('change');	
+	$('#Nro_Partidas').trigger('change');
+
+	if ( $("input[name='cod_pryct']").val() == 0 || $("input[name='cod_pryct']").val() == '' ){ 
+		$( "#pptt_gnrl_frm :submit" ).attr("disabled", "disabled"); 
+	} else {
+		$( "#pptt_gnrl_frm :submit" ).removeAttr("disabled");
+	}
 
 });
 
@@ -563,7 +569,6 @@ $("#pptt_gnrl_frm").validate({
 		'Monto_Act[]': {
 			required:true,
 			number:true,
-			// EqualsTres:['act_subtotal_','Cantidad_Mes'],
 		},
 		'act_total_mes_[]': {
 			required:true,
@@ -627,14 +632,12 @@ $("#pptt_gnrl_frm").validate({
 		var pptt_gnrl_data = $("#pptt_gnrl_frm").serializeArray();
 		pptt_gnrl_data.push(
 			{name: 'ajax',value:1},
-			// {name: 'codigo_proyecto',value:$("input[name='id_local']").val()},
-			{name: 'codigo_proyecto',value:'00000001'},
+			{name: 'codigo_proyecto',value: $("input[name='cod_pryct']").val()},
 			{name: 'id_area',value:1}
-			// {name: 'user_id',value:$("input[name='user_id']").val()},
 		);
 
 		var bgnrl = $( "#pptt_gnrl_frm :submit" );
-		// bgnrl.attr("disabled", "disabled");
+		bgnrl.attr("disabled", "disabled");
 		$.ajax({
 			url: CI.site_url + "/presupuesto/presupuesto/datos_generales",
 			type:'POST',
@@ -643,7 +646,7 @@ $("#pptt_gnrl_frm").validate({
 			dataType:'json',
 			success:function(json){
 				alert(json.msg);
-				// bgnrl.removeAttr('disabled');
+				bgnrl.removeAttr('disabled');
 			}
 		});
 	}
