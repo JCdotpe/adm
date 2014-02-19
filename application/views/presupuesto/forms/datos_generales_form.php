@@ -98,19 +98,6 @@ echo form_open($this->uri->uri_string(),$attr);
 
 	</div></div><!-- end row -->
 
-	
-
-		
-
-
-
-
-
-	
-	 
-
-	
-
 	<hr />
 
 	<div class="form-inline" role="form">
@@ -197,7 +184,7 @@ $(function(){
 	$('#Nro_Partidas').trigger('change');
 
 	if ( $("input[name='cod_pryct']").val() == 0 || $("input[name='cod_pryct']").val() == '' ){ 
-		$( "#pptt_gnrl_frm :submit" ).attr("disabled", "disabled"); 
+		$( "#pptt_gnrl_frm :submit" ).attr("disabled", "disabled");
 	} else {
 		$( "#pptt_gnrl_frm :submit" ).removeAttr("disabled");
 	}
@@ -513,7 +500,7 @@ $(document).on("change",'.part_calculo_pptt',function() {
 
 
 ////////////////////////////////////////////////
-////// FORM  
+////// FORM PPTT GENERAL
 ////////////////////////////////////////////////
 $("#pptt_gnrl_frm").validate({
 	rules: {
