@@ -8,7 +8,14 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<?php echo base_url('index.php'); ?>">CIE2013</a>
+			
+
+			<a id="nav-proyect" href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown"><?php if (!isset($name_proyct)) { echo 'PROYECTOS'; } else { echo $name_proyct; } ?> <b class="caret"></b></a>
+			<ul id="ltproyectos" class="dropdown-menu">
+				<?php $ref = ( $this->uri->segment(1) != '' ) ? site_url().'/'.$this->uri->segment(1).'/index/'.$this->my_encryption->encode('00000001') : ''; ?>
+				<li><a id="pryct_1" class="lst_proyectos" href="<?php echo $ref; ?>"><i class="fa fa-gear"></i> Proyecto 1</a></li>
+				<li><a id="pryct_2" class="lst_proyectos" href="<?php echo site_url().'/'.$this->uri->segment(1).'/index/'.$this->my_encryption->encode('00000002'); ?>"><i class="fa fa-key"></i> Proyecto 2</a></li>
+			</ul>
 		</div>
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
@@ -45,16 +52,16 @@
 
 			</ul>
 
-			<ul class="nav navbar-nav navbar-right">
+			<!-- <ul class="nav navbar-nav navbar-right">
 				<li class="glass dropdown">
 					<a id="nav-user" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Proyectos  <b class="caret"></b></a>
 					<ul id="ltproyectos" class="dropdown-menu">
-						<?php $ref = ( $this->uri->segment(1) != '' ) ? site_url().'/'.$this->uri->segment(1).'/index/00000001' : ''; ?>
-						<li><a href="<?php echo $ref; ?>"><i class="fa fa-gear"></i> Proyecto 1</a></li>
-						<li><a href="<?php echo site_url().'/'.$this->uri->segment(1).'/index/00000002' ?>"><i class="fa fa-key"></i> Proyecto 2</a></li>
+						<?php #$ref = ( $this->uri->segment(1) != '' ) ? site_url().'/'.$this->uri->segment(1).'/index/00000001' : ''; ?>
+						<li><a href="<?php #echo $ref; ?>"><i class="fa fa-gear"></i> Proyecto 1</a></li>
+						<li><a href="<?php #echo site_url().'/'.$this->uri->segment(1).'/index/00000002' ?>"><i class="fa fa-key"></i> Proyecto 2</a></li>
 					</ul>
 				</li>
-			</ul>
+			</ul> -->
 			
 			<?php 
 				if($this->ion_auth->logged_in()){

@@ -38,8 +38,16 @@ class Presupuesto extends CI_Controller {
 
 		$cod_area = 1;
 		$anio = 2014;
-		$cod_pryct = ( is_null($codigo) ) ? 0 : $codigo;
+		$cod_pryct = ( is_null($codigo) ) ? 0 : $this->my_encryption->decode($codigo);
+		$name_proyct = ( is_null($codigo) ) ? 0 : 'PROYECTOS';
+		if ( $cod_pryct == '00000001' ) {
+			$name_proyct = 'Proyecto 1';
+		}else{
+			$name_proyct = 'Proyecto 2';
+		}
+		
 		$data['cod_pryct'] = $cod_pryct;
+		$data['name_proyct'] = $name_proyct;
 
 		//////////////////////////////
 		//Presupuesto Proyecto
@@ -226,6 +234,13 @@ class Presupuesto extends CI_Controller {
 			}
 		}
 	}
+
+	public function datos_detalle()
+	{
+		
+	}
+
+
 }
 
 ?>
