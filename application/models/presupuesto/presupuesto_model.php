@@ -52,5 +52,17 @@ class Presupuesto_model extends CI_MODEL{
 		return $q;	
 	}
 
+	function delete_data_pt_detail( $area, $codigo, $anio, $cod_act, $tbl )
+	{
+		$this->db->where('ID_AREA', $area);
+		$this->db->where('CODIGO_PROYECTO', $codigo);
+		$this->db->where('ANIO', $anio);
+		$this->db->where('COD_ACT', $cod_act);
+		$this->db->delete($tbl);
+		return $this->db->affected_rows() > 0;
+	}
+
+
+
 }
 ?>

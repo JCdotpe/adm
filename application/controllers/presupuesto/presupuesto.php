@@ -120,7 +120,7 @@ class Presupuesto extends CI_Controller {
 					$msg = 'Se ha actualizado satisfactoriamente el Presupuesto del Proyecto';
 				}
 			}else{
-				$arr_presup_proyecto['created'] = date('Y-m-d H:i:s');;
+				$arr_presup_proyecto['created'] = date('Y-m-d H:i:s');
 				if ( $this->presupuesto_model->insert_data_pptt( $arr_presup_proyecto, 'presup_proyecto' ) > 0 ) {
 					$flag = 1;
 					$msg = 'Se ha registrado satisfactoriamente el Presupuesto del Proyecto';
@@ -237,7 +237,78 @@ class Presupuesto extends CI_Controller {
 
 	public function datos_detalle()
 	{
-		
+		$is_ajax = $this->input->post('ajax');
+		if ($is_ajax) {
+			//Obtengo column de tablas
+			$tbl_actividad_gasto = $this->general_model->get_fields('actividad_gasto');
+
+			//General parameters
+			$cod_pryct = $this->input->post('codigo_proyecto');
+			$cod_area = $this->input->post('id_area');
+
+			$nro_act = $this->input->post('Nro_Act');
+			$cod_act = $this->input->post('Cod_Act');
+
+			$anio = 2014;
+
+			$ui = $this->ion_auth->user()->row()->id;
+			$ip = $this->input->ip_address();
+			$agent = $this->agent->agent_string();
+
+			//////////////////////////////
+			//Actividad Gasto
+			//////////////////////////////
+			$arr_actividad_gasto['Id_Area'] = $cod_area;
+			$arr_actividad_gasto['Codigo_Proyecto'] = $cod_pryct;
+			$arr_actividad_gasto['Anio'] = $anio;
+			$arr_actividad_gasto['Nro_Act'] = $nro_act;
+			$arr_actividad_gasto['Cod_Act'] = $cod_act;
+			$arr_actividad_gasto['user_id'] = $ui;
+			$arr_actividad_gasto['last_ip'] = $ip;
+			$arr_actividad_gasto['user_agent'] = $agent;
+			$arr_actividad_gasto['created'] = date('Y-m-d H:i:s');
+
+			foreach ($tbl_actividad_gasto as $a => $b) {
+				if (!in_array($b, array('Id_Area','Codigo_Proyecto', 'Mes', 'Anio', 'Nro_Act', 'Cod_Act', 'user_id','last_ip','user_agent','created'))) {
+					$actividad_gasto[$b] = ( $this->input->post($b) == '' ) ? 0 : $this->input->post($b); //asigno post a un array global
+				}
+			}
+
+			$actividad_gasto['Nro_Items'] = $this->input->post('Nro_Items');// cantidad de items por gasto
+
+			$this->presupuesto_model->delete_data_pt_detail( $cod_area, $cod_pryct, $anio, $cod_act, 'actividad_gasto' );
+			
+			$i = 0;
+			$x = 0;
+			foreach ($actividad_gasto['Cod_Gasto'] as &$z) {
+
+				$arr_actividad_gasto['Cod_Gasto'] = $actividad_gasto['Cod_Gasto'][$x];
+				$arr_actividad_gasto['Nro_Gasto'] = $actividad_gasto['Nro_Gasto'][$x];
+
+				$cnt_items = $actividad_gasto['Nro_Items'][$x];
+				for ($j=0; $j <= $cnt_items-1; $j++) {
+
+					foreach ($tbl_actividad_gasto as $key => $camp) {
+						if (!in_array($camp, array('Id_Area','Codigo_Proyecto', 'Mes','Anio','Nro_Act','Cod_Act', 'Nro_Gasto', 'Cod_Gasto', 'user_id','last_ip','user_agent','created'))) {
+							$arr_actividad_gasto[$camp] = ( !isset($actividad_gasto[$camp][$i]) ) ? 0 : $actividad_gasto[$camp][$i]; //asigno datos
+						}
+					}
+
+					$this->presupuesto_model->insert_data_pptt( $arr_actividad_gasto, 'actividad_gasto' );
+					$i++;
+				}
+				$x++;
+			}
+
+			$msg = 'Se ha registrado satisfactoriamente la Activdad y Gastos';
+
+			$datos['msg'] = $msg;
+			$data['datos'] = $datos;
+			$this->load->view('backend/json/json_view', $data);
+
+		}else{
+			show_404();
+		}
 	}
 
 

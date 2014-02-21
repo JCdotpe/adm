@@ -186,6 +186,7 @@ $('#Cntdad_Partidas').change(function(event){
 		for (var i = 0; i < nro; i++) {
 			html += '<div id=dv_'+i+' class="form-inline dv_items" role="form">';
 			html += 'Partida <br>';
+			html += '<input type="hidden" id="Nro_Part_'+i+'" name="Nro_Gasto[]" />';
 			html += 'Cod. <input id="Cod_Part_'+i+'" class="gasto form-control input13" type="text" maxlength="11" name="Cod_Gasto[]">';
 			html += 'Partida <input id="Nombre_Part_'+i+'" class="form-control" type="text" readonly="true" name="Nombre_Part[]">';
 			html += 'Total <input id="Subtotal_Part_'+i+'" class="form-control input8" type="text" readonly="true" name="Subtotal_Part[]">';
@@ -275,11 +276,12 @@ $(document).on("change",'.gasto',function() {
 	$.getJSON(CI.site_url+'/general/general/gasto_pptt', {codigo:codigo,proyct:proyct,area:1,anio:2014,ajax:1}, function(json_data, textStatus) {
 
 		$('#Nombre_Part_'+array[2]).val('');
+		$("#Nro_Part_"+array[2]).val('');
 		$.each(json_data, function(i,datos){
 			$('#Nombre_Part_'+array[2]).val(datos.Descripcion);
+			$("#Nro_Part_"+array[2]).val(datos.Nro_Gasto);
 		});
 	});
-
 });
 
 $(document).on("change",'.medida',function() {
