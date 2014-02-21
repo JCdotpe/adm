@@ -40,8 +40,8 @@ echo form_open($this->uri->uri_string(),$attr);
 <div id="cabecera" class="form-inline" role="form">
 	Actividades <br>
 	<?php echo form_hidden('Nro_Act'); ?>
-	Cod. <?php echo form_input($Cod_Act); ?> Actividad <?php echo form_input($Name_Act); ?> Total <?php echo form_input($Subtotal_Act); ?>
-	Cantidad de Partidas <?php echo form_input($Cntdad_Partidas); ?>
+	Cod. <?php echo form_input($Cod_Act); ?><div class="help-block has-error"></div> Actividad <?php echo form_input($Name_Act); ?><div class="help-block has-error"></div> Total <?php echo form_input($Subtotal_Act); ?>
+	Cantidad de Partidas <?php echo form_input($Cntdad_Partidas); ?><div class="help-block has-error"></div>
 </div>
 <br>
 
@@ -187,10 +187,11 @@ $('#Cntdad_Partidas').change(function(event){
 			html += '<div id=dv_'+i+' class="form-inline dv_items" role="form">';
 			html += 'Partida <br>';
 			html += '<input type="hidden" id="Nro_Part_'+i+'" name="Nro_Gasto[]" />';
-			html += 'Cod. <input id="Cod_Part_'+i+'" class="gasto form-control input13" type="text" maxlength="11" name="Cod_Gasto[]">';
-			html += 'Partida <input id="Nombre_Part_'+i+'" class="form-control" type="text" readonly="true" name="Nombre_Part[]">';
+			html += 'Cod. <input id="Cod_Part_'+i+'" class="gasto form-control input13" type="text" maxlength="11" name="Cod_Gasto[]"> <div class="help-block has-error"></div>';
+			html += 'Partida <input id="Nombre_Part_'+i+'" class="form-control" type="text" readonly="true" name="Nombre_Part[]"> <div class="help-block has-error"></div>';
 			html += 'Total <input id="Subtotal_Part_'+i+'" class="form-control input8" type="text" readonly="true" name="Subtotal_Part[]">';
-			html += 'Nro Items <input id="Nro_Items_'+i+'" class="form-control input2 items" type="text" maxlength="2" name="Nro_Items[]"></div>';
+			html += 'Nro Items <input id="Nro_Items_'+i+'" class="form-control input2 items" type="text" maxlength="2" name="Nro_Items[]"> <div class="help-block has-error"></div>'
+			html += '</div>';
 		}
 
 		$('#maestro').html(html);
@@ -232,15 +233,15 @@ $(document).on("change",'.items',function() {
 		for (var i = 0; i < nro; i++) {
 			html += '<tr>';
 			html += '<td><input type="text" id="Item_'+i+'" name="Item[]" class="form-control input2" value="'+( parseInt(i) + 1 )+'" readonly /></td>';
-			html += '<td><input id="Item_Descripcion_'+array[2]+'_'+i+'" class="form-control" type="text" name="Item_Descripcion[]"></td>';
-			html += '<td><input id="Cod_UM_'+array[2]+'_'+i+'" class="form-control input3 medida" type="text" name="Cod_UM[]"> <input id="Unidad_Med_'+array[2]+'_'+i+'" class="form-control input13" type="text" readonly="true" name="Unidad_Med[]"></td>';
-			html += '<td><input id="Cantidad_'+array[2]+'_'+i+'" class="form-control input13" type="text" name="Cantidad[]"></td>';
-			html += '<td><input id="Precio_Unit_'+array[2]+'_'+i+'" class="form-control input13" type="text" name="Precio_Unit[]"></td>';
-			html += '<td><input id="Tiempo_'+array[2]+'_'+i+'" class="form-control input2" type="text" name="Tiempo[]"></td>';
+			html += '<td><input id="Item_Descripcion_'+array[2]+'_'+i+'" class="form-control" type="text" name="Item_Descripcion[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="Cod_UM_'+array[2]+'_'+i+'" class="form-control input3 medida" type="text" name="Cod_UM[]"> <input id="Unidad_Med_'+array[2]+'_'+i+'" class="form-control input13" type="text" readonly="true" name="Unidad_Med[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="Cantidad_'+array[2]+'_'+i+'" class="form-control input13" type="text" name="Cantidad[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="Precio_Unit_'+array[2]+'_'+i+'" class="form-control input13" type="text" name="Precio_Unit[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="Tiempo_'+array[2]+'_'+i+'" class="form-control input2" type="text" name="Tiempo[]"> <div class="help-block has-error"></div></td>';
 			html += '<td><input id="SubTotal_Item_'+array[2]+'_'+i+'" class="form-control input8" type="text" readonly="true" name="SubTotal_Item[]"></td>';
 
 			for (var x = 0; x < mcs; x++) {
-				html += '<td><input id="Monto_Mes_'+x+'_Item_'+array[2]+'_'+i+'" class="form-control input8" type="text" name="Monto_Mes_Item[]"></td>';
+				html += '<td><input id="Monto_Mes_'+x+'_Item_'+array[2]+'_'+i+'" class="form-control input8" type="text" name="Monto_Mes_Item[]"> <div class="help-block has-error"></div></td>';
 			};
 			html += '</tr>';
 		}
@@ -308,7 +309,51 @@ $(document).on("change",'.medida',function() {
 ////////////////////////////////////////////////
 $("#pptt_gnrl_dtail_frm").validate({
 	rules: {
-		
+		Cod_Act: {
+			required:true,
+			number:true,
+		},
+		Name_Act: {
+			required:true,
+		},
+		Cntdad_Partidas: {
+			required:true,
+			number:true,
+		},
+		'Cod_Gasto[]': {
+			required:true,
+			rangelength:[8,11],
+		},
+		'Nombre_Part[]': {
+			required:true,
+		},
+		'Nro_Items[]': {
+			required:true,
+			number:true,
+		},
+		'Item_Descripcion[]': {
+			required:true,
+		},
+		'Cod_UM[]': {
+			required:true,
+			number:true,
+		},
+		'Cantidad[]': {
+			required:true,
+			number:true,
+		},
+		'Precio_Unit[]': {
+			required:true,
+			number:true,
+		},
+		'Tiempo[]': {
+			required:true,
+			number:true,
+		},
+		'Monto_Mes_Item[]': {
+			required:true,
+			number:true,
+		},
 	},
 
 	messages: {
