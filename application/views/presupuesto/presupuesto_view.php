@@ -69,6 +69,19 @@ $(function(){
 		return  flag;
 	}, "Suma de Meses no coincide con Subtotal");
 
+	$.validator.addMethod("valNotEquals", function(value, element, arg){
+		flag = true;
+		var name = arg[0];
+		var nro = $('#'+arg[1]).val();
+		var cod = element.id;
+
+		for (var i = 0; i < nro; i++) {
+			if ( (cod != (name+i)) && $('#'+name+i).val() == value ) return false
+		}
+		return  flag;
+	}, "Codigo repetido");
+
+
 });
 </script>	
 

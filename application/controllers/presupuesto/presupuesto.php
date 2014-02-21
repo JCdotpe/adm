@@ -241,6 +241,7 @@ class Presupuesto extends CI_Controller {
 		if ($is_ajax) {
 			//Obtengo column de tablas
 			$tbl_actividad_gasto = $this->general_model->get_fields('actividad_gasto');
+			$tbl_actividad_gasto_mes = $this->general_model->get_fields('actividad_gasto_mes');
 
 			//General parameters
 			$cod_pryct = $this->input->post('codigo_proyecto');
@@ -269,38 +270,86 @@ class Presupuesto extends CI_Controller {
 			$arr_actividad_gasto['created'] = date('Y-m-d H:i:s');
 
 			foreach ($tbl_actividad_gasto as $a => $b) {
-				if (!in_array($b, array('Id_Area','Codigo_Proyecto', 'Mes', 'Anio', 'Nro_Act', 'Cod_Act', 'user_id','last_ip','user_agent','created'))) {
-					$actividad_gasto[$b] = ( $this->input->post($b) == '' ) ? 0 : $this->input->post($b); //asigno post a un array global
+				if (!in_array($b, array('Id_Area','Codigo_Proyecto', 'Anio', 'Nro_Act', 'Cod_Act', 'user_id','last_ip','user_agent','created'))) {
+					$actividad_gasto[$b] = ( $this->input->post($b) == '' ) ? 0 : array_map('utf8_decode', $this->input->post($b)); //asigno post a un array global
 				}
 			}
 
+			//////////////////////////////
+			//Actividad Gasto Mes
+			//////////////////////////////
+			$arr_actividad_gasto_mes['Id_Area'] = $cod_area;
+			$arr_actividad_gasto_mes['Codigo_Proyecto'] = $cod_pryct;
+			$arr_actividad_gasto_mes['Anio'] = $anio;
+			$arr_actividad_gasto_mes['Nro_Act'] = $nro_act;
+			$arr_actividad_gasto_mes['Cod_Act'] = $cod_act;
+			$arr_actividad_gasto_mes['user_id'] = $ui;
+			$arr_actividad_gasto_mes['last_ip'] = $ip;
+			$arr_actividad_gasto_mes['user_agent'] = $agent;
+			$arr_actividad_gasto_mes['created'] = date('Y-m-d H:i:s');
+
+			foreach ($tbl_actividad_gasto_mes as $a => $b) {
+				if (!in_array($b, array('Id_Area','Codigo_Proyecto', 'Anio', 'Nro_Act', 'Cod_Act', 'Nro_Gasto', 'Cod_Gasto', 'user_id','last_ip','user_agent','created'))) {
+					$actividad_gasto_mes[$b] = ( $this->input->post($b) == '' ) ? 0 : $this->input->post($b); //asigno post a un array global
+				}
+			}
+
+			//////////////////////////////
+			//DATA
+			//////////////////////////////
 			$actividad_gasto['Nro_Items'] = $this->input->post('Nro_Items');// cantidad de items por gasto
 
-			$this->presupuesto_model->delete_data_pt_detail( $cod_area, $cod_pryct, $anio, $cod_act, 'actividad_gasto' );
+			$this->presupuesto_model->delete_data_pt_detail( $cod_area, $cod_pryct, $anio, $cod_act, 'actividad_gasto' ); //limpio tabla
+			$this->presupuesto_model->delete_data_pt_detail( $cod_area, $cod_pryct, $anio, $cod_act, 'actividad_gasto_mes' );//limpio tabla
 			
-			$i = 0;
-			$x = 0;
+			$i = 0; // items
+			$x = 0; // gasto
+			$w = 0; // gasto meses
 			foreach ($actividad_gasto['Cod_Gasto'] as &$z) {
 
+				// asigno nro y codigo de gasto
 				$arr_actividad_gasto['Cod_Gasto'] = $actividad_gasto['Cod_Gasto'][$x];
 				$arr_actividad_gasto['Nro_Gasto'] = $actividad_gasto['Nro_Gasto'][$x];
 
+				$arr_actividad_gasto_mes['Cod_Gasto'] = $actividad_gasto['Cod_Gasto'][$x];
+				$arr_actividad_gasto_mes['Nro_Gasto'] = $actividad_gasto['Nro_Gasto'][$x];
+
+				//cantidad de items por gasto
 				$cnt_items = $actividad_gasto['Nro_Items'][$x];
 				for ($j=0; $j <= $cnt_items-1; $j++) {
 
 					foreach ($tbl_actividad_gasto as $key => $camp) {
-						if (!in_array($camp, array('Id_Area','Codigo_Proyecto', 'Mes','Anio','Nro_Act','Cod_Act', 'Nro_Gasto', 'Cod_Gasto', 'user_id','last_ip','user_agent','created'))) {
+						if (!in_array($camp, array('Id_Area','Codigo_Proyecto', 'Anio','Nro_Act','Cod_Act', 'Nro_Gasto', 'Cod_Gasto', 'user_id','last_ip','user_agent','created'))) {
 							$arr_actividad_gasto[$camp] = ( !isset($actividad_gasto[$camp][$i]) ) ? 0 : $actividad_gasto[$camp][$i]; //asigno datos
 						}
 					}
 
 					$this->presupuesto_model->insert_data_pptt( $arr_actividad_gasto, 'actividad_gasto' );
+
+					// codigo de item
+					$arr_actividad_gasto_mes['Item'] = $actividad_gasto['Item'][$i];
+					$m = 0;// meses
+					foreach ($actividad_gasto_mes['Mes'] as &$y) {
+
+						// asigno codigo de mes
+						$arr_actividad_gasto_mes['Mes'] = $actividad_gasto_mes['Mes'][$m];
+
+						foreach ($tbl_actividad_gasto_mes as $key => $camp) {
+							if (!in_array($camp, array('Id_Area','Codigo_Proyecto', 'Mes', 'Anio','Nro_Act','Cod_Act', 'Nro_Gasto', 'Cod_Gasto', 'Item', 'user_id','last_ip','user_agent','created'))) {
+								$arr_actividad_gasto_mes[$camp] = ( !isset($actividad_gasto_mes[$camp][$w]) ) ? 0 : $actividad_gasto_mes[$camp][$w]; //asigno datos
+							}
+						}
+
+						$this->presupuesto_model->insert_data_pptt( $arr_actividad_gasto_mes, 'actividad_gasto_mes' );
+						$m++;
+						$w++;
+					}
 					$i++;
 				}
 				$x++;
 			}
 
-			$msg = 'Se ha registrado satisfactoriamente la Activdad y Gastos';
+			$msg = 'Se ha registrado satisfactoriamente la Actividad y Gastos';
 
 			$datos['msg'] = $msg;
 			$data['datos'] = $datos;

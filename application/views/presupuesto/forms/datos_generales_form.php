@@ -523,6 +523,7 @@ $("#pptt_gnrl_frm").validate({
 			required:true,
 			number:true,
 			range:[1,12],
+			valNotEquals:['Mes_','Cantidad_Mes'],
 		},
 		'name_mcs_[]':{
 			required:true,
@@ -545,6 +546,7 @@ $("#pptt_gnrl_frm").validate({
 		'Cod_Act[]':{
 			required:true,
 			number:true,
+			valNotEquals:['Cod_Act_','Nro_Actividades'],
 		},
 		'Name_Act[]':{
 			required:true,
@@ -572,6 +574,7 @@ $("#pptt_gnrl_frm").validate({
 		'Cod_Gasto[]': {
 			required:true,
 			rangelength:[8,11],
+			valNotEquals:['Cod_Gasto_','Nro_Partidas'],
 		},
 		'Name_Part[]': {
 			required:true,

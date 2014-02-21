@@ -234,10 +234,10 @@ $(document).on("change",'.items',function() {
 			html += '<tr>';
 			html += '<td><input type="text" id="Item_'+i+'" name="Item[]" class="form-control input2" value="'+( parseInt(i) + 1 )+'" readonly /></td>';
 			html += '<td><input id="Item_Descripcion_'+array[2]+'_'+i+'" class="form-control" type="text" name="Item_Descripcion[]"> <div class="help-block has-error"></div></td>';
-			html += '<td><input id="Cod_UM_'+array[2]+'_'+i+'" class="form-control input3 medida" type="text" name="Cod_UM[]"> <input id="Unidad_Med_'+array[2]+'_'+i+'" class="form-control input13" type="text" readonly="true" name="Unidad_Med[]"> <div class="help-block has-error"></div></td>';
-			html += '<td><input id="Cantidad_'+array[2]+'_'+i+'" class="form-control input13" type="text" name="Cantidad[]"> <div class="help-block has-error"></div></td>';
-			html += '<td><input id="Precio_Unit_'+array[2]+'_'+i+'" class="form-control input13" type="text" name="Precio_Unit[]"> <div class="help-block has-error"></div></td>';
-			html += '<td><input id="Tiempo_'+array[2]+'_'+i+'" class="form-control input2" type="text" name="Tiempo[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="Cod_UM_'+array[2]+'_'+i+'" class="form-control input3 medida" type="text" maxlength="2" name="Cod_UM[]"> <input id="Unidad_Med_'+array[2]+'_'+i+'" class="form-control input13" type="text" readonly="true" name="Unidad_Med[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="Cantidad_'+array[2]+'_'+i+'" class="form-control input13 dsubtotal" type="text" maxlength="6" name="Cantidad[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="PrecioUnit_'+array[2]+'_'+i+'" class="form-control input13 dsubtotal" type="text" name="Precio_Unit[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="Tiempo_'+array[2]+'_'+i+'" class="form-control input2 dsubtotal" type="text" maxlength="2" name="Tiempo[]"> <div class="help-block has-error"></div></td>';
 			html += '<td><input id="SubTotal_Item_'+array[2]+'_'+i+'" class="form-control input8" type="text" readonly="true" name="SubTotal_Item[]"></td>';
 
 			for (var x = 0; x < mcs; x++) {
@@ -304,6 +304,39 @@ $(document).on("change",'.medida',function() {
 });
 
 
+$(document).on("change",'.dsubtotal',function() {
+
+	var campo = $(this);
+	var cod = campo.attr('id');
+	array = cod.split("_");
+
+	parm1 = $('#Cantidad_'+array[1]+'_'+array[2]).val();
+	parm2 = $('#PrecioUnit_'+array[1]+'_'+array[2]).val();
+	parm3 = $('#Tiempo_'+array[1]+'_'+array[2]).val();
+
+	parm1 = ( parm1.trim() != '' ) ? parseFloat(parm1) : 0;
+	parm2 = ( parm2.trim() != '' ) ? parseFloat(parm2) : 0;
+	parm3 = ( parm3.trim() != '' ) ? parseFloat(parm3) : 0;
+	
+	monto = parm1*parm2*parm3;
+
+	$('#SubTotal_Item_'+array[1]+'_'+array[2]).val(monto);
+	
+	suma_total_items( array[1], $('#Nro_Items_'+array[1]).val() );
+
+});
+
+function suma_total_items(param,nrofilas) {
+	monto = 0;
+	for (var i = 0; i < nrofilas; i++) {
+		valor = $('#SubTotal_Item_'+param+'_'+i).val();
+		valor = ( valor.trim() != '' ) ? valor : 0;
+		monto = parseFloat(monto) + parseFloat(valor);
+	}
+	$('#Subtotal_Part_'+param).val(monto);
+}
+
+
 ////////////////////////////////////////////////
 ////// FORM PPTT DETAIL
 ////////////////////////////////////////////////
@@ -349,6 +382,7 @@ $("#pptt_gnrl_dtail_frm").validate({
 		'Tiempo[]': {
 			required:true,
 			number:true,
+			range:[0,62],
 		},
 		'Monto_Mes_Item[]': {
 			required:true,
