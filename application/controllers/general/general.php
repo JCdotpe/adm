@@ -55,36 +55,6 @@ class General extends CI_Controller {
 		}
 	}
 
-	public function actividad_pptt()
-	{
-		$code = $this->input->get('codigo');
-		$proyct = $this->input->get('proyct');
-		$area = $this->input->get('area');
-		$anio = $this->input->get('anio');
-		$is_ajax = $this->input->get('ajax');
-		if($is_ajax){
-			$datos = $this->general_model->get_actividad_pptt($code, $proyct, $area, $anio);
-			$this->convert_uft8_array($datos);
-		}else{
-			show_404();
-		}
-	}
-
-	public function gasto_pptt()
-	{
-		$code = $this->input->get('codigo');
-		$proyct = $this->input->get('proyct');
-		$area = $this->input->get('area');
-		$anio = $this->input->get('anio');
-		$is_ajax = $this->input->get('ajax');
-		if($is_ajax){
-			$datos = $this->general_model->get_partida_pptt($code, $proyct, $area, $anio);
-			$this->convert_uft8_array($datos);
-		}else{
-			show_404();
-		}
-	}
-
 	public function unidad_medida()
 	{
 		$code = $this->input->get('codigo');
@@ -97,6 +67,7 @@ class General extends CI_Controller {
 		}
 	}
 
+	
 	function convert_uft8_array($datos)
 	{
 		$data['datos'] = array();

@@ -360,6 +360,92 @@ class Presupuesto extends CI_Controller {
 		}
 	}
 
+	/// GENERAL ///
+	public function actividad_pptt()
+	{
+		$code = $this->input->get('codigo');
+		$proyct = $this->input->get('proyct');
+		$area = $this->input->get('area');
+		$anio = $this->input->get('anio');
+		$is_ajax = $this->input->get('ajax');
+		if($is_ajax){
+			$datos = $this->presupuesto_model->get_actividad_pptt($code, $proyct, $area, $anio);
+			$this->convert_uft8_array($datos);
+		}else{
+			show_404();
+		}
+	}
+
+	public function gasto_pptt()
+	{
+		$code = $this->input->get('codigo');
+		$proyct = $this->input->get('proyct');
+		$area = $this->input->get('area');
+		$anio = $this->input->get('anio');
+		$is_ajax = $this->input->get('ajax');
+		if($is_ajax){
+			$datos = $this->presupuesto_model->get_partida_pptt($code, $proyct, $area, $anio);
+			$this->convert_uft8_array($datos);
+		}else{
+			show_404();
+		}
+	}
+
+	public function AG_Gasto()
+	{
+		$code = $this->input->get('codigo');
+		$proyct = $this->input->get('proyct');
+		$area = $this->input->get('area');
+		$anio = $this->input->get('anio');
+		$is_ajax = $this->input->get('ajax');
+		if($is_ajax){
+			$datos = $this->presupuesto_model->get_AG_Gasto($code, $proyct, $area, $anio);
+			$this->convert_uft8_array($datos);
+		}else{
+			show_404();
+		}	
+	}
+
+	public function AG_Gasto_2()
+	{
+		$actvdad = $this->input->get('actvdad');
+		$proyct = $this->input->get('proyct');
+		$area = $this->input->get('area');
+		$anio = $this->input->get('anio');
+		$prtda = $this->input->get('prtda');
+		$is_ajax = $this->input->get('ajax');
+		if($is_ajax){
+			$datos = $this->presupuesto_model->get_AG_Gasto_2($actvdad, $proyct, $area, $anio, $prtda);
+			$this->convert_uft8_array($datos);
+		}else{
+			show_404();
+		}
+	}
+
+	public function AGM_Gasto()
+	{
+		$actvdad = $this->input->get('actvdad');
+		$proyct = $this->input->get('proyct');
+		$area = $this->input->get('area');
+		$anio = $this->input->get('anio');
+		$prtda = $this->input->get('prtda');
+		$is_ajax = $this->input->get('ajax');
+		if($is_ajax){
+			$datos = $this->presupuesto_model->get_AGM_Gasto($actvdad, $proyct, $area, $anio, $prtda);
+			$this->convert_uft8_array($datos);
+		}else{
+			show_404();
+		}
+	}
+
+	function convert_uft8_array($datos)
+	{
+		$data['datos'] = array();
+		foreach ($datos->result_array() as $row) {
+			array_push($data['datos'], array_map('utf8_encode', $row));
+		}
+		$this->load->view('backend/json/json_view', $data);
+	}
 
 }
 

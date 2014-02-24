@@ -46,94 +46,7 @@ echo form_open($this->uri->uri_string(),$attr);
 <br>
 
 <div id="maestro">
-	<!-- <div  class="form-inline" role="form">
-		Partida <br>
-		Cod. <input id="Cod_Gasto_0" class="form-control input13" type="text" maxlength="11" name="Cod_Gasto[]">
-		Partida <input id="Name_Part_" class="form-control" type="text" readonly="true" name="Name_Part[]">
-		Nro Items <input id="Nro_Items_" class="form-control input2" type="text" maxlength="2" name="Nro_Items[]">
-		<table class="table table-striped table-hover">
-			<thead>
-				<th>Item</th>
-				<th>Unidad Medida</th>
-				<th>Cantidad</th>
-				<th>Precio Unitario</th>
-				<th>Veces o Tiempo en Meses</th>
-				<th>SubTotal</th>
-				<th>Mes1</th>
-				<th>Mes2</th>
-				<th>Mes3</th>
-			</thead>
-			<tbody>
-				<tr>
-					<td><input id="Name_Item_" class="form-control" type="text" name="Name_Item[]"></td>
-					<td><input id="U_Medida_" class="form-control input13" type="text" name="U_Medida[]"></td>
-					<td><input id="Cantidad_Item_" class="form-control input13" type="text" name="Cantidad_Item[]"></td>
-					<td><input id="Precio_Item_" class="form-control input13" type="text" name="Precio_Item[]"></td>
-					<td><input id="Tiempo_Item_" class="form-control input2" type="text" name="Tiempo_Item[]"></td>
-					<td><input id="SubTotal_Item_" class="form-control input8" type="text" readonly="true" name="SubTotal_Item[]"></td>
-					<td><input id="Monto_Mes1_Item_" class="form-control input8" type="text" name="Monto_Mes1_Item[]"></td>
-					<td><input id="Monto_Mes2_Item_" class="form-control input8" type="text" name="Monto_Mes2_Item[]"></td>
-					<td><input id="Monto_Mes3_Item_" class="form-control input8" type="text" name="Monto_Mes3_Item[]"></th>
-				</tr>
-				<tr>
-					<td><input id="Name_Item_" class="form-control" type="text" name="Name_Item[]"></td>
-					<td><input id="U_Medida_" class="form-control input13" type="text" name="U_Medida[]"></td>
-					<td><input id="Cantidad_Item_" class="form-control input13" type="text" name="Cantidad_Item[]"></td>
-					<td><input id="Precio_Item_" class="form-control input13" type="text" name="Precio_Item[]"></td>
-					<td><input id="Tiempo_Item_" class="form-control input2" type="text" name="Tiempo_Item[]"></td>
-					<td><input id="SubTotal_Item_" class="form-control input8" type="text" readonly="true" name="SubTotal_Item[]"></td>
-					<td><input id="Monto_Mes1_Item_" class="form-control input8" type="text" name="Monto_Mes1_Item[]"></td>
-					<td><input id="Monto_Mes2_Item_" class="form-control input8" type="text" name="Monto_Mes2_Item[]"></td>
-					<td><input id="Monto_Mes3_Item_" class="form-control input8" type="text" name="Monto_Mes3_Item[]"></th>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<hr>
-	<div  class="form-inline" role="form">
-		Partida <br>
-		Cod. <input id="Cod_Gasto_0" class="form-control input13" type="text" maxlength="11" name="Cod_Gasto[]">
-		Partida <input id="Name_Part_" class="form-control" type="text" readonly="true" name="Name_Part[]">
-		Nro Items <input id="Nro_Items_" class="form-control input2" type="text" maxlength="2" name="Nro_Items[]">
-		<table class="table table-striped table-hover">
-			<thead>
-				<th>Item</th>
-				<th>Unidad Medida</th>
-				<th>Cantidad</th>
-				<th>Precio Unitario</th>
-				<th>Veces o Tiempo en Meses</th>
-				<th>SubTotal</th>
-				<th>Mes1</th>
-				<th>Mes2</th>
-				<th>Mes3</th>
-			</thead>
-			<tbody>
-				<tr>
-					<td><input id="Name_Item_" class="form-control" type="text" name="Name_Item[]"></td>
-					<td><input id="U_Medida_" class="form-control input13" type="text" name="U_Medida[]"></td>
-					<td><input id="Cantidad_Item_" class="form-control input13" type="text" name="Cantidad_Item[]"></td>
-					<td><input id="Precio_Item_" class="form-control input13" type="text" name="Precio_Item[]"></td>
-					<td><input id="Tiempo_Item_" class="form-control input2" type="text" name="Tiempo_Item[]"></td>
-					<td><input id="SubTotal_Item_" class="form-control input8" type="text" readonly="true" name="SubTotal_Item[]"></td>
-					<td><input id="Monto_Mes1_Item_" class="form-control input8" type="text" name="Monto_Mes1_Item[]"></td>
-					<td><input id="Monto_Mes2_Item_" class="form-control input8" type="text" name="Monto_Mes2_Item[]"></td>
-					<td><input id="Monto_Mes3_Item_" class="form-control input8" type="text" name="Monto_Mes3_Item[]"></th>
-				</tr>
-				<tr>
-					<td><input id="Name_Item_" class="form-control" type="text" name="Name_Item[]"></td>
-					<td><input id="U_Medida_" class="form-control input13" type="text" name="U_Medida[]"></td>
-					<td><input id="Cantidad_Item_" class="form-control input13" type="text" name="Cantidad_Item[]"></td>
-					<td><input id="Precio_Item_" class="form-control input13" type="text" name="Precio_Item[]"></td>
-					<td><input id="Tiempo_Item_" class="form-control input2" type="text" name="Tiempo_Item[]"></td>
-					<td><input id="SubTotal_Item_" class="form-control input8" type="text" readonly="true" name="SubTotal_Item[]"></td>
-					<td><input id="Monto_Mes1_Item_" class="form-control input8" type="text" name="Monto_Mes1_Item[]"></td>
-					<td><input id="Monto_Mes2_Item_" class="form-control input8" type="text" name="Monto_Mes2_Item[]"></td>
-					<td><input id="Monto_Mes3_Item_" class="form-control input8" type="text" name="Monto_Mes3_Item[]"></th>
-				</tr>
-			</tbody>
-		</table>
-	</div> -->
-
+	<!-- AJAX -->
 </div>
 
 <?php 
@@ -145,27 +58,36 @@ echo form_close();
 ////////////////////////////////////////////////
 ////// DETALLE DE PRESUPUESTO
 ////////////////////////////////////////////////
+var proyct;
+
 $(function(){
 	$.each( <?php echo json_encode($presup_mes->result()) ?>, function(i, datos){
 		html = '<input type="hidden" id="Mes_Dtail_'+i+'" name="Mes[]" value="'+datos.Mes+'">';
 		$('#cabecera').append(html);
 	});
+
+	proyct = $("input[name='cod_pryct']").val();
+
 });
 
 $('#Cod_Act').change(function(event){
 
 	codigo = $(this).val();
-	proyct = $("input[name='cod_pryct']").val();
 
-	$.getJSON(CI.site_url+'/general/general/actividad_pptt', {codigo:codigo,proyct:proyct,area:1,anio:2014,ajax:1}, function(json_data, textStatus) {
+	$.getJSON(CI.site_url+'/presupuesto/presupuesto/actividad_pptt', {codigo:codigo,proyct:proyct,area:1,anio:2014,ajax:1}, function(json_data, textStatus) {
 
 		$("input[name='Nro_Act']").val('');
 		$('#Name_Act').val('');
 		$('#Subtotal_Act').val('');
+		$('#Cntdad_Partidas').val('');
 		$.each(json_data, function(i,datos){
 			$("input[name='Nro_Act']").val( datos.Nro_Act );
 			$('#Name_Act').val( datos.Descripcion );
 			$('#Subtotal_Act').val( datos.Monto_Act );
+			if ( datos.Cntdad_Partidas > 0 ) { 
+				$('#Cntdad_Partidas').val( datos.Cntdad_Partidas );
+			}
+			$('#Cntdad_Partidas').trigger('change');
 		});
 	});
 	
@@ -196,6 +118,16 @@ $('#Cntdad_Partidas').change(function(event){
 
 		$('#maestro').html(html);
 
+		$.getJSON(CI.site_url+'/presupuesto/presupuesto/AG_Gasto', {codigo:$('#Cod_Act').val(),proyct:proyct,area:1,anio:2014,ajax:1}, function(json_data, textStatus) {
+
+			$.each(json_data, function(i,datos){
+				$('#Cod_Part_'+i).val( datos.Cod_Gasto );
+				buscar_gastopptt( datos.Cod_Gasto, i);
+				$('#Nro_Items_'+i).val( datos.Item );
+				$('.items').trigger('change');
+			});
+		});
+		
 		$('#Cod_Part_0').focus();
 	}
 });
@@ -205,14 +137,16 @@ $(document).on("change",'.items',function() {
 	var cod = campo.attr('id');
 	array = cod.split("_");
 
+
 	nro = campo.val();
 	mcs = $('#Cantidad_Mes').val();
+	posi_prtd = array[2];
 
-	$('.tb_items_'+array[2]).remove();
+	$('.tb_items_'+posi_prtd).remove();
 
 	if (nro > 0)
 	{
-		html = '<table id="tb_'+array[2]+'" class="table table-striped table-hover tb_items_'+array[2]+'">';
+		html = '<table id="tb_'+posi_prtd+'" class="table table-striped table-hover tb_items_'+posi_prtd+'">';
 		html += '<thead>';
 		html += '<th>Nro.</th>';
 		html += '<th>Item</th>';
@@ -223,34 +157,39 @@ $(document).on("change",'.items',function() {
 		html += '<th>SubTotal</th>';
 
 		for (var j = 0; j < mcs; j++) {
-			html += '<th> <label id="lbl_Mes_'+array[2]+'_'+j+'"></label> </th>';
+			html += '<th> <label id="lbl_Mes_'+posi_prtd+'_'+j+'"></label> </th>';
 			cod_mes = $("input[id='Mes_Dtail_"+j+"']").val();
-			nombre_mes( cod_mes, array[2], j );
+			nombre_mes( cod_mes, posi_prtd, j );
 		}
 		html += '</thead>';
 		html += '<tbody>';
 
 		for (var i = 0; i < nro; i++) {
 			html += '<tr>';
-			html += '<td><input type="text" id="Item_'+i+'" name="Item[]" class="form-control input2" value="'+( parseInt(i) + 1 )+'" readonly /></td>';
-			html += '<td><input id="Item_Descripcion_'+array[2]+'_'+i+'" class="form-control" type="text" name="Item_Descripcion[]"> <div class="help-block has-error"></div></td>';
-			html += '<td><input id="Cod_UM_'+array[2]+'_'+i+'" class="form-control input3 medida" type="text" maxlength="2" name="Cod_UM[]"> <input id="Unidad_Med_'+array[2]+'_'+i+'" class="form-control input13" type="text" readonly="true" name="Unidad_Med[]"> <div class="help-block has-error"></div></td>';
-			html += '<td><input id="Cantidad_'+array[2]+'_'+i+'" class="form-control input13 dsubtotal" type="text" maxlength="6" name="Cantidad[]"> <div class="help-block has-error"></div></td>';
-			html += '<td><input id="PrecioUnit_'+array[2]+'_'+i+'" class="form-control input13 dsubtotal" type="text" name="Precio_Unit[]"> <div class="help-block has-error"></div></td>';
-			html += '<td><input id="Tiempo_'+array[2]+'_'+i+'" class="form-control input2 dsubtotal" type="text" maxlength="2" name="Tiempo[]"> <div class="help-block has-error"></div></td>';
-			html += '<td><input id="SubTotal_Item_'+array[2]+'_'+i+'" class="form-control input8" type="text" readonly="true" name="SubTotal_Item[]"></td>';
+			html += '<td><input type="text" id="Item_'+posi_prtd+'_'+i+'" name="Item[]" class="form-control input2" value="'+( parseInt(i) + 1 )+'" readonly /></td>';
+			html += '<td><input id="Item_Descripcion_'+posi_prtd+'_'+i+'" class="form-control" type="text" name="Item_Descripcion[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="Cod_UM_'+posi_prtd+'_'+i+'" class="form-control input3 medida" type="text" maxlength="2" name="Cod_UM[]"> <input id="Unidad_Med_'+posi_prtd+'_'+i+'" class="form-control input13" type="text" readonly="true" name="Unidad_Med[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="Cantidad_'+posi_prtd+'_'+i+'" class="form-control input13 dsubtotal" type="text" maxlength="6" name="Cantidad[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="PrecioUnit_'+posi_prtd+'_'+i+'" class="form-control input13 dsubtotal" type="text" name="Precio_Unit[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="Tiempo_'+posi_prtd+'_'+i+'" class="form-control input2 dsubtotal" type="text" maxlength="2" name="Tiempo[]"> <div class="help-block has-error"></div></td>';
+			html += '<td><input id="SubTotal_Item_'+posi_prtd+'_'+i+'" class="form-control input8" type="text" readonly="true" name="SubTotal_Item[]"></td>';
 
 			for (var x = 0; x < mcs; x++) {
-				html += '<td><input id="Monto_Mes_'+x+'_Item_'+array[2]+'_'+i+'" class="form-control input8" type="text" name="Monto_Mes_Item[]"> <div class="help-block has-error"></div></td>';
+				html += '<td><input id="Monto_Mes_'+x+'_Item_'+posi_prtd+'_'+i+'" class="form-control input8" type="text" name="Monto_Mes_Item[]"> <div class="help-block has-error"></div></td>';
 			};
 			html += '</tr>';
 		}
 		html += '</tbody>';
 		html += '</table>';
 
-		$('#dv_'+array[2]).append(html);
-		$('#Item_Descripcion_'+array[2]+'_0').focus();
+		$('#dv_'+posi_prtd).append(html);
+
+		buscar_items( $('#Cod_Act').val(), $('#Cod_Part_'+posi_prtd).val(), posi_prtd );
+		buscar_items_meses( $('#Cod_Act').val(), $('#Cod_Part_'+posi_prtd).val(), posi_prtd );
+
+		$('#Item_Descripcion_'+posi_prtd+'_0').focus();
 	}
+
 });
 
 function nombre_mes(codigo,nro_tbl,posi){
@@ -264,6 +203,48 @@ function nombre_mes(codigo,nro_tbl,posi){
 	});
 }
 
+function buscar_items(actvdad, prtda, posi_prtd) {
+	$.getJSON(CI.site_url+'/presupuesto/presupuesto/AG_Gasto_2', {actvdad:actvdad,proyct:proyct,area:1,anio:2014,prtda:prtda,ajax:1}, function(json_data, textStatus) {
+
+		$.each(json_data, function(i,datos){
+			$('#Item_'+posi_prtd+'_'+i).val( datos.Item );
+			$('#Item_Descripcion_'+posi_prtd+'_'+i).val( datos.Item_Descripcion );
+			$('#Cod_UM_'+posi_prtd+'_'+i).val( datos.Cod_UM.trim() );
+			$('#Cantidad_'+posi_prtd+'_'+i).val( datos.Cantidad );
+			$('#PrecioUnit_'+posi_prtd+'_'+i).val( datos.Precio_Unit );
+			$('#Tiempo_'+posi_prtd+'_'+i).val( datos.Tiempo );
+			buscar_medida( datos.Cod_UM.trim() , posi_prtd, i );
+			subtotal_items( posi_prtd, i );
+		});
+		suma_total_items( posi_prtd, $('#Nro_Items_'+posi_prtd).val() );
+	});
+}
+
+function buscar_items_meses(actvdad, prtda, posi_prtd) {
+	
+	var cod_mes;
+	var ms = 0;
+	var fila = 0;
+
+	$.getJSON(CI.site_url+'/presupuesto/presupuesto/AGM_Gasto', {actvdad:actvdad,proyct:proyct,area:1,anio:2014,prtda:prtda,ajax:1}, function(json_data, textStatus) {
+
+		$.each(json_data, function(i,datos){
+			if ( i == 0)
+			{
+				$('#Monto_Mes_'+ms+'_Item_'+posi_prtd+'_'+fila).val( datos.Monto_Mes_Item );
+				cod_mes = datos.Mes;
+			}else{
+				ms = ( cod_mes != datos.Mes ) ? ( ms + 1 ) : ms;
+				fila = ( cod_mes != datos.Mes ) ? 0 : ( fila + 1 );
+				$('#Monto_Mes_'+ms+'_Item_'+posi_prtd+'_'+fila).val( datos.Monto_Mes_Item );
+				cod_mes = datos.Mes;
+			}
+		});
+
+	});
+
+}
+
 
 $(document).on("change",'.gasto',function() {
 
@@ -272,18 +253,23 @@ $(document).on("change",'.gasto',function() {
 	array = cod.split("_");
 
 	codigo = campo.val();
-	proyct = $("input[name='cod_pryct']").val();
+	buscar_gastopptt(codigo,array[2]);
 	
-	$.getJSON(CI.site_url+'/general/general/gasto_pptt', {codigo:codigo,proyct:proyct,area:1,anio:2014,ajax:1}, function(json_data, textStatus) {
+});
 
-		$('#Nombre_Part_'+array[2]).val('');
-		$("#Nro_Part_"+array[2]).val('');
+function buscar_gastopptt (code,posi) {
+
+	$.getJSON(CI.site_url+'/presupuesto/presupuesto/gasto_pptt', {codigo:code,proyct:proyct,area:1,anio:2014,ajax:1}, function(json_data, textStatus) {
+
+		$('#Nombre_Part_'+posi).val('');
+		$("#Nro_Part_"+posi).val('');
 		$.each(json_data, function(i,datos){
-			$('#Nombre_Part_'+array[2]).val(datos.Descripcion);
-			$("#Nro_Part_"+array[2]).val(datos.Nro_Gasto);
+			$('#Nombre_Part_'+posi).val(datos.Descripcion);
+			$("#Nro_Part_"+posi).val(datos.Nro_Gasto);
 		});
 	});
-});
+
+}
 
 $(document).on("change",'.medida',function() {
 
@@ -292,16 +278,21 @@ $(document).on("change",'.medida',function() {
 	array = cod.split("_");
 
 	codigo = campo.val();
+	buscar_medida( codigo, array[2], array[3] );
 	
-	$.getJSON(CI.site_url+'/general/general/unidad_medida', {codigo:codigo,ajax:1}, function(json_data, textStatus) {
+});
 
-		$('#Unidad_Med_'+array[2]).val('');
+function buscar_medida(uni_med,posi_prtd,fila) {
+
+	$.getJSON(CI.site_url+'/general/general/unidad_medida', {codigo:uni_med,ajax:1}, function(json_data, textStatus) {
+
+		$('#Unidad_Med_'+posi_prtd+'_'+fila).val('');
 		$.each(json_data, function(i,datos){
-			$('#Unidad_Med_'+array[2]+'_'+array[3]).val(datos.Unidad_Med);
+			$('#Unidad_Med_'+posi_prtd+'_'+fila).val(datos.Unidad_Med);
 		});
 	});
-
-});
+	
+}
 
 
 $(document).on("change",'.dsubtotal',function() {
@@ -310,9 +301,16 @@ $(document).on("change",'.dsubtotal',function() {
 	var cod = campo.attr('id');
 	array = cod.split("_");
 
-	parm1 = $('#Cantidad_'+array[1]+'_'+array[2]).val();
-	parm2 = $('#PrecioUnit_'+array[1]+'_'+array[2]).val();
-	parm3 = $('#Tiempo_'+array[1]+'_'+array[2]).val();
+	subtotal_items( array[1], array[2] );
+	suma_total_items( array[1], $('#Nro_Items_'+array[1]).val() );
+
+});
+
+function subtotal_items(posi_prtd,fila) {
+	
+	parm1 = $('#Cantidad_'+posi_prtd+'_'+fila).val();
+	parm2 = $('#PrecioUnit_'+posi_prtd+'_'+fila).val();
+	parm3 = $('#Tiempo_'+posi_prtd+'_'+fila).val();
 
 	parm1 = ( parm1.trim() != '' ) ? parseFloat(parm1) : 0;
 	parm2 = ( parm2.trim() != '' ) ? parseFloat(parm2) : 0;
@@ -320,11 +318,8 @@ $(document).on("change",'.dsubtotal',function() {
 	
 	monto = parm1*parm2*parm3;
 
-	$('#SubTotal_Item_'+array[1]+'_'+array[2]).val(monto);
-	
-	suma_total_items( array[1], $('#Nro_Items_'+array[1]).val() );
-
-});
+	$('#SubTotal_Item_'+posi_prtd+'_'+fila).val(monto);
+}
 
 function suma_total_items(param,nrofilas) {
 	monto = 0;
