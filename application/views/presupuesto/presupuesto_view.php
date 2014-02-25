@@ -100,7 +100,7 @@ $(function(){
 			<ul id="nav_pptt" class="nav nav-tabs fix_navcap">
 				<li id="ctab1"><a href="#tab1" data-toggle="tab">Datos Generales</a></li>
 				<li id="ctab2"><a href="#tab2" data-toggle="tab">Detalle PPTT</a></li>
-				<!-- <li id="ctab3"><a href="#tab3" data-toggle="tab">Exportar</a></li> -->
+				<li id="ctab3"><a href="#tab3" data-toggle="tab">Exportar</a></li>
 			</ul>
 			<div class="tab-content fix_tabcontent">
 				<div class="tab-pane" id="tab1">
@@ -109,9 +109,9 @@ $(function(){
 				<div class="tab-pane" id="tab2">
 					<p><?php $this->load->view('presupuesto/forms/detalle_pptt_form'); ?></p>
 				</div>
-				<!-- <div class="tab-pane" id="tab3">
-					<p><?php //$this->load->view('presupuesto/forms/exportar'); ?></p>
-				</div> -->
+				<div class="tab-pane" id="tab3">
+					<p><?php $this->load->view('presupuesto/forms/exportar'); ?></p>
+				</div>
 			</div>
 		</div>
 	</div>

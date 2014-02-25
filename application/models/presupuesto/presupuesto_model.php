@@ -120,10 +120,21 @@ class Presupuesto_model extends CI_MODEL{
 		return $q;	
 	}
 
+	function get_data_pa( $area, $proyct, $anio )
+	{
+		$this->db->select('pa.Mes, pa.Nro_Act, pa.Cod_Act, a.Descripcion, pa.Monto_Act');
+		$this->db->where('ID_AREA', $area);
+		$this->db->where('CODIGO_PROYECTO', $proyct);
+		$this->db->where('ANIO', $anio);
+		$this->db->from('proyecto_actividad pa');
+		$this->db->join('actividad a', 'pa.Cod_Act = a.Cod_Act','left');
+		$q = $this->db->get();
+		return $q;
+	}
 
-// 	select * from actividad_gasto where Cod_Act = 2 and Codigo_Proyecto = '00000001' and Id_Area = 1 and Anio = 2014 and Cod_Gasto = '2.3.27.1199'
-
-// select * from actividad_gasto_mes where Cod_Act = 2 and Codigo_Proyecto = '00000001' and Id_Area = 1 and Anio = 2014 and Cod_Gasto = '2.3.27.1199'
+// 	select pa.Mes, pa.Nro_Act, pa.Cod_Act, a.Descripcion, pa.Monto_Act 
+// from proyecto_actividad pa
+// left join actividad a on pa.Cod_Act = a.Cod_Act
 
 }
 ?>

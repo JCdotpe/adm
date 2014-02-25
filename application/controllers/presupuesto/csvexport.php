@@ -40,27 +40,85 @@ class Csvexport extends CI_Controller
 
 		$query =  $this->presupuesto_model->get_pptt_proyect( $cod_area, $cod_pryct );
 
+		// cantidad de meses del proyecto
+		foreach ($query->result() as $filas) {
+			$Cantidad_Mes = $filas->Cantidad_Mes;
+		}
+
+		$fromCell = array();
+		$col_index = 13; // indice del primer mes
+		for ($x=0; $x < $Cantidad_Mes; $x++) {
+			array_push($fromCell, PHPExcel_Cell::stringFromColumnIndex($col_index));
+			$col_index++;
+		}
+
+		$pr_mes = $fromCell[0];
+		$ult_mes = $fromCell[$Cantidad_Mes-1];
+
 		// pestaña
 		$sheet = $this->phpexcel->getActiveSheet(0);
 
-		//colores
-		$color_celda_cabeceras =   array(
-			'fill' => array(
-				'type' => PHPExcel_Style_Fill::FILL_SOLID,
-				'color' => array('rgb' => '27408B')
+		//colores y estilos
+		$alignment_general = array(
+			'alignment' => array(
+				'wrap' => true,
+				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+				'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+			),
+		);
+
+		$style_cabecera_general = array(
+			'font' => array(
+				'bold' => true,
+				'color' => array('rgb' => '366092'),
 			)
 		);
 
+		$style_celda_general = array(
+			'fill' => array(
+				'type' => PHPExcel_Style_Fill::FILL_SOLID,
+				'color' => array('rgb' => '215967')
+			),
+			'font' => array(
+				'bold' => true,
+				'color' => array('rgb' => 'FFFFFF'),
+				'size' => 12,
+			),
+			// 'borders' => array(
+			// 	'right' => array(
+			// 		'style' => PHPExcel_Style_Border::BORDER_THICK,
+			// 		'color' => array('rgb' => 'FFFFFF'),
+			// 	),
+			// ),
+		);
+
+		$style_fondo_uno = array(
+			'fill' => array(
+				'type' => PHPExcel_Style_Fill::FILL_SOLID,
+				'color' => array('rgb' => '31869B')
+			),
+			'font' => array(
+				'bold' => true,
+				'color' => array('rgb' => 'FFFFFF'),
+			),
+		);
+		
+		////////////////////////////////
 		// formato de la hoja ( Set Orientation, size and scaling )
+		////////////////////////////////
+
 		$sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);// horizontal
 		$sheet->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A3);
 		$sheet->getPageSetup()->setFitToPage(false); // ajustar pagina
 		$sheet->getPageSetup()->setFitToWidth(1);
 		$sheet->getPageSetup()->setFitToHeight(0);
-
+		$sheet->getDefaultStyle()->getFont()->setName('Calibri');
+		$sheet->getDefaultStyle()->getFont()->setSize(10);
+		$sheet->getDefaultStyle()->applyFromArray($alignment_general);
+		$sheet->getSheetView()->setZoomScale(70);
 
 		// ancho y altura de columnas del file
-		$sheet->getColumnDimension('A')->setWidth(2);
+		$sheet->getColumnDimension('A')->setWidth(12);
 		$sheet->getColumnDimension('B')->setWidth(2);
 		$sheet->getColumnDimension('C')->setWidth(20);
 		$sheet->getColumnDimension('D')->setWidth(77);
@@ -73,16 +131,34 @@ class Csvexport extends CI_Controller
 		$sheet->getColumnDimension('K')->setWidth(2);
 		$sheet->getColumnDimension('L')->setWidth(33);
 		$sheet->getColumnDimension('M')->setWidth(2);
-		$sheet->getColumnDimension('N')->setWidth(25);
-		$sheet->getColumnDimension('O')->setWidth(25);
-		$sheet->getColumnDimension('P')->setWidth(25);
 
+		// ancho de los meses
+		for ($i=0; $i < count($fromCell) ; $i++) { 
+			$sheet->getColumnDimension($fromCell[$i])->setWidth(25);
+		}
 
 		$sheet->getRowDimension(1)->setRowHeight(38);
 		$sheet->getRowDimension(2)->setRowHeight(38);
 		$sheet->getRowDimension(3)->setRowHeight(38);
+		$sheet->getRowDimension(5)->setRowHeight(54);
+		$sheet->getRowDimension(6)->setRowHeight(4);
+		$sheet->getRowDimension(7)->setRowHeight(30);
+		$sheet->getRowDimension(10)->setRowHeight(6);
+		$sheet->getRowDimension(11)->setRowHeight(32);
+		$sheet->getRowDimension(12)->setRowHeight(3);
 
+		$sheet->getRowDimension(13)->setRowHeight(17);
+		$sheet->getRowDimension(14)->setRowHeight(17);
+		$sheet->getRowDimension(15)->setRowHeight(17);
+		$sheet->getRowDimension(16)->setRowHeight(17);
+		$sheet->getRowDimension(17)->setRowHeight(17);
+		$sheet->getRowDimension(18)->setRowHeight(17);
+		$sheet->getRowDimension(19)->setRowHeight(17);
+		$sheet->getRowDimension(20)->setRowHeight(17);
+
+		////////////////////////////////
 		// Logo
+		////////////////////////////////
 		$objDrawing = new PHPExcel_Worksheet_Drawing();
 		$objDrawing->setWorksheet($sheet);
 		$objDrawing->setName("inei");
@@ -93,18 +169,147 @@ class Csvexport extends CI_Controller
 		$objDrawing->setOffsetX(1);
 		$objDrawing->setOffsetY(5);
 
+		////////////////////////////////
+		// Cabecera General
+		////////////////////////////////
+		$sheet->setCellValue('C2','PRESUPUESTO POR ACTIVIDADES');
+			$sheet->mergeCells('C1:'.$ult_mes.'1');
+			$sheet->getStyle('C1:'.$ult_mes.'1')->getFont()->setSize(16);
+			$sheet->mergeCells('C2:'.$ult_mes.'2');
+			$sheet->getStyle('C2:'.$ult_mes.'2')->getFont()->setSize(12);
+			$sheet->mergeCells('C3:'.$ult_mes.'3');
+			$sheet->getStyle('C3:'.$ult_mes.'3')->getFont()->setSize(11);
+			
+			$sheet->getStyle('C1:'.$ult_mes.'3')->applyFromArray($style_cabecera_general);
 
-		// Datos Generales del Reporte
+		////////////////////////////////
+		//Datos Generales del Proyecto
+		////////////////////////////////
+		$sheet->setCellValue('C5','PART.');
+			$sheet->getStyle('C5')->applyFromArray($style_celda_general)
+				->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK)->setColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_WHITE));
+
+		$sheet->setCellValue('D5','ACTIVIDADES');
+			$sheet->mergeCells('D5:H5');
+			$sheet->getStyle('D5:H5')->applyFromArray($style_celda_general)
+				->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK)->setColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_WHITE));
+
+		$sheet->setCellValue('I5','TOTAL GENERAL S/.');
+			$sheet->mergeCells('I5:J5');
+			$sheet->getStyle('I5:J5')->applyFromArray($style_celda_general);
+
+		$sheet->setCellValue('L5','TOTAL');
+			$sheet->getStyle('L5')->applyFromArray($style_celda_general);
+
+		// datos generales - meses
+		$sheet->getStyle('N5:'.$ult_mes.'5')->applyFromArray($style_celda_general);
+		for ($i=0; $i < count($fromCell) ; $i++) { 
+			$sheet->getStyle($fromCell[$i].'5')->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK)->setColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_WHITE));
+		}
+
+		$sheet->setCellValue('G7','TOTAL GENERAL');
+			$sheet->mergeCells('G7:H7');
+			$sheet->getStyle('C7:J7')->applyFromArray($style_fondo_uno);
+
+		$sheet->setCellValue('G8','IGV');
+			$sheet->mergeCells('G8:H8');
+
+		$sheet->setCellValue('G9','SUB - TOTAL');
+			$sheet->mergeCells('G9:H9');
+
+		$sheet->getStyle('C7:H9')->getFont()->setSize(12);
+		$sheet->getStyle('C7:H9')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+		$sheet->getStyle('C8:H9')->getFont()->setBold(true)->getColor()->setRGB('366092');
+
+		// style de contenido 1
+		$sheet->mergeCells('I7:J7');
+		$sheet->mergeCells('I8:J8');
+		$sheet->mergeCells('I9:J9');
+		$sheet->getStyle('I7:J9')->getFont()->setSize(15);
+		$sheet->getStyle('I7:J9')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+		$sheet->getStyle('I7:J9')->getNumberFormat()->setFormatCode('#,##0.00');
+
+		$sheet->getStyle('L7')->applyFromArray($style_fondo_uno);
+		$sheet->getStyle('L7:L9')->getFont()->setSize(15);
+		$sheet->getStyle('L7:L9')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+		$sheet->getStyle('L7:L9')->getNumberFormat()->setFormatCode('#,##0.00');
+
+		// contenido 1 - datos generales
 		foreach ($query->result() as $filas) {
 			$sheet->getCellByColumnAndRow(2,1)->setValue(utf8_encode($filas->Proyecto));
 			$sheet->getCellByColumnAndRow(2,3)->setValue(utf8_encode($filas->Descripcion));
+			$sheet->getCellByColumnAndRow(8,7)->setValue($filas->Total_Gral);
+			$sheet->getCellByColumnAndRow(11,7)->setValue($filas->Total_Gral);
+
+			$sheet->getCellByColumnAndRow(8,8)->setValue($filas->IGV);
+			$sheet->getCellByColumnAndRow(11,8)->setValue($filas->IGV);
+
+			$sheet->getCellByColumnAndRow(8,9)->setValue($filas->Subtotal);
+			$sheet->getCellByColumnAndRow(11,9)->setValue($filas->Subtotal);
 		}
 
-		$sheet->setCellValue('C2','PRESUPUESTO POR ACTIVIDADES');
-		$sheet->mergeCells('C1:P1');
-		$sheet->mergeCells('C2:P2');
-		$sheet->mergeCells('C3:P3');
-		$sheet->getStyle('C1:P3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		////////////////////////////////////
+		//Datos de Actividades del Proyecto
+		////////////////////////////////////
+		$sheet->setCellValue('C11','ACTIVIDADES');
+			$sheet->mergeCells('C11:D11');
+			$sheet->getStyle('C11:D11')->applyFromArray($style_celda_general)
+				->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK)->setColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_WHITE));
+
+		$sheet->setCellValue('E11','SUB - TOTAL');
+			$sheet->mergeCells('E11:H11');
+			$sheet->getStyle('E11:H11')->applyFromArray($style_celda_general)
+				->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK)->setColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_WHITE));
+
+		$sheet->getStyle('I11')->applyFromArray($style_celda_general)
+				->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK)->setColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_WHITE));
+
+		$sheet->setCellValue('J11','%');
+		$sheet->getStyle('J11')->applyFromArray($style_celda_general);
+
+		$sheet->getStyle('L11')->applyFromArray($style_celda_general);
+
+		// contenido 2 - Actividades
+		$col_c2 = 13;
+		$fil_c2 = 13;
+		$i = 0;
+		$mes = 0;
+		$tot_grl = 0;
+
+		$query_pa =  $this->presupuesto_model->get_data_pa( $cod_area, $cod_pryct, $anio );
+
+		foreach ($query_pa->result() as $filas) {
+			if ( $i == 0) {
+				$sheet->getCellByColumnAndRow($col_c2,$fil_c2)->setValue($filas->Monto_Act);
+				$tot_grl = $filas->Monto_Act; // se puede cambiar
+				$mes = $filas->Mes;
+			}else {
+				$col_c2 = ( $mes != $filas->Mes ) ? ( $col_c2 + 1 ) : $col_c2;
+				$fil_c2 = ( $mes != $filas->Mes ) ? 13 : ( $fil_c2 + 1 );
+				$sheet->getCellByColumnAndRow($col_c2,$fil_c2)->setValue($filas->Monto_Act);
+				$tot_grl = $tot_grl + $filas->Monto_Act; // se puede cambiar
+				$mes = $filas->Mes;
+			}
+			$sheet->getCellByColumnAndRow(2,$fil_c2)->setValue($filas->Nro_Act);
+			$sheet->getCellByColumnAndRow(3,$fil_c2)->setValue(utf8_encode($filas->Descripcion));
+			$i++;
+		}
+
+		$fromCell = PHPExcel_Cell::stringFromColumnIndex(13);
+		$sheet->setCellValue('N11',$fromCell);
+
+
+		$sheet->setCellValue('I11',$tot_grl);
+			$sheet->getStyle('I11')->getNumberFormat()->setFormatCode('#,##0.00');
+		$sheet->setCellValue('L11',$tot_grl);
+			$sheet->getStyle('L11')->getNumberFormat()->setFormatCode('#,##0.00');
+
+		$sheet->getStyle('C13:J20')->applyFromArray($style_fondo_uno);
+		$sheet->getStyle('L13:L20')->applyFromArray($style_fondo_uno);
+		$sheet->getStyle('N13:P20')->applyFromArray($style_fondo_uno);
+
+		$sheet->getStyle('D13:D20')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
 
 
 		//SALIDA EXCEL ( Propiedades del archivo excel )
