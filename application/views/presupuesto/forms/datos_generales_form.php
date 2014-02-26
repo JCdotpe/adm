@@ -7,20 +7,20 @@
 $SubTotal = array(
 	'name'	=> 'Subtotal',
 	'id'	=> 'Subtotal',
-	'class'	=> 'form-control input30 calculo',
+	'class'	=> 'form-control text-right input9 calculo',
 );
 
 $IGV = array(
 	'name'	=> 'IGV',
 	'id'	=> 'IGV',
-	'class'	=> 'form-control input15 calculo',
+	'class'	=> 'form-control text-right input9 calculo',
 );
 
 $Total_Gral = array(
 	'name'	=> 'Total_Gral',
 	'id'	=> 'Total_Gral',
 	'readonly' => 'true',
-	'class'	=> 'form-control input30',
+	'class'	=> 'form-control text-right input9',
 );
 
 $Cantidad_Mes = array(
@@ -55,54 +55,30 @@ echo form_open($this->uri->uri_string(),$attr);
 	
 	<h2>Presupuesto General</h2>
 
-	<div class="row"><div class="form-inline" role="form">
+	<table class="table table-striped table-hover">
+		<thead>
+			<th>Total General</th>
+			<th>Subtotal</th>
+			<th>IGV</th>
+			<th>Cantidad de Meses</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td><?php echo form_input($Total_Gral); ?><div class="help-block has-error"></div></td>
+				<td><?php echo form_input($SubTotal); ?><div class="help-block has-error"></div></td>
+				<td><?php echo form_input($IGV); ?><div class="help-block has-error"></div></td>
+				<td><?php echo form_input($Cantidad_Mes); ?><div class="help-block has-error"></div></td>
+			</tr>
+		</tbody>
+	</table>
 
-		<div class="col-xs-3">
 
-			<div class="form-group">
-				<label>Total General</label>
-				<?php echo form_input($Total_Gral); ?>
-			</div>
-
-		</div>
-
-		<div class="col-xs-3">
-
-			<div class="form-group">
-				<label>Subtotal</label>
-				<?php echo form_input($SubTotal); ?>
-				<div class="help-block has-error"></div>
-			</div>
-
-		</div>
-
-		<div class="col-xs-3">
-
-			<div class="form-group">
-				<label>IGV</label>
-				<?php echo form_input($IGV); ?>
-				<div class="help-block has-error"></div>
-			</div>
-
-		</div>
-
-		<div class="col-xs-3">
-
-			<div class="form-group">
-				<label>Cantidad de Meses</label>
-				<?php echo form_input($Cantidad_Mes); ?>
-				<div class="help-block has-error"></div>
-			</div>	
-
-		</div>						
-
-	</div></div><!-- end row -->
 
 	<hr />
 
 	<div class="form-inline" role="form">
 
-	<h2>Presupuesto Mensual</h2> <input id="total_mcs" class="form-control input8" name="total_mcs" type="text" readonly /><div class="help-block has-error"></div>
+	<h2>Presupuesto Mensual</h2> <input id="total_mcs" class="form-control text-right input9" name="total_mcs" type="text" readonly /><div class="help-block has-error"></div>
 
 	
 
@@ -110,9 +86,9 @@ echo form_open($this->uri->uri_string(),$attr);
 		<thead>
 			<th width="60px">COD</th>
 			<th>MES</th>
-			<th>SUBTOTAL</th>
-			<th>IGV</th>
-			<th>TOTAL</th>
+			<th width="120px" class="text-right"><input type="text" readonly="" value="SUBTOTAL" class="form-control text-right input9 valid"></th>
+			<th width="120px" class="text-right"><input type="text" readonly="" value="IGV" class="form-control text-right input9 valid"></th>
+			<th width="120px" class="text-right"><input type="text" readonly="" value="TOTAL" class="form-control text-right input9 valid"></th>
 		</thead>
 		<tbody>
 		</tbody>
@@ -131,8 +107,8 @@ echo form_open($this->uri->uri_string(),$attr);
 			<th width="60px"></th>
 			<th width="60px">COD.</th>
 			<th>ACTIVIDAD</th>
-			<th>SUBTOTAL <input type="text" id="total_actvd" class="form-control input8" name="total_actvd" readonly /><div class="help-block has-error"></div> </th>
-			<th class='prct_act'>%</th>
+			<th width="120px"><input type="text" class="form-control text-right input9" value="SUBTOTAL" readonly /> <input type="text" id="total_actvd" class="form-control text-right input9" name="total_actvd" readonly /><div class="help-block has-error"></div> </th>
+			<th width="70px" class="prct_act"><input type="text" class="form-control text-center input3" value="%" readonly /> <input type="text" class="form-control text-right input3" value="98.5" readonly /><div class="help-block has-error"></div></th>
 		</thead>
 		<tbody>
 		</tbody>
@@ -149,10 +125,10 @@ echo form_open($this->uri->uri_string(),$attr);
 	<table id="pptt_partidas" class="table table-striped table-hover">
 		<thead>
 			<th width="60px"></th>
-			<th>COD.</th>
+			<th width="120px">COD.</th>
 			<th>PARTIDA</th>
-			<th>SUBTOTAL <input type="text" id="total_part" class="form-control input8" name="total_part" readonly /><div class="help-block has-error"></div> </th>
-			<th class='prct_part'>%</th>
+			<th width="120px"><input type="text" class="form-control text-right input9" value="SUBTOTAL" readonly /> <input type="text" id="total_part" class="form-control text-right input9" name="total_part" readonly /><div class="help-block has-error"></div> </th>
+			<th width="70px" class='prct_part'><input type="text" class="form-control text-center input3" value="%" readonly /> <input type="text" class="form-control text-center input3" value="94.4" readonly /><div class="help-block has-error"></div> </th>
 		</thead>
 		<tbody>
 		</tbody>
@@ -160,13 +136,16 @@ echo form_open($this->uri->uri_string(),$attr);
 
 	</div><!-- end form partidas -->
 
-</div>
-
 <?php 
 echo form_submit('send', 'Guardar','class="btn btn-primary"');
 echo form_close();
 // echo 'soy el nro d act '.$cantidad1;
-?>
+?>	
+
+</div>
+
+
+
 
 <script type="text/javascript">
 
@@ -228,10 +207,10 @@ $('#Cantidad_Mes').change(function(event) {
 		for (var i = 0; i < nro; i++){ 
 			html += '<tr>';
 			html += '<td><input type="text" id="Mes_'+i+'" name="Mes[]" maxlength="2" class="form-control input2 meses" /><div class="help-block has-error"></div> </td>';
-			html += '<td><input type="text" id="name_mcs_'+i+'" name="name_mcs_[]" class="form-control input13" readonly /><div class="help-block has-error"></div> </td>';
-			html += '<td><input type="text" id="Subtotal_M_'+i+'" name="Subtotal_M[]" class="form-control input8 calculo_mcs" /><div class="help-block has-error"></div> </td>';
-			html += '<td><input type="text" id="IGV_M_'+i+'" name="IGV_M[]" class="form-control input8 calculo_mcs" /><div class="help-block has-error"></div> </td>';
-			html += '<td><input type="text" id="Total_Gral_M_'+i+'" name="Total_Gral_M[]" class="form-control input8" readonly /></td>';
+			html += '<td><input type="text" id="name_mcs_'+i+'" name="name_mcs_[]" class="form-control input98p" readonly /><div class="help-block has-error"></div> </td>';
+			html += '<td><input type="text" id="Subtotal_M_'+i+'" name="Subtotal_M[]" class="form-control text-right input9 calculo_mcs" /><div class="help-block has-error"></div> </td>';
+			html += '<td><input type="text" id="IGV_M_'+i+'" name="IGV_M[]" class="form-control text-right input9 calculo_mcs" /><div class="help-block has-error"></div> </td>';
+			html += '<td><input type="text" id="Total_Gral_M_'+i+'" name="Total_Gral_M[]" class="form-control text-right input9" readonly /></td>';
 			html += '</tr>';
 		}
 		$('#pptt_meses > tbody').append(html);
@@ -311,8 +290,8 @@ $('#Nro_Actividades').change(function(event){
 	if (mcs > 0){
 		html = '';
 		for (var i = 0; i < mcs; i++) {
-			html += '<th class = "act_meses"><input type="text" id="act_nombre_mes_'+i+'" class="form-control input13" name="act_nombre_mes_'+i+'" value="'+$('#name_mcs_'+i).val()+'" readonly />';
-			html += '<input type="text" id="act_total_mes_'+i+'" class="form-control input8" name="act_total_mes_[]" readonly /><div class="help-block has-error"></div> </th>';
+			html += '<th width="140px" class = "act_meses"><input type="text" id="act_nombre_mes_'+i+'" class="form-control text-right input10" name="act_nombre_mes_'+i+'" value="'+$('#name_mcs_'+i).val()+'" readonly />';
+			html += '<input type="text" id="act_total_mes_'+i+'" class="form-control text-right input10" name="act_total_mes_[]" readonly /><div class="help-block has-error"></div> </th>';
 		}
 		$('.prct_act').after(html);
 
@@ -324,11 +303,11 @@ $('#Nro_Actividades').change(function(event){
 				html2 += '<tr>';
 				html2 += '<td><input type="text" id="Nro_Act_'+j+'" name="Nro_Act[]" class="form-control input2" value="'+( parseInt(j) + 1 )+'" readonly /></td>';
 				html2 += '<td><input type="text" id="Cod_Act_'+j+'" name="Cod_Act[]" maxlength="2" class="actvd form-control input2" /><div class="help-block has-error"></div> </td>';
-				html2 += '<td><input type="text" id="Name_Act_'+j+'" name="Name_Act[]" readonly class="form-control input200" /><div class="help-block has-error"></div> </td>';
-				html2 += '<td><input type="text" id="Subtotal_Act_'+j+'" name="Subtotal_Act[]" class="form-control input8" readonly /><div class="help-block has-error"></div> </td>';
-				html2 += '<td><input type="text" id="Prct_Act_'+j+'" name="Prct_Act[]" class="form-control input8" readonly /></td>';
+				html2 += '<td><input type="text" id="Name_Act_'+j+'" name="Name_Act[]" readonly class="form-control input98p" /><div class="help-block has-error"></div> </td>';
+				html2 += '<td><input type="text" id="Subtotal_Act_'+j+'" name="Subtotal_Act[]" class="form-control text-right input9" readonly /><div class="help-block has-error"></div> </td>';
+				html2 += '<td><input type="text" id="Prct_Act_'+j+'" name="Prct_Act[]" class="form-control text-right input3" readonly /></td>';
 				for (var m = 0; m < mcs; m++) {
-					html2 += '<td><input type="text" id="Monto_Act_'+m+'_'+j+'" name="Monto_Act[]" class="form-control input8 act_calculo_pptt" /><div class="help-block has-error"></div></td>';
+					html2 += '<td><input type="text" id="Monto_Act_'+m+'_'+j+'" name="Monto_Act[]" class="form-control text-right input10 act_calculo_pptt" /><div class="help-block has-error"></div></td>';
 				}
 				html2 += '</tr>';
 			}
@@ -425,8 +404,8 @@ $('#Nro_Partidas').change(function(event){
 	if (mcs > 0){
 		html = '';
 		for (var i = 0; i < mcs; i++) {
-			html += '<th class = "part_meses"><input type="text" id="part_nombre_mes_'+i+'" name="part_nombre_mes_'+i+'" class="form-control input13" value="'+$('#name_mcs_'+i).val()+'" readonly />';
-			html += '<input type="text" id="part_total_mes_'+i+'" class="form-control input8" name="part_total_mes_[]" readonly /><div class="help-block has-error"></div> </th>';
+			html += '<th width="140px" class = "part_meses"><input type="text" id="part_nombre_mes_'+i+'" name="part_nombre_mes_'+i+'" class="form-control text-right input10" value="'+$('#name_mcs_'+i).val()+'" readonly />';
+			html += '<input type="text" id="part_total_mes_'+i+'" class="form-control text-right input10" name="part_total_mes_[]" readonly /><div class="help-block has-error"></div> </th>';
 		}
 		$('.prct_part').after(html);
 
@@ -438,11 +417,11 @@ $('#Nro_Partidas').change(function(event){
 				html2 += '<tr>';
 				html2 += '<td><input type="text" id="Nro_Gasto_'+j+'" name="Nro_Gasto[]" class="form-control input2" value="'+( parseInt(j) + 1 )+'" readonly /></td>';
 				html2 += '<td><input type="text" id="Cod_Gasto_'+j+'" name="Cod_Gasto[]" maxlength="11" class="prtda form-control input13" /><div class="help-block has-error"></div> </td>';	
-				html2 += '<td><input type="text" id="Name_Part_'+j+'" name="Name_Part[]" class="form-control" readonly /><div class="help-block has-error"></div> </td>';
-				html2 += '<td><input type="text" id="Subtotal_Gasto_'+j+'" name="Subtotal_Gasto[]" class="form-control input8" readonly /><div class="help-block has-error"></div></td>';
-				html2 += '<td><input type="text" id="Prct_Gasto_'+j+'" name="Prct_Gasto[]" class="form-control input8" readonly /></td>';
+				html2 += '<td><input type="text" id="Name_Part_'+j+'" name="Name_Part[]" class="form-control input98p" readonly /><div class="help-block has-error"></div> </td>';
+				html2 += '<td><input type="text" id="Subtotal_Gasto_'+j+'" name="Subtotal_Gasto[]" class="form-control text-right input9" readonly /><div class="help-block has-error"></div></td>';
+				html2 += '<td><input type="text" id="Prct_Gasto_'+j+'" name="Prct_Gasto[]" class="form-control text-right input3" readonly /></td>';
 				for (var m = 0; m < mcs; m++) {
-					html2 += '<td><input type="text" id="Monto_Gasto_'+m+'_'+j+'" name="Monto_Gasto[]" class="form-control input8 part_calculo_pptt" /><div class="help-block has-error"></div></td>';
+					html2 += '<td><input type="text" id="Monto_Gasto_'+m+'_'+j+'" name="Monto_Gasto[]" class="form-control text-right input10 part_calculo_pptt" /><div class="help-block has-error"></div></td>';
 				}
 				html2 += '</tr>';
 			}

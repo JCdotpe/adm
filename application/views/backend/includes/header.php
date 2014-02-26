@@ -17,7 +17,7 @@
 	<link rel="stylesheet/less" type="text/css" href="<?php echo base_url('js/style.less'); ?>" />
 </head>
 
-<body>
+<body class="inei">
 	<script src="<?php echo base_url('js/less-1.6.2.min.js'); ?>"></script>
 	<script src="<?php echo base_url('js/jquery.js'); ?>"></script>
 	<script src="<?php echo base_url('js/bootstrap.min.js'); ?>"></script>

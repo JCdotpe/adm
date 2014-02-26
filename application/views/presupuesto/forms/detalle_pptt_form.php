@@ -7,28 +7,28 @@
 $Cod_Act = array(
 	'name'	=> 'Cod_Act',
 	'id'	=> 'Cod_Act',
-	'class' => 'form-control input2',
+	'class' => 'form-control text-right input2',
 	'maxlength' => 2,
 );
 
 $Name_Act = array(
 	'name'	=> 'Name_Act',
 	'id'	=> 'Name_Act',
-	'class' => 'form-control input200',
+	'class' => 'form-control input98p',
 	'readonly' => 'true',
 );
 
 $Subtotal_Act = array(
 	'name'	=> 'Subtotal_Act',
 	'id'	=> 'Subtotal_Act',
-	'class'	=> 'form-control input8',
+	'class'	=> 'form-control text-right input9',
 	'readonly' => 'true',
 );
 
 $Cntdad_Partidas = array(
 	'name'	=> 'Cntdad_Partidas',
 	'id'	=> 'Cntdad_Partidas',
-	'class' => 'form-control input2',
+	'class' => 'form-control text-right input2',
 	'maxlength' => 2,
 );
 
@@ -38,10 +38,30 @@ echo form_open($this->uri->uri_string(),$attr);
 ?>
 
 <div id="cabecera" class="form-inline" role="form">
-	Actividades <br>
+	
+	<h2>Actividades</h2>
 	<?php echo form_hidden('Nro_Act'); ?>
-	Cod. <?php echo form_input($Cod_Act); ?><div class="help-block has-error"></div> Actividad <?php echo form_input($Name_Act); ?><div class="help-block has-error"></div> Total <?php echo form_input($Subtotal_Act); ?>
-	Cantidad de Partidas <?php echo form_input($Cntdad_Partidas); ?><div class="help-block has-error"></div>
+
+
+	<table class="table table-striped table-hover">
+		<thead>
+			<th width="60px">COD</th>
+			<th>ACTIVIDAD</th>
+			<th width="120px">TOTAL</th>
+			<th width="60px">PARTIDAS</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td><?php echo form_input($Cod_Act); ?><div class="help-block has-error"></td>
+				<td><?php echo form_input($Name_Act); ?><div class="help-block has-error"></td>
+				<td class="text-right"><?php echo form_input($Subtotal_Act); ?><div class="help-block has-error"></td>
+				<td class="text-right"><?php echo form_input($Cntdad_Partidas); ?><div class="help-block has-error"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<hr />
+
 </div>
 <br>
 

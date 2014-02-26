@@ -41,9 +41,9 @@ class Presupuesto extends CI_Controller {
 		$cod_pryct = ( is_null($codigo) ) ? 0 : $this->my_encryption->decode($codigo);
 		$name_proyct = ( is_null($codigo) ) ? 0 : 'PROYECTOS';
 		if ( $cod_pryct == '00000001' ) {
-			$name_proyct = 'Proyecto 1';
+			$name_proyct = 'CIE2013';
 		}else{
-			$name_proyct = 'Proyecto 2';
+			$name_proyct = 'CENEPSCO';
 		}
 		
 		$data['cod_pryct'] = $cod_pryct;
