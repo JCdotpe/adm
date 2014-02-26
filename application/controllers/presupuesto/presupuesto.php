@@ -262,7 +262,6 @@ class Presupuesto extends CI_Controller {
 			$arr_actividad_gasto['Id_Area'] = $cod_area;
 			$arr_actividad_gasto['Codigo_Proyecto'] = $cod_pryct;
 			$arr_actividad_gasto['Anio'] = $anio;
-			$arr_actividad_gasto['Nro_Act'] = $nro_act;
 			$arr_actividad_gasto['Cod_Act'] = $cod_act;
 			$arr_actividad_gasto['user_id'] = $ui;
 			$arr_actividad_gasto['last_ip'] = $ip;
@@ -270,7 +269,7 @@ class Presupuesto extends CI_Controller {
 			$arr_actividad_gasto['created'] = date('Y-m-d H:i:s');
 
 			foreach ($tbl_actividad_gasto as $a => $b) {
-				if (!in_array($b, array('Id_Area','Codigo_Proyecto', 'Anio', 'Nro_Act', 'Cod_Act', 'user_id','last_ip','user_agent','created'))) {
+				if (!in_array($b, array('Id_Area','Codigo_Proyecto', 'Anio', 'Cod_Act', 'user_id','last_ip','user_agent','created'))) {
 					$actividad_gasto[$b] = ( $this->input->post($b) == '' ) ? 0 : array_map('utf8_decode', $this->input->post($b)); //asigno post a un array global
 				}
 			}
@@ -281,7 +280,6 @@ class Presupuesto extends CI_Controller {
 			$arr_actividad_gasto_mes['Id_Area'] = $cod_area;
 			$arr_actividad_gasto_mes['Codigo_Proyecto'] = $cod_pryct;
 			$arr_actividad_gasto_mes['Anio'] = $anio;
-			$arr_actividad_gasto_mes['Nro_Act'] = $nro_act;
 			$arr_actividad_gasto_mes['Cod_Act'] = $cod_act;
 			$arr_actividad_gasto_mes['user_id'] = $ui;
 			$arr_actividad_gasto_mes['last_ip'] = $ip;
@@ -289,7 +287,7 @@ class Presupuesto extends CI_Controller {
 			$arr_actividad_gasto_mes['created'] = date('Y-m-d H:i:s');
 
 			foreach ($tbl_actividad_gasto_mes as $a => $b) {
-				if (!in_array($b, array('Id_Area','Codigo_Proyecto', 'Anio', 'Nro_Act', 'Cod_Act', 'Nro_Gasto', 'Cod_Gasto', 'user_id','last_ip','user_agent','created'))) {
+				if (!in_array($b, array('Id_Area','Codigo_Proyecto', 'Anio', 'Cod_Act', 'Cod_Gasto', 'user_id','last_ip','user_agent','created'))) {
 					$actividad_gasto_mes[$b] = ( $this->input->post($b) == '' ) ? 0 : $this->input->post($b); //asigno post a un array global
 				}
 			}
@@ -309,17 +307,15 @@ class Presupuesto extends CI_Controller {
 
 				// asigno nro y codigo de gasto
 				$arr_actividad_gasto['Cod_Gasto'] = $actividad_gasto['Cod_Gasto'][$x];
-				$arr_actividad_gasto['Nro_Gasto'] = $actividad_gasto['Nro_Gasto'][$x];
 
 				$arr_actividad_gasto_mes['Cod_Gasto'] = $actividad_gasto['Cod_Gasto'][$x];
-				$arr_actividad_gasto_mes['Nro_Gasto'] = $actividad_gasto['Nro_Gasto'][$x];
 
 				//cantidad de items por gasto
 				$cnt_items = $actividad_gasto['Nro_Items'][$x];
 				for ($j=0; $j <= $cnt_items-1; $j++) {
 
 					foreach ($tbl_actividad_gasto as $key => $camp) {
-						if (!in_array($camp, array('Id_Area','Codigo_Proyecto', 'Anio','Nro_Act','Cod_Act', 'Nro_Gasto', 'Cod_Gasto', 'user_id','last_ip','user_agent','created'))) {
+						if (!in_array($camp, array('Id_Area','Codigo_Proyecto', 'Anio', 'Cod_Act', 'Cod_Gasto', 'user_id','last_ip','user_agent','created'))) {
 							$arr_actividad_gasto[$camp] = ( !isset($actividad_gasto[$camp][$i]) ) ? 0 : $actividad_gasto[$camp][$i]; //asigno datos
 						}
 					}
@@ -335,7 +331,7 @@ class Presupuesto extends CI_Controller {
 						$arr_actividad_gasto_mes['Mes'] = $actividad_gasto_mes['Mes'][$m];
 
 						foreach ($tbl_actividad_gasto_mes as $key => $camp) {
-							if (!in_array($camp, array('Id_Area','Codigo_Proyecto', 'Mes', 'Anio','Nro_Act','Cod_Act', 'Nro_Gasto', 'Cod_Gasto', 'Item', 'user_id','last_ip','user_agent','created'))) {
+							if (!in_array($camp, array('Id_Area','Codigo_Proyecto', 'Mes', 'Anio', 'Cod_Act', 'Cod_Gasto', 'Item', 'user_id','last_ip','user_agent','created'))) {
 								$arr_actividad_gasto_mes[$camp] = ( !isset($actividad_gasto_mes[$camp][$w]) ) ? 0 : $actividad_gasto_mes[$camp][$w]; //asigno datos
 							}
 						}
