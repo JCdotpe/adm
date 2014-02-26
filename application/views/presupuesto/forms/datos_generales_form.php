@@ -106,7 +106,7 @@ echo form_open($this->uri->uri_string(),$attr);
 		<thead>
 			<th width="60px"></th>
 			<th width="60px">COD.</th>
-			<th>ACTIVIDAD</th>
+			<th min-width="200px">ACTIVIDAD</th>
 			<th width="120px"><input type="text" class="form-control text-right input9" value="SUBTOTAL" readonly /> <input type="text" id="total_actvd" class="form-control text-right input9" name="total_actvd" readonly /><div class="help-block has-error"></div> </th>
 			<th width="70px" class="prct_act"><input type="text" class="form-control text-center input3" value="%" readonly /> <input type="text" class="form-control text-right input3" value="98.5" readonly /><div class="help-block has-error"></div></th>
 		</thead>
