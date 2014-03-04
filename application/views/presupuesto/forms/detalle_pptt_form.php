@@ -41,137 +41,134 @@ echo form_open($this->uri->uri_string(),$attr);
 	
 <h2>ACTIVIDADES MODELO 01</h2>
 	
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          01) DIRECCIÓN Y METODOLOGÍA
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
-      <div class="panel-body">
-      	<!-- body -->
-
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#jaccordion" href="#jcollapseOne">
-          2.3.27.11.99 - CONTRATO POR LOCACIÓN DE SERVICIOS
-        </a>
-      </h4>
-    </div>
-    <div id="jcollapseOne" class="panel-collapse collapse in">
-      <div class="panel-body">
-
-		<table class="table table-striped table-hover" id="">
-			<thead>
-				<tr>
-					<th>Nro.</th>
-					<th>Item</th>
-					<th>Unidad Medida</th>
-					<th>Cantidad</th>
-					<th>Precio Unitario</th>
-					<th>Veces o Tiempo en Meses</th>
-					<th>SubTotal</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><input type="text" readonly="" value="1" class="form-control input2" name="Item[]" id="Item_0_0"></td>
-					<td><input type="text" name="Item_Descripcion[]" class="form-control" id="Item_Descripcion_0_0"> <div class="help-block has-error"></div></td>
-					<td><input type="text" name="Cod_UM[]" maxlength="2" class="form-control input3 medida" id="Cod_UM_0_0"> <input type="text" name="Unidad_Med[]" readonly="true" class="form-control input13" id="Unidad_Med_0_0"> <div class="help-block has-error"></div></td>
-					<td><input type="text" name="Cantidad[]" maxlength="6" class="form-control input13 dsubtotal" id="Cantidad_0_0"> <div class="help-block has-error"></div></td><td><input type="text" name="Precio_Unit[]" class="form-control input13 dsubtotal" id="PrecioUnit_0_0"> <div class="help-block has-error"></div></td>
-					<td><input type="text" name="Tiempo[]" maxlength="2" class="form-control input2 dsubtotal" id="Tiempo_0_0"> <div class="help-block has-error"></div></td>
-					<td><input type="text" name="SubTotal_Item[]" readonly="true" class="form-control input8" id="SubTotal_Item_0_0"></td>
-				</tr>
-				<tr>
-					<td><input type="text" readonly="" value="1" class="form-control input2" name="Item[]" id="Item_0_0"></td>
-					<td><input type="text" name="Item_Descripcion[]" class="form-control" id="Item_Descripcion_0_0"> <div class="help-block has-error"></div></td>
-					<td><input type="text" name="Cod_UM[]" maxlength="2" class="form-control input3 medida" id="Cod_UM_0_0"> <input type="text" name="Unidad_Med[]" readonly="true" class="form-control input13" id="Unidad_Med_0_0"> <div class="help-block has-error"></div></td>
-					<td><input type="text" name="Cantidad[]" maxlength="6" class="form-control input13 dsubtotal" id="Cantidad_0_0"> <div class="help-block has-error"></div></td><td><input type="text" name="Precio_Unit[]" class="form-control input13 dsubtotal" id="PrecioUnit_0_0"> <div class="help-block has-error"></div></td>
-					<td><input type="text" name="Tiempo[]" maxlength="2" class="form-control input2 dsubtotal" id="Tiempo_0_0"> <div class="help-block has-error"></div></td>
-					<td><input type="text" name="SubTotal_Item[]" readonly="true" class="form-control input8" id="SubTotal_Item_0_0"></td>
-				</tr>
-				<tr>
-					<td><input type="text" readonly="" value="1" class="form-control input2" name="Item[]" id="Item_0_0"></td>
-					<td><input type="text" name="Item_Descripcion[]" class="form-control" id="Item_Descripcion_0_0"> <div class="help-block has-error"></div></td>
-					<td><input type="text" name="Cod_UM[]" maxlength="2" class="form-control input3 medida" id="Cod_UM_0_0"> <input type="text" name="Unidad_Med[]" readonly="true" class="form-control input13" id="Unidad_Med_0_0"> <div class="help-block has-error"></div></td>
-					<td><input type="text" name="Cantidad[]" maxlength="6" class="form-control input13 dsubtotal" id="Cantidad_0_0"> <div class="help-block has-error"></div></td><td><input type="text" name="Precio_Unit[]" class="form-control input13 dsubtotal" id="PrecioUnit_0_0"> <div class="help-block has-error"></div></td>
-					<td><input type="text" name="Tiempo[]" maxlength="2" class="form-control input2 dsubtotal" id="Tiempo_0_0"> <div class="help-block has-error"></div></td>
-					<td><input type="text" name="SubTotal_Item[]" readonly="true" class="form-control input8" id="SubTotal_Item_0_0"></td>
-				</tr>								
-			</tbody>
-		</table>
-
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#jaccordion" href="#jcollapseTwo">
-          2.3.28.12 - CONTRIBUCIONES A ESSALUD DE CAS
-        </a>
-      </h4>
-    </div>
-    <div id="jcollapseTwo" class="panel-collapse collapse">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#jaccordion" href="#jcollapseThree">
-          2.3.21.2.99 - OTROS GASTOS
-        </a>
-      </h4>
-    </div>
-    <div id="jcollapseThree" class="panel-collapse collapse">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-</div>
-
-      	<!-- body -->
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-          02) SEGMENTACION
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-          03) ARCHIVO, DISTRIBUCIÓN y RECEPCIÓN
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-</div>
+	<div class="panel-group" id="accordion">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+						01) DIRECCIÓN Y METODOLOGÍA
+					</a>
+				</h4>
+			</div>
+			<div id="collapseOne" class="panel-collapse collapse in">
+				<div class="panel-body">
+					Cantidad de Partidas <input type="text" id="cnt_prt_1" name="cnt_prt_1" class="cantidad_partidas" >
+					<!-- body -->
+					<div class="panel-group" id="part_1_1">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#jaccordion" href="#jcollapseOne">
+										2.3.27.11.99 - CONTRATO POR LOCACIÓN DE SERVICIOS
+									</a>
+								</h4>
+							</div>
+							<div id="jcollapseOne" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<table class="table table-striped table-hover" id="">
+										<thead>
+											<tr>
+												<th>Nro.</th>
+												<th>Item</th>
+												<th>Unidad Medida</th>
+												<th>Cantidad</th>
+												<th>Precio Unitario</th>
+												<th>Veces o Tiempo en Meses</th>
+												<th>SubTotal</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><input type="text" readonly="" value="1" class="form-control input2" name="Item[]" id="Item_0_0"></td>
+												<td><input type="text" name="Item_Descripcion[]" class="form-control" id="Item_Descripcion_0_0"> <div class="help-block has-error"></div></td>
+												<td><input type="text" name="Cod_UM[]" maxlength="2" class="form-control input3 medida" id="Cod_UM_0_0"> <input type="text" name="Unidad_Med[]" readonly="true" class="form-control input13" id="Unidad_Med_0_0"> <div class="help-block has-error"></div></td>
+												<td><input type="text" name="Cantidad[]" maxlength="6" class="form-control input13 dsubtotal" id="Cantidad_0_0"> <div class="help-block has-error"></div></td><td><input type="text" name="Precio_Unit[]" class="form-control input13 dsubtotal" id="PrecioUnit_0_0"> <div class="help-block has-error"></div></td>
+												<td><input type="text" name="Tiempo[]" maxlength="2" class="form-control input2 dsubtotal" id="Tiempo_0_0"> <div class="help-block has-error"></div></td>
+												<td><input type="text" name="SubTotal_Item[]" readonly="true" class="form-control input8" id="SubTotal_Item_0_0"></td>
+											</tr>
+											<tr>
+												<td><input type="text" readonly="" value="1" class="form-control input2" name="Item[]" id="Item_0_0"></td>
+												<td><input type="text" name="Item_Descripcion[]" class="form-control" id="Item_Descripcion_0_0"> <div class="help-block has-error"></div></td>
+												<td><input type="text" name="Cod_UM[]" maxlength="2" class="form-control input3 medida" id="Cod_UM_0_0"> <input type="text" name="Unidad_Med[]" readonly="true" class="form-control input13" id="Unidad_Med_0_0"> <div class="help-block has-error"></div></td>
+												<td><input type="text" name="Cantidad[]" maxlength="6" class="form-control input13 dsubtotal" id="Cantidad_0_0"> <div class="help-block has-error"></div></td><td><input type="text" name="Precio_Unit[]" class="form-control input13 dsubtotal" id="PrecioUnit_0_0"> <div class="help-block has-error"></div></td>
+												<td><input type="text" name="Tiempo[]" maxlength="2" class="form-control input2 dsubtotal" id="Tiempo_0_0"> <div class="help-block has-error"></div></td>
+												<td><input type="text" name="SubTotal_Item[]" readonly="true" class="form-control input8" id="SubTotal_Item_0_0"></td>
+											</tr>
+											<tr>
+												<td><input type="text" readonly="" value="1" class="form-control input2" name="Item[]" id="Item_0_0"></td>
+												<td><input type="text" name="Item_Descripcion[]" class="form-control" id="Item_Descripcion_0_0"> <div class="help-block has-error"></div></td>
+												<td><input type="text" name="Cod_UM[]" maxlength="2" class="form-control input3 medida" id="Cod_UM_0_0"> <input type="text" name="Unidad_Med[]" readonly="true" class="form-control input13" id="Unidad_Med_0_0"> <div class="help-block has-error"></div></td>
+												<td><input type="text" name="Cantidad[]" maxlength="6" class="form-control input13 dsubtotal" id="Cantidad_0_0"> <div class="help-block has-error"></div></td><td><input type="text" name="Precio_Unit[]" class="form-control input13 dsubtotal" id="PrecioUnit_0_0"> <div class="help-block has-error"></div></td>
+												<td><input type="text" name="Tiempo[]" maxlength="2" class="form-control input2 dsubtotal" id="Tiempo_0_0"> <div class="help-block has-error"></div></td>
+												<td><input type="text" name="SubTotal_Item[]" readonly="true" class="form-control input8" id="SubTotal_Item_0_0"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#jaccordion" href="#jcollapseTwo">
+										2.3.28.12 - CONTRIBUCIONES A ESSALUD DE CAS
+									</a>
+								</h4>
+							</div>
+							<div id="jcollapseTwo" class="panel-collapse collapse">
+								<div class="panel-body">
+									Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#jaccordion" href="#jcollapseThree">
+										2.3.21.2.99 - OTROS GASTOS
+									</a>
+								</h4>
+							</div>
+							<div id="jcollapseThree" class="panel-collapse collapse">
+								<div class="panel-body">
+									Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- body -->
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+						02) SEGMENTACION
+					</a>
+				</h4>
+			</div>
+			<div id="collapseTwo" class="panel-collapse collapse">
+				<div class="panel-body">
+					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+						03) ARCHIVO, DISTRIBUCIÓN y RECEPCIÓN
+					</a>
+				</h4>
+			</div>
+			<div id="collapseThree" class="panel-collapse collapse">
+				<div class="panel-body">
+					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+				</div>
+			</div>
+		</div>
+	</div>
 
 <hr />
 
@@ -209,6 +206,97 @@ echo form_submit('enviar', 'Guardar','class="btn btn-primary"');
 echo form_close();
 ?>
 <script type="text/javascript">
+
+////////////////////////////////////////////////
+////// SCRIPT DE PRUEBA
+////////////////////////////////////////////////
+
+$(document).on("change",'.cantidad_partidas',function() {
+
+	var campo = $(this);
+	var cod = campo.attr('id');
+	array = cod.split("_");
+
+	nro = campo.val();
+
+	html = '';
+
+	for (var i = 0; i < nro; i++) {
+		html += '<div class="panel panel-default">';
+			html += '<div class="panel-heading">';
+				html += '<h4 class="panel-title">';
+					html += '<a data-toggle="collapse" data-parent="#jaccordion" href="#jcollapse'+i+'">'+parseInt(i+1)+')';
+					html += '</a>';
+				html += '</h4>';
+			html += '</div>';
+			html += '<div id="jcollapse'+i+'" class="panel-collapse collapse">';
+				html += '<div class="panel-body">';
+					html += 'Cantidad de Items : <input type="text" id="cnt_items_'+i+'" name="cnt_items_'+i+'" class="cantidad_items" />';
+					html += '<table class="table table-striped table-hover" id="tb_part_'+i+'">';
+						html += '<thead>';
+							html += '<tr>';
+								html += '<th>Nro.</th>';
+								html += '<th>Item</th>';
+								html += '<th>Unidad Medida</th>';
+								html += '<th>Cantidad</th>';
+								html += '<th>Precio Unitario</th>';
+								html += '<th>Veces o Tiempo en Meses</th>';
+								html += '<th>SubTotal</th>';
+							html += '</tr>';
+						html += '</thead>';
+						html += '<tbody>';
+						html += '</tbody>';
+					html += '</table>';
+				html += '</div>';
+			html += '</div>';
+		html += '</div>';
+	};
+
+	$('#part_1_1').html(html);
+	
+});
+
+
+$(document).on("change",'.cantidad_items',function() {
+
+	var campo = $(this);
+	var cod = campo.attr('id');
+	array = cod.split("_");
+
+	nro = campo.val();
+
+	html = '';
+
+	for (var i = 0; i < nro; i++) {
+		html += '<tr>';
+			html += '<td><input type="text" readonly="" value="1" class="form-control input2" name="Item[]" id="Item_0_0"></td>';
+			html += '<td><input type="text" name="Item_Descripcion[]" class="form-control" id="Item_Descripcion_0_0"> <div class="help-block has-error"></div></td>';
+			html += '<td><input type="text" name="Cod_UM[]" maxlength="2" class="form-control input3 medida" id="Cod_UM_0_0"> <input type="text" name="Unidad_Med[]" readonly="true" class="form-control input13" id="Unidad_Med_0_0"> <div class="help-block has-error"></div></td>';
+			html += '<td><input type="text" name="Cantidad[]" maxlength="6" class="form-control input13 dsubtotal" id="Cantidad_0_0"> <div class="help-block has-error"></div></td><td><input type="text" name="Precio_Unit[]" class="form-control input13 dsubtotal" id="PrecioUnit_0_0"> <div class="help-block has-error"></div></td>';
+			html += '<td><input type="text" name="Tiempo[]" maxlength="2" class="form-control input2 dsubtotal" id="Tiempo_0_0"> <div class="help-block has-error"></div></td>';
+			html += '<td><input type="text" name="SubTotal_Item[]" readonly="true" class="form-control input8" id="SubTotal_Item_0_0"></td>';
+			html += '</tr>';
+	};
+	
+	$('#tb_part_'+array[2]+' > tbody').html(html);
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ////////////////////////////////////////////////
 ////// DETALLE DE PRESUPUESTO
