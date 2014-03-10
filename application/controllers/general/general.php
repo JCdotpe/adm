@@ -19,13 +19,13 @@ class General extends CI_Controller {
 		show_404();
 	}
 
-	public function meses()
+	// List
+	public function area_usuaria()
 	{
-		$code = $this->input->get('codigo');
 		$is_ajax = $this->input->get('ajax');
 		if($is_ajax){
-			$data['datos'] = $this->general_model->get_meses($code)->result();
-			$this->load->view('backend/json/json_view', $data);		
+			$datos = $this->general_model->get_data('area_usuaria');
+			$this->convert_uft8_array($datos);
 		}else{
 			show_404();
 		}
@@ -33,41 +33,69 @@ class General extends CI_Controller {
 
 	public function actividades()
 	{
-		$code = $this->input->get('codigo');
 		$is_ajax = $this->input->get('ajax');
 		if($is_ajax){
-			$datos = $this->general_model->get_actividades($code);
+			$datos = $this->general_model->get_data('actividad');
 			$this->convert_uft8_array($datos);
 		}else{
 			show_404();
 		}
 	}
 
-	public function partidas()
+	//Search
+	public function meses_by()
 	{
 		$code = $this->input->get('codigo');
 		$is_ajax = $this->input->get('ajax');
 		if($is_ajax){
-			$datos = $this->general_model->get_partidas($code);
-			$this->convert_uft8_array($datos);
+			$where_array = array('MES' => $code);
+			$data['datos'] = $this->general_model->select_data($where_array,'mes')->result();
+			$this->load->view('backend/json/json_view', $data);		
 		}else{
 			show_404();
 		}
 	}
 
-	public function unidad_medida()
+	public function actividades_by()
 	{
 		$code = $this->input->get('codigo');
 		$is_ajax = $this->input->get('ajax');
 		if($is_ajax){
-			$datos = $this->general_model->get_unidad_medida($code);
+			$where_array = array('COD_ACT' => $code);
+			$datos = $this->general_model->select_data($where_array,'actividad');
 			$this->convert_uft8_array($datos);
 		}else{
 			show_404();
 		}
 	}
 
-	
+	public function partidas_by()
+	{
+		$code = $this->input->get('codigo');
+		$is_ajax = $this->input->get('ajax');
+		if($is_ajax){
+			$where_array = array('COD_GASTO' => $code);
+			$datos = $this->general_model->select_data($where_array,'gasto');
+			$this->convert_uft8_array($datos);
+		}else{
+			show_404();
+		}
+	}
+
+	public function unidad_medida_by()
+	{
+		$code = $this->input->get('codigo');
+		$is_ajax = $this->input->get('ajax');
+		if($is_ajax){
+			$where_array = array('Cod_UM' => $code);
+			$datos = $this->general_model->select_data($where_array,'unidad_medida');
+			$this->convert_uft8_array($datos);
+		}else{
+			show_404();
+		}
+	}
+
+	// convert utf8
 	function convert_uft8_array($datos)
 	{
 		$data['datos'] = array();

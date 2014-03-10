@@ -1,38 +1,41 @@
 <?php 
 class General_model extends CI_MODEL{
 
+	// fields
 	function get_fields($c){
 		$q = $this->db->list_fields($c);
 		return $q;
 	}
 
-	function get_meses($codigo)
+	//list
+	function get_data($tbl)
 	{
-		$this->db->where('MES', $codigo);
-		$q = $this->db->get('mes');
+		$q =  $this->db->get($tbl);
 		return $q;
 	}
 
-	function get_actividades($codigo)
+	// mdl
+	function insert_data( $data, $tbl )
 	{
-		$this->db->where('COD_ACT', $codigo);
-		$q = $this->db->get('actividad');
-		return $q;
+		$this->db->insert($tbl, $data);
+		return $this->db->affected_rows() > 0;
 	}
 
-	function get_partidas($codigo)
+	function update_data( $array, $data, $tbl )
 	{
-		$this->db->where('COD_GASTO', $codigo);
-		$q = $this->db->get('gasto');
-		return $q;
+		$this->db->where( $array );
+		$this->db->update($tbl, $data);
+		return $this->db->affected_rows() > 0;
 	}
 
-	function get_unidad_medida($codigo)
+
+	//search
+	function select_data( $array, $tbl )
 	{
-		$this->db->where('Cod_UM', $codigo);
-		$q = $this->db->get('unidad_medida');
+		$this->db->where( $array );
+		$q = $this->db->get($tbl);
 		return $q;
-	}
+	}	
 
 }
 ?>
