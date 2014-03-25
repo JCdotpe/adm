@@ -51,9 +51,12 @@ class Matricula extends CI_Controller {
 			$tbl_proyecto_mes = $this->general_model->get_fields('presup_proyecto_mes');
 
 			// $cod_pryct = $this->input->post('codigo_proyecto');
-			$cod_pryct = '00000001';
+			$cod_area = $this->input->post('Id_Area');
 			$anio = date('Y');
 			$cod_area = $this->input->post('Id_Area');
+			$mes_inicio = $this->input->post('Mes_Inicio');
+			$mes_fin = $this->input->post('Mes_Fin');
+			$cod_pryct = time().$cod_area.$anio.$mes_inicio.$mes_fin;
 
 			$ui = $this->ion_auth->user()->row()->id;
 			$ip = $this->input->ip_address();
@@ -80,13 +83,13 @@ class Matricula extends CI_Controller {
 				$arr_proyecto['modified'] = date('Y-m-d H:i:s');
 				if ( $this->general_model->update_data( $where_array, $arr_proyecto, 'presup_proyecto' ) > 0 ) {
 					$flag = 1;
-					$msg = 'Se ha actualizado satisfactoriamente el Presupuesto del Proyecto';
+					$msg = 'Se ha actualizado satisfactoriamente la Matricula del Proyecto';
 				}
 			}else{
 				$arr_proyecto['created'] = date('Y-m-d H:i:s');
 				if ( $this->general_model->insert_data( $arr_proyecto, 'presup_proyecto' ) > 0 ){
 					$flag = 1;
-					$msg = 'Se ha registrado satisfactoriamente el Presupuesto del Proyecto';
+					$msg = 'Se ha registrado satisfactoriamente la Matricula del Proyecto';
 				}
 			}
 
