@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
+$db['default']['hostname'] = 'JSANCHEZA\SQLEXPRESS';
 $db['default']['username'] = 'sa';
 $db['default']['password'] = '123456';
 $db['default']['database'] = 'ADM';
